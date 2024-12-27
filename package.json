@@ -9,10 +9,14 @@
     "dev": "nodemon --watch src -e ts --exec npm run gulp:dev-with-start"
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-ejs-layouts": "^2.5.1"
   },
   "devDependencies": {
+    "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.0",
+    "@types/express-ejs-layouts": "^2.5.4",
     "del": "^8.0.0",
     "dotenv": "^16.4.7",
     "gulp": "^5.0.0",

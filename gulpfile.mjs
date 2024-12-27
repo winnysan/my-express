@@ -1,5 +1,5 @@
 import { deleteAsync } from 'del'
-import { dest, series, task } from 'gulp'
+import { dest, series, src, task } from 'gulp'
 import gulpTypescript from 'gulp-typescript'
 
 /**
@@ -18,6 +18,11 @@ task('typescript-transpile', () => {
 })
 
 /**
+ * Copy views to target folder
+ */
+task('views-copy', () => src('./src/views/**/*.ejs').pipe(dest('./dist/views')))
+
+/**
  * Default task
  */
-task('default', series('build-clean', 'typescript-transpile'))
+task('default', series('build-clean', 'typescript-transpile', 'views-copy'))
