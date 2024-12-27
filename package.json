@@ -2,6 +2,13 @@
   "name": "lets-code-express-differently",
   "version": "0.0.1",
   "scripts": {},
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "dotenv": "^16.4.7",
+    "nodemon": "^3.1.9",
+    "typescript": "^5.7.2"
+  }
 }
