@@ -4,9 +4,10 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "node .",
+    "webpack:dev": "webpack --env=development",
     "gulp": "gulp",
-    "gulp:dev-with-start": "npm-run-all gulp start",
-    "dev": "nodemon --watch src -e ts --exec npm run gulp:dev-with-start"
+    "gulp:dev-with-start": "npm-run-all gulp webpack:dev start",
+    "dev": "nodemon --watch src -e ts,ejs --exec npm run gulp:dev-with-start"
   },
   "dependencies": {
     "ejs": "^3.1.10",
@@ -23,6 +24,9 @@
     "gulp-typescript": "^6.0.0-alpha.1",
     "nodemon": "^3.1.9",
     "npm-run-all": "^4.1.5",
-    "typescript": "^5.7.2"
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.7.2",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
   }
 }
