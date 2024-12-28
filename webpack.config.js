@@ -1,4 +1,5 @@
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 
 const srcPath = path.resolve(__dirname, 'src')
@@ -15,15 +16,37 @@ module.exports = env => ({
         use: 'ts-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  require('autoprefixer'),
+                  require('cssnano')({
+                    preset: 'default',
+                  }),
+                ],
+              },
+            },
+          },
+          'sass-loader',
+        ],
+      },
     ],
   },
 
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js', '.scss'],
   },
 
   entry: {
     'public/js/script': [`${srcPath}/public/ts/script`],
+    'public/css/style': [`${srcPath}/public/css/style.scss`],
   },
 
   output: {
@@ -32,6 +55,9 @@ module.exports = env => ({
   },
 
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
     new WebpackManifestPlugin({
       fileName: 'manifest.json',
       publicPath: '/',
