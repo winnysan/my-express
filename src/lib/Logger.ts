@@ -1,4 +1,5 @@
 import fs from 'fs'
+import Helper from './Helper'
 import Message from './Message'
 
 /**
@@ -16,7 +17,7 @@ class Logger {
       const day = Helper.getCurrentDate()
       const time = Helper.getCurrentTime()
 
-      const data = `${time} | ${errorMessage}`
+      const data = `${time} | ${errorMessage}\n`
 
       fs.writeFileSync(`logs/${day}.txt`, data, { flag: 'a' })
     } catch (err: unknown) {

@@ -29,3 +29,5 @@ class Helper {
     return time
   }
 }
+
+export default Helper

@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 import express from 'express'
 import expressLayouts from 'express-ejs-layouts'
 import path from 'path'
+import ErrorMiddleware from './middleware/ErrorMiddleware'
 
 dotenv.config()
 
@@ -22,6 +23,7 @@ class App {
     this.setMiddleware()
     this.setViewEngine()
     this.setRoutes()
+    this.setErrorHandlers()
   }
 
   /**
@@ -48,9 +50,18 @@ class App {
    * @private
    */
   private setRoutes(): void {
-    this.app.use('/', (req: express.Request, res: express.Response) =>
+    this.app.get('/', (req: express.Request, res: express.Response) => {
       res.render('index')
-    )
+    })
+  }
+
+  /**
+   * Sets up error handling middleware for handling 404 errors and other server errors
+   * @private
+   */
+  private setErrorHandlers(): void {
+    this.app.use(ErrorMiddleware.notFound)
+    this.app.use(ErrorMiddleware.errorHandler)
   }
 
   /**
