@@ -1,10 +1,13 @@
 import Helper from './lib/Helper'
+import SpaRouter from './lib/SpaRouter'
 import './localization'
 
 console.log(
   `%c${window.localization.getLocalizedText('helloFromConsoleE')}`,
   'color: white; background-color: green; font-weight: bold; padding: 2px 4px; border-radius: 3px;'
 )
+
+new SpaRouter()
 
 /**
  * The current year in the footer

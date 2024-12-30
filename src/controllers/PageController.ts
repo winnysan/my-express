@@ -9,7 +9,9 @@ class PageController {
    * Home page
    */
   public home = AsyncHandler.wrap(async (req: Request, res: Response) => {
-    res.render('index')
+    res.render('index', {
+      layout: res.locals.isAjax ? false : 'layouts/main',
+    })
   })
 }
 

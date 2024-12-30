@@ -5,9 +5,13 @@ window.localization = {
   dictionaries: {
     en: {
       helloFromConsoleE: 'Hello from console!',
+      error: 'Error',
+      appElementNotFound: 'App element not found',
     },
     sk: {
-      helloFromConsoleE: 'Ahoj z konzoly!',
+      helloFromConsoleE: 'Ahoj z konzole!',
+      error: 'Chyba',
+      appElementNotFound: 'App element sa nenašiel',
     },
   },
   getLocalizedText: function (key) {

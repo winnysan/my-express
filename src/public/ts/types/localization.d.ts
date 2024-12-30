@@ -1,5 +1,7 @@
 interface Dictionary {
   helloFromConsoleE: string
+  error: string
+  appElementNotFound: string
 }
 
 interface Localization {
