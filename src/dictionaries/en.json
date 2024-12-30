@@ -10,6 +10,7 @@
   "pages": {
     "error": "Error",
     "helloE": "Hello!",
-    "posts": "Posts"
+    "posts": "Posts",
+    "letsCodeExpressDifferently": "Let's code Express differently"
   }
 }

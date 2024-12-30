@@ -10,6 +10,7 @@
   "pages": {
     "error": "Chyba",
     "helloE": "Ahoj!",
-    "posts": "Príspevky"
+    "posts": "Príspevky",
+    "letsCodeExpressDifferently": "Poďme písať Express inak"
   }
 }

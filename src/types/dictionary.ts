@@ -11,5 +11,6 @@ export type Dictionary = {
     error: string
     helloE: string
     posts: string
+    letsCodeExpressDifferently: string
   }
 }
