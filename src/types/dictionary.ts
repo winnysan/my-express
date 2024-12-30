@@ -6,5 +6,6 @@ export type Dictionary = {
   pages: {
     error: string
     helloE: string
+    posts: string
   }
 }

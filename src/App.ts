@@ -4,6 +4,8 @@ import expressLayouts from 'express-ejs-layouts'
 import path from 'path'
 import ErrorMiddleware from './middlewares/ErrorMiddleware'
 import LocalizationMiddleware from './middlewares/LocalizationMiddleware'
+import PageRouter from './routes/PageRouter'
+import PostRouter from './routes/PostRouter'
 
 dotenv.config()
 
@@ -52,9 +54,8 @@ class App {
    * @private
    */
   private setRoutes(): void {
-    this.app.get('/', (req: express.Request, res: express.Response) => {
-      res.render('index')
-    })
+    this.app.use('/', PageRouter)
+    this.app.use('/posts', PostRouter)
   }
 
   /**

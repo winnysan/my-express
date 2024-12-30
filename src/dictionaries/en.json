@@ -5,6 +5,7 @@
   },
   "pages": {
     "error": "Error",
-    "helloE": "Hello!"
+    "helloE": "Hello!",
+    "posts": "Posts"
   }
 }

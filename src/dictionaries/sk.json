@@ -5,6 +5,7 @@
   },
   "pages": {
     "error": "Chyba",
-    "helloE": "Ahoj!"
+    "helloE": "Ahoj!",
+    "posts": "Príspevky"
   }
 }
