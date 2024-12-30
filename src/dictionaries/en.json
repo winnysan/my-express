@@ -1,0 +1,10 @@
+{
+  "messages": {
+    "somethingWentWrong": "Something went wrong",
+    "notFound": "Not found"
+  },
+  "pages": {
+    "error": "Error",
+    "helloE": "Hello!"
+  }
+}

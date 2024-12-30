@@ -1,0 +1,10 @@
+{
+  "messages": {
+    "somethingWentWrong": "Niečo sa pokazilo",
+    "notFound": "Nenašlo sa"
+  },
+  "pages": {
+    "error": "Chyba",
+    "helloE": "Ahoj!"
+  }
+}

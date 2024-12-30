@@ -2,7 +2,8 @@ import dotenv from 'dotenv'
 import express from 'express'
 import expressLayouts from 'express-ejs-layouts'
 import path from 'path'
-import ErrorMiddleware from './middleware/ErrorMiddleware'
+import ErrorMiddleware from './middlewares/ErrorMiddleware'
+import LocalizationMiddleware from './middlewares/LocalizationMiddleware'
 
 dotenv.config()
 
@@ -31,6 +32,7 @@ class App {
    * @private
    */
   private setMiddleware(): void {
+    this.app.use(LocalizationMiddleware.use())
     this.app.use(express.static(path.join(__dirname, './public')))
   }
 

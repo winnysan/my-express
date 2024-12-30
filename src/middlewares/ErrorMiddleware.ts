@@ -12,7 +12,9 @@ class ErrorMiddleware extends BaseMiddleware {
    * @param next
    */
   public notFound(req: Request, res: Response, next: NextFunction): void {
-    const error = new Error(`Translate: ${req.originalUrl} not found`)
+    const error = new Error(
+      `${req.originalUrl} ${global.dictionary.messages.notFound}`
+    )
 
     res.status(404)
 
@@ -43,7 +45,7 @@ class ErrorMiddleware extends BaseMiddleware {
     Logger.logToFile(error)
 
     if (process.env.NODE_ENV === NodeEnv.PROD) {
-      error.message = 'Translate: Something went wrong'
+      error.message = global.dictionary.messages.somethingWentWrong
       error.stack = undefined
     }
 

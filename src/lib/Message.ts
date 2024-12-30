@@ -17,7 +17,7 @@ class Message {
     } else if (typeof error === 'string') {
       message = error
     } else {
-      message = 'Translate: Something Went Wrong'
+      message = global.dictionary.messages.somethingWentWrong
     }
 
     return message
