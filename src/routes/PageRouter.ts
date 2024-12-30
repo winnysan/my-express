@@ -1,4 +1,5 @@
 import express from 'express'
+import PageController from '../controllers/PageController'
 
 /**
  * Router for handling page routes
@@ -21,9 +22,7 @@ class PageRouter {
     /**
      * Home page
      */
-    this.router.get('/', (req: express.Request, res: express.Response) => {
-      res.render('index')
-    })
+    this.router.get('/', PageController.home)
   }
 }
 

@@ -1,4 +1,5 @@
 import express from 'express'
+import PostController from '../controllers/PostController'
 
 /**
  * Router for handling post-related routes
@@ -21,9 +22,7 @@ class PostRouter {
     /**
      * Post page
      */
-    this.router.get('/', (req: express.Request, res: express.Response) => {
-      res.render('post/index')
-    })
+    this.router.get('/', PostController.getPosts)
   }
 }
 
