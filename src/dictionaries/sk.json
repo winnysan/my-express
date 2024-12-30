@@ -1,4 +1,8 @@
 {
+  "navigation": {
+    "home": "Domov",
+    "posts": "Príspevky"
+  },
   "messages": {
     "somethingWentWrong": "Niečo sa pokazilo",
     "notFound": "Nenašlo sa"

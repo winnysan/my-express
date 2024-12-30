@@ -1,4 +1,8 @@
 {
+  "navigation": {
+    "home": "Home",
+    "posts": "Posts"
+  },
   "messages": {
     "somethingWentWrong": "Something went wrong",
     "notFound": "Not found"

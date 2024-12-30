@@ -6,7 +6,7 @@
     "start": "node .",
     "gulp": "gulp",
     "gulp:dev-with-start": "npm-run-all gulp --env=development start",
-    "dev": "nodemon --watch src -e ts,ejs --exec npm run gulp:dev-with-start",
+    "dev": "nodemon --watch src -e ts,ejs,scss --exec npm run gulp:dev-with-start",
     "build": "gulp --env=production"
   },
   "dependencies": {

@@ -1,4 +1,8 @@
 export type Dictionary = {
+  navigation: {
+    home: string
+    posts: string
+  }
   messages: {
     somethingWentWrong: string
     notFound: string
