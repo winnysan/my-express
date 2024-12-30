@@ -1,5 +1,7 @@
+import './localization'
+
 console.log(
-  '%cHello from console!',
+  `%c${window.localization.getLocalizedText('helloFromConsoleE')}`,
   'color: white; background-color: green; font-weight: bold; padding: 2px 4px; border-radius: 3px;'
 )
 
