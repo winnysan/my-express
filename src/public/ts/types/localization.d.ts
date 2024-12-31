@@ -1,5 +1,5 @@
 interface Dictionary {
-  helloFromConsoleE: string
+  scriptLoadedSuccessfully: string
   error: string
   appElementNotFound: string
 }

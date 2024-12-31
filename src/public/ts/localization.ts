@@ -4,12 +4,12 @@ window.localization = {
   locale: (document.documentElement.lang as Locale) || 'en',
   dictionaries: {
     en: {
-      helloFromConsoleE: 'Hello from console!',
+      scriptLoadedSuccessfully: 'Script loaded successfully',
       error: 'Error',
       appElementNotFound: 'App element not found',
     },
     sk: {
-      helloFromConsoleE: 'Ahoj z konzole!',
+      scriptLoadedSuccessfully: 'Script úspešne načítaný',
       error: 'Chyba',
       appElementNotFound: 'App element sa nenašiel',
     },

@@ -4,7 +4,14 @@ import Helper from './Helper'
  * SpaRouter class responsible for handling SPA navigation
  */
 class SpaRouter {
-  constructor() {
+  private static bootstrap?: () => void
+
+  /**
+   * Initializes a new instance of the SPA router
+   * @param bootstrap
+   */
+  constructor(bootstrap?: () => void) {
+    SpaRouter.bootstrap = bootstrap
     this.initialize()
   }
 
@@ -72,6 +79,13 @@ class SpaRouter {
         if (updateHistory) {
           history.pushState(null, '', url)
         }
+
+        /**
+         * Initializes bootstrap after navigation
+         */
+        if (SpaRouter.bootstrap) {
+          SpaRouter.bootstrap()
+        }
       })
   }
 
@@ -104,6 +118,13 @@ class SpaRouter {
         console.error(`${window.localization.getLocalizedText('error')}:`, err)
       )
     })
+
+    /**
+     * Bootstrap initialization on first load
+     */
+    if (SpaRouter.bootstrap) {
+      SpaRouter.bootstrap()
+    }
   }
 }
 

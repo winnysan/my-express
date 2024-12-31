@@ -1,36 +1,16 @@
-import Helper from './lib/Helper'
+import Bootstrap from './lib/Bootstrap'
 import SpaRouter from './lib/SpaRouter'
 import './localization'
 
+/**
+ * Main entry point of the application
+ */
 console.log(
-  `%c${window.localization.getLocalizedText('helloFromConsoleE')}`,
+  `%c${window.localization.getLocalizedText('scriptLoadedSuccessfully')}`,
   'color: white; background-color: green; font-weight: bold; padding: 2px 4px; border-radius: 3px;'
 )
 
-new SpaRouter()
-
 /**
- * The current year in the footer
+ * Initializes the SPA router with callback to initialize the bootstrap class
  */
-const yearEl = Helper.selectElement<HTMLSpanElement>('#year')
-if (yearEl) yearEl.innerText = String(new Date().getFullYear())
-
-/**
- * Navigation elements
- */
-const hamburgerButtonEl = Helper.selectElement<HTMLButtonElement>('#hamburger')
-const navigationEl = Helper.selectElement<HTMLUListElement>('.navigation')
-const headerOverlayEl = Helper.selectElement<HTMLDivElement>('#header-overlay')
-
-/**
- * Mobile menu toggle
- */
-hamburgerButtonEl?.addEventListener('click', () => {
-  navigationEl?.classList.toggle('active')
-  headerOverlayEl?.classList.toggle('active')
-})
-
-headerOverlayEl?.addEventListener('click', () => {
-  navigationEl?.classList.remove('active')
-  headerOverlayEl?.classList.remove('active')
-})
+new SpaRouter(() => Bootstrap.initialize())
