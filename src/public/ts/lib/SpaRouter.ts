@@ -13,14 +13,16 @@ class SpaRouter {
    * @param url
    */
   public static navigateTo(url: string): void {
-    // TODO: loadingIndicator: show
+    const loadingIndicator =
+      Helper.selectElement<HTMLDivElement>('#loading-indicator')
+    if (loadingIndicator) loadingIndicator.style.display = 'block'
 
     SpaRouter.loadPage(url, true)
       .catch((err: Error) =>
         console.error(`${window.localization.getLocalizedText('error')}:`, err)
       )
       .finally(() => {
-        // TODO: loadingIndicator: hide
+        if (loadingIndicator) loadingIndicator.style.display = 'none'
       })
   }
 
