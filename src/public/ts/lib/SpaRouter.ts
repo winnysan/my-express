@@ -55,7 +55,14 @@ class SpaRouter {
         if (appElement) {
           appElement.innerHTML = html
 
-          // TODO: page title
+          const mainTitleRegex = /<main[^>]*data-title="([^"]*)"[^>]*>/i
+          const match = mainTitleRegex.exec(html)
+
+          if (match && match[1]) {
+            document.title = match[1]
+          } else {
+            document.title = ''
+          }
         } else {
           throw new Error(
             window.localization.getLocalizedText('appElementNotFound')

@@ -51,6 +51,8 @@ class ErrorMiddleware extends BaseMiddleware {
 
     if (res.statusCode === 404) {
       res.render('error', {
+        layout: res.locals.isAjax ? false : 'layouts/main',
+        title: global.dictionary.title.errorPage,
         error,
       })
     } else {

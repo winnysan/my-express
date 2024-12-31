@@ -3,6 +3,11 @@
     "home": "Domov",
     "posts": "Príspevky"
   },
+  "title": {
+    "homePage": "Domovská stránka",
+    "postsPage": "Stránka s príspevkami",
+    "errorPage": "Chyba"
+  },
   "messages": {
     "somethingWentWrong": "Niečo sa pokazilo",
     "notFound": "Nenašlo sa"

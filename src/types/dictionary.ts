@@ -3,6 +3,11 @@ export type Dictionary = {
     home: string
     posts: string
   }
+  title: {
+    homePage: string
+    postsPage: string
+    errorPage: string
+  }
   messages: {
     somethingWentWrong: string
     notFound: string

@@ -3,6 +3,11 @@
     "home": "Home",
     "posts": "Posts"
   },
+  "title": {
+    "homePage": "Home page",
+    "postsPage": "Posts page",
+    "errorPage": "Error page"
+  },
   "messages": {
     "somethingWentWrong": "Something went wrong",
     "notFound": "Not found"
