@@ -7,6 +7,12 @@ declare global {
     export interface ProcessEnv {
       NODE_ENV: NodeEnv.PROD | NodeEnv.DEV
       PORT: number
+      SESSION_SECRET: string
+    }
+  }
+  namespace Express {
+    export interface Request {
+      csrfToken?: () => string
     }
   }
   var locale: Locale
