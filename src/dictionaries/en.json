@@ -1,11 +1,13 @@
 {
   "navigation": {
     "home": "Home",
-    "posts": "Posts"
+    "posts": "Posts",
+    "register": "Register"
   },
   "title": {
     "homePage": "Home page",
     "postsPage": "Posts page",
+    "registerPage": "Register page",
     "errorPage": "Error page"
   },
   "messages": {
@@ -16,6 +18,14 @@
     "error": "Error",
     "helloE": "Hello!",
     "posts": "Posts",
+    "register": "Register",
     "letsCodeExpressDifferently": "Let's code Express differently"
+  },
+  "form": {
+    "email": "Email",
+    "name": "Name",
+    "password": "Password",
+    "passwordConfirmation": "Password confirmation",
+    "submit": "Submit"
   }
 }

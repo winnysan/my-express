@@ -10,6 +10,7 @@ import CsrfMiddleware from './middlewares/CsrfMiddleware'
 import ErrorMiddleware from './middlewares/ErrorMiddleware'
 import LocalizationMiddleware from './middlewares/LocalizationMiddleware'
 import upload from './middlewares/UploadMiddleware'
+import AuthRouter from './routes/AuthRouter'
 import PageRouter from './routes/PageRouter'
 import PostRouter from './routes/PostRouter'
 
@@ -51,10 +52,10 @@ class App {
         cookie: { secure: false },
       })
     )
+    this.app.use(upload.array('files'))
     this.app.use(CsrfMiddleware.init())
     this.app.use(AjaxMiddleware.use())
     this.app.use(LocalizationMiddleware.use())
-    this.app.use(upload.array('files'))
     this.app.use(express.static(path.join(__dirname, './public')))
   }
 
@@ -76,6 +77,7 @@ class App {
   private setRoutes(): void {
     this.app.use('/', PageRouter)
     this.app.use('/posts', PostRouter)
+    this.app.use('/auth', AuthRouter)
   }
 
   /**

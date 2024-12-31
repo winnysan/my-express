@@ -1,11 +1,13 @@
 {
   "navigation": {
     "home": "Domov",
-    "posts": "Príspevky"
+    "posts": "Príspevky",
+    "register": "Registrácia"
   },
   "title": {
     "homePage": "Domovská stránka",
     "postsPage": "Stránka s príspevkami",
+    "registerPage": "Registrácia",
     "errorPage": "Chyba"
   },
   "messages": {
@@ -16,6 +18,14 @@
     "error": "Chyba",
     "helloE": "Ahoj!",
     "posts": "Príspevky",
+    "register": "Registrácia",
     "letsCodeExpressDifferently": "Poďme písať Express inak"
+  },
+  "form": {
+    "email": "Email",
+    "name": "Meno",
+    "password": "Heslo",
+    "passwordConfirmation": "Potvrdiť heslo",
+    "submit": "Odoslať"
   }
 }

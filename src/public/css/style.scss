@@ -33,6 +33,7 @@ a {
   text-decoration: none;
 }
 
+input,
 button {
   outline: none;
   background-color: transparent;
@@ -222,4 +223,48 @@ footer {
   border-right-color: transparent;
   border-radius: 50%;
   animation: rotate 1s linear infinite;
+}
+
+form#form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  width: 50%;
+  margin: 3rem 0;
+  padding: 1rem;
+  border: 1px solid var(--transparent-light);
+  border-radius: 0.5rem;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.2rem;
+
+    input {
+      padding: 0.5rem;
+      border: 1px solid var(--transparent-light);
+      border-radius: 0.3rem;
+
+      &:focus {
+        outline: 2px solid var(--primary);
+      }
+    }
+  }
+
+  button {
+    color: var(--white);
+    background-color: var(--black);
+    margin-top: 1rem;
+    padding: 0.6rem;
+    border-radius: 0.3rem;
+
+    &:hover {
+      background-color: var(--primary);
+      transition: background-color 0.3s ease-in-out;
+    }
+  }
 }
