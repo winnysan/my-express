@@ -5,6 +5,7 @@ import Helper from './Helper'
  */
 class SpaRouter {
   private static bootstrap?: () => void
+  private static toastEl: HTMLUListElement | undefined
 
   /**
    * Initializes a new instance of the SPA router
@@ -12,6 +13,7 @@ class SpaRouter {
    */
   constructor(bootstrap?: () => void) {
     SpaRouter.bootstrap = bootstrap
+    SpaRouter.toastEl = Helper.makeToast('#toast')
     this.initialize()
   }
 
@@ -25,9 +27,18 @@ class SpaRouter {
     if (loadingIndicator) loadingIndicator.style.display = 'block'
 
     SpaRouter.loadPage(url, true)
-      .catch((err: Error) =>
-        console.error(`${window.localization.getLocalizedText('error')}:`, err)
-      )
+      .catch((err: Error) => {
+        /**
+         * Log any unexpected errors
+         */
+        console.error(err)
+
+        Helper.addToastMessage(
+          SpaRouter.toastEl,
+          window.localization.getLocalizedText('somethingWentWrong'),
+          'danger'
+        )
+      })
       .finally(() => {
         if (loadingIndicator) loadingIndicator.style.display = 'none'
       })
@@ -114,9 +125,18 @@ class SpaRouter {
     window.addEventListener('popstate', () => {
       const url = location.pathname + location.search
 
-      SpaRouter.loadPage(url, false).catch((err: Error) =>
-        console.error(`${window.localization.getLocalizedText('error')}:`, err)
-      )
+      SpaRouter.loadPage(url, false).catch((err: Error) => {
+        /**
+         * Log any unexpected errors
+         */
+        console.error(err)
+
+        Helper.addToastMessage(
+          SpaRouter.toastEl,
+          window.localization.getLocalizedText('somethingWentWrong'),
+          'danger'
+        )
+      })
     })
 
     /**

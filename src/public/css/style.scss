@@ -5,6 +5,10 @@
   --dark: #262626;
   --transparent-light: rgba(0, 0, 0, 0.2);
   --transparent-dark: rgba(0, 0, 0, 0.5);
+  --toast-info: #0284c7;
+  --toast-success: #65a30d;
+  --toast-warning: #ca8a04;
+  --toast-danger: #dc2626;
 }
 
 * {
@@ -265,6 +269,49 @@ form#form {
     &:hover {
       background-color: var(--primary);
       transition: background-color 0.3s ease-in-out;
+    }
+  }
+}
+
+#toast {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  width: 16rem;
+  z-index: 10000;
+
+  @media (max-width: 640px) {
+    top: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    width: auto;
+  }
+
+  & li {
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+    transition: opacity 0.5s ease-in-out;
+
+    &.info {
+      background-color: var(--toast-info);
+    }
+
+    &.success {
+      background-color: var(--toast-success);
+    }
+
+    &.warning {
+      background-color: var(--toast-warning);
+    }
+
+    &.danger {
+      background-color: var(--toast-danger);
+    }
+
+    &.fade-out {
+      opacity: 0;
     }
   }
 }

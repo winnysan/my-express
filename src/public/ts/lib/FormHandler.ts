@@ -5,6 +5,7 @@ import Helper from './Helper'
  */
 class FormHandler {
   private formEl: HTMLFormElement | null
+  private toastEl: HTMLUListElement | undefined
 
   /**
    * Initialize the FormHandler
@@ -13,7 +14,10 @@ class FormHandler {
   constructor(formSelector: string) {
     this.formEl = Helper.selectElement<HTMLFormElement>(formSelector)
 
-    if (this.formEl) this.initialize()
+    if (this.formEl) {
+      this.toastEl = Helper.makeToast('#toast')
+      this.initialize()
+    }
   }
 
   /**
@@ -55,7 +59,7 @@ class FormHandler {
 
           if (result.error?.message) message = result.error.message
 
-          console.error(result.error.message)
+          Helper.addToastMessage(this.toastEl, message, 'danger')
         } else {
           /**
            * Handle OK responses
@@ -68,9 +72,12 @@ class FormHandler {
         /**
          * Log any unexpected errors
          */
-        console.error(
+        console.error(err)
+
+        Helper.addToastMessage(
+          this.toastEl,
           window.localization.getLocalizedText('somethingWentWrong'),
-          err
+          'danger'
         )
       } finally {
         if (loadingIndicator) loadingIndicator.style.display = 'none'
