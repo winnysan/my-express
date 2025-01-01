@@ -256,6 +256,10 @@ form#form {
       &:focus {
         outline: 2px solid var(--primary);
       }
+
+      &.is-error {
+        border: 2px solid var(--toast-danger);
+      }
     }
   }
 
