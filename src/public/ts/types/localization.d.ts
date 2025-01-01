@@ -2,6 +2,7 @@ interface Dictionary {
   scriptLoadedSuccessfully: string
   error: string
   appElementNotFound: string
+  somethingWentWrong: string
 }
 
 interface Localization {

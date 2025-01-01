@@ -1,3 +1,4 @@
+import FormHandler from './FormHandler'
 import Helper from './Helper'
 
 /**
@@ -32,6 +33,11 @@ class Bootstrap {
      */
     const yearEl = Helper.selectElement<HTMLSpanElement>('#year')
     if (yearEl) yearEl.innerText = String(new Date().getFullYear())
+
+    /**
+     * Form handlers
+     */
+    new FormHandler('#form')
   }
 }
 

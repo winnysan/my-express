@@ -7,11 +7,13 @@ window.localization = {
       scriptLoadedSuccessfully: 'Script loaded successfully',
       error: 'Error',
       appElementNotFound: 'App element not found',
+      somethingWentWrong: 'Something went wrong',
     },
     sk: {
       scriptLoadedSuccessfully: 'Script úspešne načítaný',
       error: 'Chyba',
       appElementNotFound: 'App element sa nenašiel',
+      somethingWentWrong: 'Niečo sa pokazilo',
     },
   },
   getLocalizedText: function (key) {
