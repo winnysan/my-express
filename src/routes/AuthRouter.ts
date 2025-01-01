@@ -24,11 +24,7 @@ class AuthRouter {
      * Register
      */
     this.router.get('/register', AuthController.registerPage)
-    this.router.post(
-      '/register',
-      ValidationMiddleware.register,
-      AuthController.registerUser
-    )
+    this.router.post('/register', ValidationMiddleware.register, AuthController.registerUser)
   }
 }
 

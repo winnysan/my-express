@@ -9,11 +9,9 @@ class Bootstrap {
     /**
      * Navigation elements
      */
-    const hamburgerButtonEl =
-      Helper.selectElement<HTMLButtonElement>('#hamburger')
+    const hamburgerButtonEl = Helper.selectElement<HTMLButtonElement>('#hamburger')
     const navigationEl = Helper.selectElement<HTMLUListElement>('.navigation')
-    const headerOverlayEl =
-      Helper.selectElement<HTMLDivElement>('#header-overlay')
+    const headerOverlayEl = Helper.selectElement<HTMLDivElement>('#header-overlay')
 
     /**
      * Mobile menu toggle

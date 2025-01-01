@@ -38,15 +38,12 @@ class FormHandler {
     if (this.formEl) {
       const formData = new FormData(this.formEl)
 
-      const loadingIndicator: HTMLDivElement | null =
-        Helper.selectElement<HTMLDivElement>('#loading-indicator')
+      const loadingIndicator: HTMLDivElement | null = Helper.selectElement<HTMLDivElement>('#loading-indicator')
 
       /**
        * Remove any existing error indicators
        */
-      this.formEl
-        .querySelectorAll('.is-error')
-        .forEach(element => element.classList.remove('is-error'))
+      this.formEl.querySelectorAll('.is-error').forEach(element => element.classList.remove('is-error'))
 
       try {
         if (loadingIndicator) loadingIndicator.style.display = 'block'
@@ -61,8 +58,7 @@ class FormHandler {
            * Handle non-OK responses
            */
           const result = await response.json()
-          let message: string =
-            window.localization.getLocalizedText('somethingWentWrong')
+          let message: string = window.localization.getLocalizedText('somethingWentWrong')
 
           if (result.error?.message) message = result.error.message
 
@@ -79,31 +75,24 @@ class FormHandler {
           if (
             Array.isArray(result?.validation) &&
             result.validation.every(
-              (error: any) =>
-                typeof error.field === 'string' &&
-                typeof error.message === 'string'
+              (error: any) => typeof error.field === 'string' && typeof error.message === 'string'
             )
           ) {
-            result.validation.forEach(
-              (error: { field: string; message: string }) => {
-                /**
-                 * Hoghlight the form field that caused the error
-                 */
-                const inputEl = this.formEl?.querySelector(
-                  `[name="${error.field}"]`
-                )
-                if (inputEl) inputEl.classList.add('is-error')
+            result.validation.forEach((error: { field: string; message: string }) => {
+              /**
+               * Hoghlight the form field that caused the error
+               */
+              const inputEl = this.formEl?.querySelector(`[name="${error.field}"]`)
+              if (inputEl) inputEl.classList.add('is-error')
 
-                Helper.addToastMessage(this.toastEl, error.message, 'danger')
-              }
-            )
+              Helper.addToastMessage(this.toastEl, error.message, 'danger')
+            })
           }
 
           /**
            * Show message from result
            */
-          if (result?.message)
-            Helper.addToastMessage(this.toastEl, result?.message, 'success')
+          if (result?.message) Helper.addToastMessage(this.toastEl, result?.message, 'success')
         }
       } catch (err) {
         /**
@@ -111,11 +100,7 @@ class FormHandler {
          */
         console.error(err)
 
-        Helper.addToastMessage(
-          this.toastEl,
-          window.localization.getLocalizedText('somethingWentWrong'),
-          'danger'
-        )
+        Helper.addToastMessage(this.toastEl, window.localization.getLocalizedText('somethingWentWrong'), 'danger')
       } finally {
         if (loadingIndicator) loadingIndicator.style.display = 'none'
       }

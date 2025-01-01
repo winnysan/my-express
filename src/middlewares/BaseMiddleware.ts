@@ -10,11 +10,7 @@ abstract class BaseMiddleware {
    * @param res
    * @param next
    */
-  protected handle(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): void | Promise<void> {
+  protected handle(req: Request, res: Response, next: NextFunction): void | Promise<void> {
     next()
   }
 

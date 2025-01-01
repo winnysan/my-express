@@ -95,18 +95,10 @@ class FieldValidator {
     this.validation.addValidation(() => {
       const value = this.validation.getFieldValue(this.name)
 
-      if (
-        value === undefined ||
-        value === null ||
-        (typeof value === 'string' && value.trim() === '')
-      ) {
+      if (value === undefined || value === null || (typeof value === 'string' && value.trim() === '')) {
         this.validation.addError(
           this.name,
-          message ||
-            global.dictionary.validation.fieldIsRequiredDefault.replace(
-              /::field/,
-              this.name
-            )
+          message || global.dictionary.validation.fieldIsRequiredDefault.replace(/::field/, this.name)
         )
       }
     })
@@ -125,10 +117,7 @@ class FieldValidator {
       const emailRegex = /\S+@\S+\.\S+/
 
       if (typeof value === 'string' && !emailRegex.test(value)) {
-        this.validation.addError(
-          this.name,
-          message || global.dictionary.validation.invalidEmailAddressDefault
-        )
+        this.validation.addError(this.name, message || global.dictionary.validation.invalidEmailAddressDefault)
       }
     })
 

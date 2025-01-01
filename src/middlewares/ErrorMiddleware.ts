@@ -12,9 +12,7 @@ class ErrorMiddleware extends BaseMiddleware {
    * @param next
    */
   public notFound(req: Request, res: Response, next: NextFunction): void {
-    const error = new Error(
-      `${req.originalUrl} ${global.dictionary.messages.notFound}`
-    )
+    const error = new Error(`${req.originalUrl} ${global.dictionary.messages.notFound}`)
 
     res.status(404)
 
@@ -28,12 +26,7 @@ class ErrorMiddleware extends BaseMiddleware {
    * @param res
    * @param next
    */
-  public errorHandler(
-    err: Error,
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): void {
+  public errorHandler(err: Error, req: Request, res: Response, next: NextFunction): void {
     const message = Message.getErrorMessage(err)
     const error = {
       message,

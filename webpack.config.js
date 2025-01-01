@@ -64,10 +64,7 @@ module.exports = env => ({
       generate: (seed, files) => {
         const manifest = {}
         files.forEach(file => {
-          manifest[file.name.replace(/^public/, '')] = file.path.replace(
-            '/public',
-            ''
-          )
+          manifest[file.name.replace(/^public/, '')] = file.path.replace('/public', '')
         })
         return manifest
       },

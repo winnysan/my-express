@@ -57,10 +57,7 @@ task('ejs-update', done => {
       if (err) return done(err)
 
       const updatedFileData = fileData
-        .replace(
-          /<script type="text\/javascript" src="\/js\/.*\.js" defer><\/script>/,
-          scriptTag
-        )
+        .replace(/<script type="text\/javascript" src="\/js\/.*\.js" defer><\/script>/, scriptTag)
         .replace(/<link rel="stylesheet" href="\/css\/.*\.css" \/>/, styleTag)
 
       fs.writeFile(ejsFilePath, updatedFileData, 'utf-8', err => {
@@ -75,13 +72,4 @@ task('ejs-update', done => {
 /**
  * Default task
  */
-task(
-  'default',
-  series(
-    'build-clean',
-    'typescript-transpile',
-    'views-copy',
-    'webpack-build',
-    'ejs-update'
-  )
-)
+task('default', series('build-clean', 'typescript-transpile', 'views-copy', 'webpack-build', 'ejs-update'))

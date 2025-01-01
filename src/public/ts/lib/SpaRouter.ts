@@ -22,8 +22,7 @@ class SpaRouter {
    * @param url
    */
   public static navigateTo(url: string): void {
-    const loadingIndicator =
-      Helper.selectElement<HTMLDivElement>('#loading-indicator')
+    const loadingIndicator = Helper.selectElement<HTMLDivElement>('#loading-indicator')
     if (loadingIndicator) loadingIndicator.style.display = 'block'
 
     SpaRouter.loadPage(url, true)
@@ -33,11 +32,7 @@ class SpaRouter {
          */
         console.error(err)
 
-        Helper.addToastMessage(
-          SpaRouter.toastEl,
-          window.localization.getLocalizedText('somethingWentWrong'),
-          'danger'
-        )
+        Helper.addToastMessage(SpaRouter.toastEl, window.localization.getLocalizedText('somethingWentWrong'), 'danger')
       })
       .finally(() => {
         if (loadingIndicator) loadingIndicator.style.display = 'none'
@@ -49,10 +44,7 @@ class SpaRouter {
    * @param url
    * @param updateHistory
    */
-  private static async loadPage(
-    url: string,
-    updateHistory: boolean
-  ): Promise<void> {
+  private static async loadPage(url: string, updateHistory: boolean): Promise<void> {
     return await fetch(url, {
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
@@ -82,9 +74,7 @@ class SpaRouter {
             document.title = ''
           }
         } else {
-          throw new Error(
-            window.localization.getLocalizedText('appElementNotFound')
-          )
+          throw new Error(window.localization.getLocalizedText('appElementNotFound'))
         }
 
         if (updateHistory) {
@@ -131,11 +121,7 @@ class SpaRouter {
          */
         console.error(err)
 
-        Helper.addToastMessage(
-          SpaRouter.toastEl,
-          window.localization.getLocalizedText('somethingWentWrong'),
-          'danger'
-        )
+        Helper.addToastMessage(SpaRouter.toastEl, window.localization.getLocalizedText('somethingWentWrong'), 'danger')
       })
     })
 

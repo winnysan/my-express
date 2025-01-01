@@ -17,8 +17,7 @@ window.localization = {
     },
   },
   getLocalizedText: function (key) {
-    const dictionary =
-      this.dictionaries[this.locale as Locale] || this.dictionaries['en']
+    const dictionary = this.dictionaries[this.locale as Locale] || this.dictionaries['en']
     return dictionary[key]
   },
 }

@@ -94,9 +94,7 @@ class App {
    * @public
    */
   public start(): void {
-    this.app.listen(this.port, () =>
-      console.log(`App running on http://localhost:${this.port}`)
-    )
+    this.app.listen(this.port, () => console.log(`App running on http://localhost:${this.port}`))
   }
 }
 
