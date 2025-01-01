@@ -27,5 +27,11 @@
     "password": "Password",
     "passwordConfirmation": "Password confirmation",
     "submit": "Submit"
+  },
+  "validation": {
+    "fieldIsRequiredDefault": "Field ::field is required",
+    "invalidEmailAddressDefault": "Invalid email address",
+    "fieldMustBeAtLeastCharacterDefault": "Field ::field must be least ::length characters",
+    "fieldDoesNotMatchOtherDefault": "Field ::field does not match ::other"
   }
 }

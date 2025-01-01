@@ -27,5 +27,11 @@
     "password": "Heslo",
     "passwordConfirmation": "Potvrdiť heslo",
     "submit": "Odoslať"
+  },
+  "validation": {
+    "fieldIsRequiredDefault": "Pole ::field je povinné",
+    "invalidEmailAddressDefault": "Neplatná emailová adresa",
+    "fieldMustBeAtLeastCharacterDefault": "Pole ::field musí mať aspoň ::length znakov",
+    "fieldDoesNotMatchOtherDefault": "Pole ::field sa nezhoduje s ::other"
   }
 }

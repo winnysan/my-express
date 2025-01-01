@@ -1,5 +1,6 @@
 import express from 'express'
 import AuthController from '../controllers/AuthController'
+import ValidationMiddleware from '../middlewares/ValidationMiddleware'
 
 /**
  * Router for handling auth-related routes
@@ -23,7 +24,11 @@ class AuthRouter {
      * Register
      */
     this.router.get('/register', AuthController.registerPage)
-    this.router.post('/register', AuthController.registerUser)
+    this.router.post(
+      '/register',
+      ValidationMiddleware.register,
+      AuthController.registerUser
+    )
   }
 }
 

@@ -28,4 +28,10 @@ export type Dictionary = {
     passwordConfirmation: string
     submit: string
   }
+  validation: {
+    fieldIsRequiredDefault: string
+    invalidEmailAddressDefault: string
+    fieldMustBeAtLeastCharacterDefault: string
+    fieldDoesNotMatchOtherDefault: string
+  }
 }
