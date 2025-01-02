@@ -9,6 +9,7 @@ declare global {
       PORT: number
       SESSION_SECRET: string
       MONGO_URI: string
+      ADMIN_EMAIL: string | undefined
     }
   }
   namespace Express {

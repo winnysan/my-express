@@ -13,6 +13,7 @@ export type Dictionary = {
   messages: {
     somethingWentWrong: string
     notFound: string
+    youHaveBeenRegistered: string
   }
   pages: {
     error: string

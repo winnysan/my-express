@@ -12,7 +12,8 @@
   },
   "messages": {
     "somethingWentWrong": "Something went wrong",
-    "notFound": "Not found"
+    "notFound": "Not found",
+    "youHaveBeenRegistered": "You have been registered"
   },
   "pages": {
     "error": "Error",

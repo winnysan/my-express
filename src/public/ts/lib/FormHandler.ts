@@ -1,4 +1,5 @@
 import Helper from './Helper'
+import SpaRouter from './SpaRouter'
 
 /**
  * A class to handle form submission
@@ -92,7 +93,12 @@ class FormHandler {
           /**
            * Show message from result
            */
-          if (result?.message) Helper.addToastMessage(this.toastEl, result?.message, 'success')
+          if (result.message) Helper.addToastMessage(this.toastEl, result.message, 'success')
+
+          /**
+           * Handle redirect
+           */
+          if (result.redirect) SpaRouter.navigateTo(result.redirect)
         }
       } catch (err) {
         /**

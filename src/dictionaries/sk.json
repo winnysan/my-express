@@ -12,7 +12,8 @@
   },
   "messages": {
     "somethingWentWrong": "Niečo sa pokazilo",
-    "notFound": "Nenašlo sa"
+    "notFound": "Nenašlo sa",
+    "youHaveBeenRegistered": "Boli ste zaregistrovaní"
   },
   "pages": {
     "error": "Chyba",
