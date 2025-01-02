@@ -5,6 +5,7 @@ import express from 'express'
 import expressLayouts from 'express-ejs-layouts'
 import session from 'express-session'
 import path from 'path'
+import Database from './lib/Database'
 import AjaxMiddleware from './middlewares/AjaxMiddleware'
 import CsrfMiddleware from './middlewares/CsrfMiddleware'
 import ErrorMiddleware from './middlewares/ErrorMiddleware'
@@ -22,6 +23,7 @@ dotenv.config()
 class App {
   public app: express.Application
   private port: number | undefined
+  private db: Database
 
   /**
    * Initializes a new instance of App class
@@ -29,11 +31,20 @@ class App {
   constructor() {
     this.app = express()
     this.port = process.env.PORT
+    this.db = new Database(process.env.MONGO_URI)
 
+    this.connectDatabase()
     this.setMiddleware()
     this.setViewEngine()
     this.setRoutes()
     this.setErrorHandlers()
+  }
+
+  /**
+   * Connect to the MongoDB database
+   */
+  private async connectDatabase(): Promise<void> {
+    await this.db.connect()
   }
 
   /**

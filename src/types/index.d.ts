@@ -8,6 +8,7 @@ declare global {
       NODE_ENV: NodeEnv.PROD | NodeEnv.DEV
       PORT: number
       SESSION_SECRET: string
+      MONGO_URI: string
     }
   }
   namespace Express {
