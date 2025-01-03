@@ -16,9 +16,9 @@
   "messages": {
     "somethingWentWrong": "Something went wrong",
     "notFound": "Not found",
-    "youHaveBeenRegistered": "You have been registered",
+    "youHaveBeenRegisteredAndLoggedIn": "You have been registered and logged in",
     "youHaveBeenLoggedIn": "You have been logged in",
-    "youHaveBeenLoggedOut": "You have been logged in",
+    "youHaveBeenLoggedOut": "You have been logged out",
     "invalidCredentials": "Invalid credentials"
   },
   "pages": {
@@ -40,6 +40,8 @@
     "fieldIsRequiredDefault": "Field ::field is required",
     "invalidEmailAddressDefault": "Invalid email address",
     "fieldMustBeAtLeastCharacterDefault": "Field ::field must be least ::length characters",
-    "fieldDoesNotMatchOtherDefault": "Field ::field does not match ::other"
+    "fieldDoesNotMatchOtherDefault": "Field ::field does not match ::other",
+    "fieldMustByUniqueDefault": "Field ::field must be unique",
+    "errorCheckingUniquenessForFieldDefault": "Error checking uniqueness for field ::field"
   }
 }

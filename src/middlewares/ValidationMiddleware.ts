@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import AsyncHandler from '../lib/AsyncHandler'
 import Validator from '../lib/Validator'
+import User from '../models/User'
 
 /**
  * Middleware class for handling input validation
@@ -14,8 +15,7 @@ class ValidationMiddleware {
 
     validation.field('name').required()
 
-    validation.field('email').required().email()
-    // TODO: check if the email is unique
+    validation.field('email').required().email().unique(User, 'email')
 
     validation.field('password').required().min(8)
 

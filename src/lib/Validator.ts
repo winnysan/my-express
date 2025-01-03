@@ -8,6 +8,10 @@ interface ValidationError {
   message: string
 }
 
+interface FindOneModel {
+  findOne(query: Record<string, any>): Promise<any>
+}
+
 /**
  * Class representing validation logic for request fields
  */
@@ -170,6 +174,30 @@ class FieldValidator {
       }
     })
 
+    return this
+  }
+
+  public unique(model: FindOneModel, fieldName?: string, message?: string): this {
+    this.validation.addValidation(async () => {
+      const value = this.validation.getFieldValue(this.name)
+      if (value === undefined || value === null || value === '') return
+
+      const queryField = fieldName || this.name
+      try {
+        const exist = await model.findOne({ [queryField]: value })
+        if (exist) {
+          this.validation.addError(
+            this.name,
+            message || global.dictionary.validation.fieldMustByUniqueDefault.replace(/::field/, this.name)
+          )
+        }
+      } catch (err) {
+        this.validation.addError(
+          this.name,
+          global.dictionary.validation.errorCheckingUniquenessForFieldDefault.replace(/::field/, this.name)
+        )
+      }
+    })
     return this
   }
 }

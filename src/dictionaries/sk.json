@@ -16,7 +16,7 @@
   "messages": {
     "somethingWentWrong": "Niečo sa pokazilo",
     "notFound": "Nenašlo sa",
-    "youHaveBeenRegistered": "Boli ste zaregistrovaní",
+    "youHaveBeenRegisteredAndLoggedIn": "Boli ste zaregistrovaní a prihlásený",
     "youHaveBeenLoggedIn": "Boli ste prihlásený",
     "youHaveBeenLoggedOut": "Boli ste odhlásený",
     "invalidCredentials": "Zlé prihlasovacie údaje"
@@ -40,6 +40,8 @@
     "fieldIsRequiredDefault": "Pole ::field je povinné",
     "invalidEmailAddressDefault": "Neplatná emailová adresa",
     "fieldMustBeAtLeastCharacterDefault": "Pole ::field musí mať aspoň ::length znakov",
-    "fieldDoesNotMatchOtherDefault": "Pole ::field sa nezhoduje s ::other"
+    "fieldDoesNotMatchOtherDefault": "Pole ::field sa nezhoduje s ::other",
+    "fieldMustByUniqueDefault": "Pole ::field musí byť unikátne",
+    "errorCheckingUniquenessForFieldDefault": "Chyba pri zisťovaní unikátnosti poľa ::field"
   }
 }

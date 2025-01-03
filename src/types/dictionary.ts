@@ -16,7 +16,7 @@ export type Dictionary = {
   messages: {
     somethingWentWrong: string
     notFound: string
-    youHaveBeenRegistered: string
+    youHaveBeenRegisteredAndLoggedIn: string
     youHaveBeenLoggedIn: string
     youHaveBeenLoggedOut: string
     invalidCredentials: string
@@ -41,5 +41,7 @@ export type Dictionary = {
     invalidEmailAddressDefault: string
     fieldMustBeAtLeastCharacterDefault: string
     fieldDoesNotMatchOtherDefault: string
+    fieldMustByUniqueDefault: string
+    errorCheckingUniquenessForFieldDefault: string
   }
 }

@@ -150,10 +150,10 @@ class AuthController {
       role: isAdmin ? Role.ADMIN : undefined,
     })
 
-    // TODO: login
+    SessionManger.generateAuthToken(res, user._id.toString())
 
     res.status(201).json({
-      message: global.dictionary.messages.youHaveBeenRegistered,
+      message: global.dictionary.messages.youHaveBeenRegisteredAndLoggedIn,
       redirect: '/',
     })
   })
@@ -266,6 +266,11 @@ class AuthController {
     }
   })
 
+  /**
+   * Logs out a user by destroying the session and clearing the auth token
+   * @param req
+   * @param res
+   */
   public logoutUser = (req: Request, res: Response) => {
     SessionManger.destroyUserSession(req, res)
   }
