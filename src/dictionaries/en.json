@@ -16,7 +16,8 @@
     "somethingWentWrong": "Something went wrong",
     "notFound": "Not found",
     "youHaveBeenRegistered": "You have been registered",
-    "youHaveBeenLoggedIn": "You have been logged in"
+    "youHaveBeenLoggedIn": "You have been logged in",
+    "invalidCredentials": "Invalid credentials"
   },
   "pages": {
     "error": "Error",

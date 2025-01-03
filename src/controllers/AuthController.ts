@@ -245,12 +245,18 @@ class AuthController {
   public loginUser = AsyncHandler.wrap(async (req: Request, res: Response) => {
     const { email, password } = req.body
 
-    console.log({ email, password })
+    const user = await User.findOne({ email })
 
-    res.status(200).json({
-      message: global.dictionary.messages.youHaveBeenLoggedIn,
-      redirect: '/',
-    })
+    if (user && (await bcrypt.compare(password, user.password!))) {
+      res.status(200).json({
+        message: global.dictionary.messages.youHaveBeenLoggedIn,
+        redirect: '/',
+      })
+    } else {
+      res.status(401)
+
+      throw new Error(global.dictionary.messages.invalidCredentials)
+    }
   })
 }
 

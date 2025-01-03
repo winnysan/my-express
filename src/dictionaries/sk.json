@@ -16,7 +16,8 @@
     "somethingWentWrong": "Niečo sa pokazilo",
     "notFound": "Nenašlo sa",
     "youHaveBeenRegistered": "Boli ste zaregistrovaní",
-    "youHaveBeenLoggedIn": "Boli ste prihlásený"
+    "youHaveBeenLoggedIn": "Boli ste prihlásený",
+    "invalidCredentials": "Zlé prihlasovacie údaje"
   },
   "pages": {
     "error": "Chyba",

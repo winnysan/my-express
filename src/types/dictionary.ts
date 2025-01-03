@@ -17,6 +17,7 @@ export type Dictionary = {
     notFound: string
     youHaveBeenRegistered: string
     youHaveBeenLoggedIn: string
+    invalidCredentials: string
   }
   pages: {
     error: string
