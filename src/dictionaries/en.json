@@ -2,6 +2,7 @@
   "navigation": {
     "home": "Home",
     "posts": "Posts",
+    "admin": "Admin",
     "register": "Register",
     "login": "Login",
     "logout": "Logout"
@@ -9,6 +10,7 @@
   "title": {
     "homePage": "Home page",
     "postsPage": "Posts page",
+    "adminPage": "Admin page",
     "registerPage": "Register page",
     "loginPage": "Login page",
     "errorPage": "Error page"
@@ -25,6 +27,7 @@
     "error": "Error",
     "helloE": "Hello!",
     "posts": "Posts",
+    "admin": "Admin",
     "register": "Register",
     "login": "Login",
     "letsCodeExpressDifferently": "Let's code Express differently"

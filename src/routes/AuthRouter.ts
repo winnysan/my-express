@@ -1,5 +1,6 @@
 import express from 'express'
 import AuthController from '../controllers/AuthController'
+import AuthMiddleware from '../middlewares/AuthMiddleware'
 import ValidationMiddleware from '../middlewares/ValidationMiddleware'
 
 /**
@@ -23,19 +24,19 @@ class AuthRouter {
     /**
      * Register
      */
-    this.router.get('/register', AuthController.registerPage)
-    this.router.post('/register', ValidationMiddleware.register, AuthController.registerUser)
+    this.router.get('/register', AuthMiddleware.public, AuthController.registerPage)
+    this.router.post('/register', AuthMiddleware.public, ValidationMiddleware.register, AuthController.registerUser)
 
     /**
      * Login
      */
-    this.router.get('/login', AuthController.loginPage)
-    this.router.post('/login', ValidationMiddleware.login, AuthController.loginUser)
+    this.router.get('/login', AuthMiddleware.public, AuthController.loginPage)
+    this.router.post('/login', AuthMiddleware.public, ValidationMiddleware.login, AuthController.loginUser)
 
     /**
      * Logout
      */
-    this.router.post('/logout', AuthController.logoutUser)
+    this.router.post('/logout', AuthMiddleware.protect, AuthController.logoutUser)
   }
 }
 

@@ -13,6 +13,7 @@ import CsrfMiddleware from './middlewares/CsrfMiddleware'
 import ErrorMiddleware from './middlewares/ErrorMiddleware'
 import LocalizationMiddleware from './middlewares/LocalizationMiddleware'
 import upload from './middlewares/UploadMiddleware'
+import AdminRouter from './routes/AdminRouter'
 import AuthRouter from './routes/AuthRouter'
 import PageRouter from './routes/PageRouter'
 import PostRouter from './routes/PostRouter'
@@ -91,6 +92,7 @@ class App {
   private setRoutes(): void {
     this.app.use('/', AuthMiddleware.authCheck, PageRouter)
     this.app.use('/posts', AuthMiddleware.authCheck, PostRouter)
+    this.app.use('/admin', AuthMiddleware.authCheck, AdminRouter)
     this.app.use('/auth', AuthMiddleware.authCheck, AuthRouter)
   }
 

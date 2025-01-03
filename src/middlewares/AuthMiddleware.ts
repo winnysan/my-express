@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 import AsyncHandler from '../lib/AsyncHandler'
 import Message from '../lib/Message'
 import User, { IUser } from '../models/User'
+import { Role } from '../types/enums'
 
 type Decoded = {
   userId: string
@@ -35,6 +36,41 @@ class AuthMiddleware {
       req.session.user = undefined
 
       next()
+    }
+  })
+
+  /**
+   * Middleware to protect routes by ensuring the user is authenticated
+   */
+  public protect = AsyncHandler.wrap(async (req: Request, res: Response, next: NextFunction) => {
+    const user: IUser | undefined = req.session.user
+
+    if (user) {
+      next()
+    } else {
+      res.redirect('/auth/login')
+    }
+  })
+
+  /**
+   * Middleware to allow access only to admin users
+   */
+  public admin = AsyncHandler.wrap(async (req: Request, res: Response, next: NextFunction) => {
+    if (req.session.user && req.session.user.role === Role.ADMIN) {
+      next()
+    } else {
+      res.redirect('/')
+    }
+  })
+
+  /**
+   * Middleware to allow access only to unauthenticated users
+   */
+  public public = AsyncHandler.wrap(async (req: Request, res: Response, next: NextFunction) => {
+    if (!req.cookies.authToken || !req.session.user) {
+      next()
+    } else {
+      res.redirect('/')
     }
   })
 }

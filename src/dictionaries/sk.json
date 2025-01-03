@@ -2,6 +2,7 @@
   "navigation": {
     "home": "Domov",
     "posts": "Príspevky",
+    "admin": "Administrácia",
     "register": "Registrácia",
     "login": "Prihlásenie",
     "logout": "Odhlásenie"
@@ -9,6 +10,7 @@
   "title": {
     "homePage": "Domovská stránka",
     "postsPage": "Stránka s príspevkami",
+    "adminPage": "Administrácia",
     "registerPage": "Registrácia",
     "loginPage": "Prihlásenie",
     "errorPage": "Chyba"
@@ -25,6 +27,7 @@
     "error": "Chyba",
     "helloE": "Ahoj!",
     "posts": "Príspevky",
+    "admin": "Administrácia",
     "register": "Registrácia",
     "login": "Registrácia",
     "letsCodeExpressDifferently": "Poďme písať Express inak"

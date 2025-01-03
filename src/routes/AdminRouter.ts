@@ -1,11 +1,11 @@
 import express from 'express'
-import PostController from '../controllers/PostController'
+import AdminController from '../controllers/AdminController'
 import AuthMiddleware from '../middlewares/AuthMiddleware'
 
 /**
- * Router for handling post-related routes
+ * Router for handling admin-related routes
  */
-class PostRouter {
+class AdminRouter {
   public router: express.Router
 
   /**
@@ -21,10 +21,10 @@ class PostRouter {
    */
   private setRoutes(): void {
     /**
-     * Post page
+     * Admin page
      */
-    this.router.get('/', AuthMiddleware.protect, PostController.postsPage)
+    this.router.get('/', AuthMiddleware.protect, AuthMiddleware.admin, AdminController.adminPage)
   }
 }
 
-export default new PostRouter().router
+export default new AdminRouter().router
