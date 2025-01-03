@@ -29,6 +29,25 @@ class ValidationMiddleware {
       next()
     }
   })
+
+  /**
+   * Middleware function for validating login data
+   */
+  public static login = AsyncHandler.wrap(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const validation = new Validator(req)
+
+    validation.field('email').required().email()
+
+    validation.field('password').required()
+
+    await validation.runValidations()
+
+    if (validation.errors.length > 0) {
+      res.json({ validation: validation.errors })
+    } else {
+      next()
+    }
+  })
 }
 
 export default ValidationMiddleware

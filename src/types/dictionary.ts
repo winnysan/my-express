@@ -3,23 +3,27 @@ export type Dictionary = {
     home: string
     posts: string
     register: string
+    login: string
   }
   title: {
     homePage: string
     postsPage: string
     registerPage: string
+    loginPage: string
     errorPage: string
   }
   messages: {
     somethingWentWrong: string
     notFound: string
     youHaveBeenRegistered: string
+    youHaveBeenLoggedIn: string
   }
   pages: {
     error: string
     helloE: string
     posts: string
     register: string
+    login: string
     letsCodeExpressDifferently: string
   }
   form: {

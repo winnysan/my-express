@@ -2,24 +2,28 @@
   "navigation": {
     "home": "Home",
     "posts": "Posts",
-    "register": "Register"
+    "register": "Register",
+    "login": "Login"
   },
   "title": {
     "homePage": "Home page",
     "postsPage": "Posts page",
     "registerPage": "Register page",
+    "loginPage": "Login page",
     "errorPage": "Error page"
   },
   "messages": {
     "somethingWentWrong": "Something went wrong",
     "notFound": "Not found",
-    "youHaveBeenRegistered": "You have been registered"
+    "youHaveBeenRegistered": "You have been registered",
+    "youHaveBeenLoggedIn": "You have been logged in"
   },
   "pages": {
     "error": "Error",
     "helloE": "Hello!",
     "posts": "Posts",
     "register": "Register",
+    "login": "Login",
     "letsCodeExpressDifferently": "Let's code Express differently"
   },
   "form": {

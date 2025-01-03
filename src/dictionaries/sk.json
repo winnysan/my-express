@@ -2,24 +2,28 @@
   "navigation": {
     "home": "Domov",
     "posts": "Príspevky",
-    "register": "Registrácia"
+    "register": "Registrácia",
+    "login": "Prihlásenie"
   },
   "title": {
     "homePage": "Domovská stránka",
     "postsPage": "Stránka s príspevkami",
     "registerPage": "Registrácia",
+    "loginPage": "Prihlásenie",
     "errorPage": "Chyba"
   },
   "messages": {
     "somethingWentWrong": "Niečo sa pokazilo",
     "notFound": "Nenašlo sa",
-    "youHaveBeenRegistered": "Boli ste zaregistrovaní"
+    "youHaveBeenRegistered": "Boli ste zaregistrovaní",
+    "youHaveBeenLoggedIn": "Boli ste prihlásený"
   },
   "pages": {
     "error": "Chyba",
     "helloE": "Ahoj!",
     "posts": "Príspevky",
     "register": "Registrácia",
+    "login": "Registrácia",
     "letsCodeExpressDifferently": "Poďme písať Express inak"
   },
   "form": {

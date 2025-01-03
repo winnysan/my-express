@@ -154,6 +154,104 @@ class AuthController {
       redirect: '/',
     })
   })
+
+  /**
+   * Renders the login page
+   */
+  public loginPage = AsyncHandler.wrap(async (req: Request, res: Response) => {
+    const form: ElementData = {
+      element: 'form',
+      attr: {
+        id: 'form',
+        action: '/auth/login',
+        method: 'post',
+      },
+      children: [
+        // CSRF
+        {
+          element: 'input',
+          attr: {
+            type: 'hidden',
+            name: '_csrf',
+            value: req.csrfToken?.() || '',
+          },
+        },
+        // Email group
+        {
+          element: 'div',
+          children: [
+            {
+              element: 'label',
+              attr: {
+                for: 'email',
+              },
+              content: global.dictionary.form.email,
+            },
+            {
+              element: 'input',
+              attr: {
+                type: 'email',
+                name: 'email',
+              },
+            },
+          ],
+        },
+        // Password group
+        {
+          element: 'div',
+          children: [
+            {
+              element: 'label',
+              attr: {
+                for: 'password',
+              },
+              content: global.dictionary.form.password,
+            },
+            {
+              element: 'input',
+              attr: {
+                type: 'password',
+                name: 'password',
+              },
+            },
+          ],
+        },
+        // Submit
+        {
+          element: 'div',
+          children: [
+            {
+              element: 'button',
+              attr: {
+                type: 'submit',
+              },
+              content: global.dictionary.form.submit,
+            },
+          ],
+        },
+      ],
+    }
+
+    res.render('auth/login', {
+      layout: res.locals.isAjax ? false : 'layout/main',
+      title: global.dictionary.title.loginPage,
+      form: new RenderElement(form).toString(),
+    })
+  })
+
+  /**
+   * Authenticates a user
+   */
+  public loginUser = AsyncHandler.wrap(async (req: Request, res: Response) => {
+    const { email, password } = req.body
+
+    console.log({ email, password })
+
+    res.status(200).json({
+      message: global.dictionary.messages.youHaveBeenLoggedIn,
+      redirect: '/',
+    })
+  })
 }
 
 export default new AuthController()

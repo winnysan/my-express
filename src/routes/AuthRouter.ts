@@ -25,6 +25,12 @@ class AuthRouter {
      */
     this.router.get('/register', AuthController.registerPage)
     this.router.post('/register', ValidationMiddleware.register, AuthController.registerUser)
+
+    /**
+     * Login
+     */
+    this.router.get('/login', AuthController.loginPage)
+    this.router.post('/login', ValidationMiddleware.login, AuthController.loginUser)
   }
 }
 
