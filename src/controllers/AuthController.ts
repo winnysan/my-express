@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs'
 import { Request, Response } from 'express'
 import AsyncHandler from '../lib/AsyncHandler'
 import RenderElement, { ElementData } from '../lib/RenderElement'
+import SessionManger from '../lib/SesionManager'
 import User from '../models/User'
 import { Role } from '../types/enums'
 
@@ -233,7 +234,7 @@ class AuthController {
     }
 
     res.render('auth/login', {
-      layout: res.locals.isAjax ? false : 'layout/main',
+      layout: res.locals.isAjax ? false : 'layouts/main',
       title: global.dictionary.title.loginPage,
       form: new RenderElement(form).toString(),
     })
@@ -248,6 +249,8 @@ class AuthController {
     const user = await User.findOne({ email })
 
     if (user && (await bcrypt.compare(password, user.password!))) {
+      SessionManger.generateAuthToken(res, user._id.toString())
+
       res.status(200).json({
         message: global.dictionary.messages.youHaveBeenLoggedIn,
         redirect: '/',

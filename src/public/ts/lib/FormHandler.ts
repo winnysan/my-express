@@ -98,7 +98,16 @@ class FormHandler {
           /**
            * Handle redirect
            */
-          if (result.redirect) SpaRouter.navigateTo(result.redirect)
+          if (result.redirect) {
+            /**
+             * Cookies fix in Safari
+             */
+            if (/Version\/[\d.]+.*Safari/.test(navigator.userAgent)) {
+              window.location.href = result.redirect
+            }
+
+            SpaRouter.navigateTo(result.redirect)
+          }
         }
       } catch (err) {
         /**

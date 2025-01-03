@@ -1,3 +1,4 @@
+import { IUser } from '../models/User'
 import { Dictionary } from './dictionary'
 import { NodeEnv } from './enums'
 import { Locale } from './locale'
@@ -10,6 +11,7 @@ declare global {
       SESSION_SECRET: string
       MONGO_URI: string
       ADMIN_EMAIL: string | undefined
+      JWT_SECRET: string
     }
   }
   namespace Express {
@@ -19,6 +21,12 @@ declare global {
   }
   var locale: Locale
   var dictionary: Dictionary
+}
+
+declare module 'express-session' {
+  export interface SessionData {
+    user?: IUser
+  }
 }
 
 export {}
