@@ -130,6 +130,7 @@ class AuthController {
     res.render('auth/register', {
       layout: res.locals.isAjax ? false : 'layouts/main',
       title: global.dictionary.title.registerPage,
+      user: req.session.user,
       form: new RenderElement(form).toString(),
     })
   })
@@ -236,6 +237,7 @@ class AuthController {
     res.render('auth/login', {
       layout: res.locals.isAjax ? false : 'layouts/main',
       title: global.dictionary.title.loginPage,
+      user: req.session.user,
       form: new RenderElement(form).toString(),
     })
   })

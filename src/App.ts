@@ -8,6 +8,7 @@ import session from 'express-session'
 import path from 'path'
 import Database from './lib/Database'
 import AjaxMiddleware from './middlewares/AjaxMiddleware'
+import AuthMiddleware from './middlewares/AuthMiddleware'
 import CsrfMiddleware from './middlewares/CsrfMiddleware'
 import ErrorMiddleware from './middlewares/ErrorMiddleware'
 import LocalizationMiddleware from './middlewares/LocalizationMiddleware'
@@ -88,9 +89,9 @@ class App {
    * @private
    */
   private setRoutes(): void {
-    this.app.use('/', PageRouter)
-    this.app.use('/posts', PostRouter)
-    this.app.use('/auth', AuthRouter)
+    this.app.use('/', AuthMiddleware.authCheck, PageRouter)
+    this.app.use('/posts', AuthMiddleware.authCheck, PostRouter)
+    this.app.use('/auth', AuthMiddleware.authCheck, AuthRouter)
   }
 
   /**

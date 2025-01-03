@@ -12,6 +12,7 @@ class PostController {
     res.render('post/index', {
       layout: res.locals.isAjax ? false : 'layouts/main',
       title: global.dictionary.title.postsPage,
+      user: req.session.user,
     })
   })
 }

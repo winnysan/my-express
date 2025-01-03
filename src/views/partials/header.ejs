@@ -21,8 +21,12 @@
         <ul class="navigation">
             <li><a href="/" class="link" data-link><%= global.dictionary.navigation.home %></a></li>
             <li><a href="/posts" class="link" data-link><%= global.dictionary.navigation.posts %></a></li>
-            <li><a href="/auth/register" class="link" data-link><%= global.dictionary.navigation.register %></a></li>
-            <li><a href="/auth/login" class="link" data-link><%= global.dictionary.navigation.login %></a></li>
+            <% if (typeof user === 'undefined') { %>
+                <li><a href="/auth/register" class="link" data-link><%= global.dictionary.navigation.register %></a></li>
+                <li><a href="/auth/login" class="link" data-link><%= global.dictionary.navigation.login %></a></i> 
+            <% } else { %>
+                <li></li>
+            <% } %>
         </ul>
     </nav>
 </header>
