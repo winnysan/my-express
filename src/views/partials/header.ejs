@@ -25,7 +25,12 @@
                 <li><a href="/auth/register" class="link" data-link><%= global.dictionary.navigation.register %></a></li>
                 <li><a href="/auth/login" class="link" data-link><%= global.dictionary.navigation.login %></a></i> 
             <% } else { %>
-                <li></li>
+                <li>
+                    <form id="form-logout" action="/auth/logout" method="post">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                        <button type="submit" class="link"><%= global.dictionary.navigation.logout %></button>
+                    </form>
+                </li>
             <% } %>
         </ul>
     </nav>

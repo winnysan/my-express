@@ -4,6 +4,7 @@ export type Dictionary = {
     posts: string
     register: string
     login: string
+    logout: string
   }
   title: {
     homePage: string
@@ -17,6 +18,7 @@ export type Dictionary = {
     notFound: string
     youHaveBeenRegistered: string
     youHaveBeenLoggedIn: string
+    youHaveBeenLoggedOut: string
     invalidCredentials: string
   }
   pages: {

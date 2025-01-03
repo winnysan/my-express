@@ -36,6 +36,7 @@ class Bootstrap {
      * Form handlers
      */
     new FormHandler('#form')
+    new FormHandler('#form-logout')
   }
 }
 

@@ -1,4 +1,4 @@
-import { Response } from 'express'
+import { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import { NodeEnv } from '../types/enums'
 
@@ -21,6 +21,25 @@ class SessionManger {
       secure: process.env.NODE_ENV === NodeEnv.PROD,
       sameSite: 'strict',
       maxAge: 30 * 24 * 60 * 60 * 1000,
+    })
+  }
+
+  /**
+   * Destroys the user's session by clearing the authentication cookie and removing the user from the session
+   * @param req
+   * @param res
+   */
+  public static destroyUserSession(req: Request, res: Response): void {
+    res.cookie('authToken', '', {
+      httpOnly: true,
+      expires: new Date(0),
+    })
+
+    delete req.session.user
+
+    res.status(200).json({
+      message: global.dictionary.messages.youHaveBeenLoggedOut,
+      redirect: '/',
     })
   }
 }

@@ -12,6 +12,7 @@ class PageController {
     res.render('index', {
       layout: res.locals.isAjax ? false : 'layouts/main',
       title: global.dictionary.title.homePage,
+      csrfToken: req.csrfToken?.() || '',
       user: req.session.user,
     })
   })

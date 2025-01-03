@@ -130,6 +130,7 @@ class AuthController {
     res.render('auth/register', {
       layout: res.locals.isAjax ? false : 'layouts/main',
       title: global.dictionary.title.registerPage,
+      csrfToken: req.csrfToken?.() || '',
       user: req.session.user,
       form: new RenderElement(form).toString(),
     })
@@ -237,6 +238,7 @@ class AuthController {
     res.render('auth/login', {
       layout: res.locals.isAjax ? false : 'layouts/main',
       title: global.dictionary.title.loginPage,
+      csrfToken: req.csrfToken?.() || '',
       user: req.session.user,
       form: new RenderElement(form).toString(),
     })
@@ -263,6 +265,10 @@ class AuthController {
       throw new Error(global.dictionary.messages.invalidCredentials)
     }
   })
+
+  public logoutUser = (req: Request, res: Response) => {
+    SessionManger.destroyUserSession(req, res)
+  }
 }
 
 export default new AuthController()

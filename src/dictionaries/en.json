@@ -3,7 +3,8 @@
     "home": "Home",
     "posts": "Posts",
     "register": "Register",
-    "login": "Login"
+    "login": "Login",
+    "logout": "Logout"
   },
   "title": {
     "homePage": "Home page",
@@ -17,6 +18,7 @@
     "notFound": "Not found",
     "youHaveBeenRegistered": "You have been registered",
     "youHaveBeenLoggedIn": "You have been logged in",
+    "youHaveBeenLoggedOut": "You have been logged in",
     "invalidCredentials": "Invalid credentials"
   },
   "pages": {

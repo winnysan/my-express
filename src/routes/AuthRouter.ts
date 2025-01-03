@@ -31,6 +31,11 @@ class AuthRouter {
      */
     this.router.get('/login', AuthController.loginPage)
     this.router.post('/login', ValidationMiddleware.login, AuthController.loginUser)
+
+    /**
+     * Logout
+     */
+    this.router.post('/logout', AuthController.logoutUser)
   }
 }
 

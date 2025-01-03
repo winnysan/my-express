@@ -46,6 +46,7 @@ class ErrorMiddleware extends BaseMiddleware {
       res.render('error', {
         layout: res.locals.isAjax ? false : 'layouts/main',
         title: global.dictionary.title.errorPage,
+        csrfToken: req.csrfToken?.() || '',
         user: req.session.user,
         error,
       })

@@ -3,7 +3,8 @@
     "home": "Domov",
     "posts": "Príspevky",
     "register": "Registrácia",
-    "login": "Prihlásenie"
+    "login": "Prihlásenie",
+    "logout": "Odhlásenie"
   },
   "title": {
     "homePage": "Domovská stránka",
@@ -17,6 +18,7 @@
     "notFound": "Nenašlo sa",
     "youHaveBeenRegistered": "Boli ste zaregistrovaní",
     "youHaveBeenLoggedIn": "Boli ste prihlásený",
+    "youHaveBeenLoggedOut": "Boli ste odhlásený",
     "invalidCredentials": "Zlé prihlasovacie údaje"
   },
   "pages": {
