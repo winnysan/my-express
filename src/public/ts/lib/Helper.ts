@@ -57,6 +57,22 @@ class Helper {
       setTimeout(() => li.remove(), 500)
     }, duration)
   }
+
+  /**
+   * Creates a debounced version of a function that delays its executions
+   * @param func
+   * @param delay
+   * @returns
+   */
+  static debounce<T extends (...args: any[]) => void>(func: T, delay: number): (...args: Parameters<T>) => void {
+    let timeoutId: number | undefined
+
+    return (...args: Parameters<T>): void => {
+      if (timeoutId) clearTimeout(timeoutId)
+
+      timeoutId = window.setTimeout(() => func(...args), delay)
+    }
+  }
 }
 
 export default Helper

@@ -21,13 +21,13 @@ class CategoryHandler {
   private categoriesEl: HTMLDivElement | null = null
   private listenerAttached: boolean = false
   private apiClient: ApiClient<ApiCategoryResponse>
+  private inputDebounceMap: WeakMap<HTMLInputElement, (data: any) => void> = new WeakMap()
 
   /**
    * Bind the event handler to avoid multiple bindings
    */
   private handleInputBound: (event: Event) => void
   private handleClickBound: (event: MouseEvent) => void
-  private handleChangeBound: (event: Event) => void
 
   /**
    * Private contructor to secure the Singleton pattern
@@ -39,7 +39,6 @@ class CategoryHandler {
 
     this.handleInputBound = this.handleInput.bind(this)
     this.handleClickBound = this.handleClick.bind(this)
-    this.handleChangeBound = this.handleChange.bind(this)
 
     this.initialize()
   }
@@ -74,7 +73,6 @@ class CategoryHandler {
     if (this.categoriesEl && !this.listenerAttached) {
       this.categoriesEl.addEventListener('input', this.handleInputBound)
       this.categoriesEl.addEventListener('click', this.handleClickBound)
-      this.categoriesEl.addEventListener('change', this.handleChangeBound)
 
       this.listenerAttached = true
     }
@@ -93,7 +91,6 @@ class CategoryHandler {
       if (this.categoriesEl && this.listenerAttached) {
         this.categoriesEl.removeEventListener('input', this.handleInputBound)
         this.categoriesEl.removeEventListener('click', this.handleClickBound)
-        this.categoriesEl.removeEventListener('change', this.handleChangeBound)
       }
 
       /**
@@ -107,7 +104,6 @@ class CategoryHandler {
       if (this.categoriesEl) {
         this.categoriesEl.addEventListener('input', this.handleInputBound)
         this.categoriesEl.addEventListener('click', this.handleClickBound)
-        this.categoriesEl.addEventListener('change', this.handleChangeBound)
       }
 
       /**
@@ -157,7 +153,30 @@ class CategoryHandler {
   private handleInput(event: Event): void {
     const target = event.target as HTMLElement
 
-    //
+    if (target.tagName.toLowerCase() === 'input') {
+      const input: HTMLInputElement = target as HTMLInputElement
+      const li: HTMLLIElement | null = input.closest('li')
+
+      if (li) {
+        const data: SendData = { action: 'input', target: li.id, value: input.value }
+
+        /**
+         * Get or create a debounced function for this input
+         */
+        let debouncedSendData = this.inputDebounceMap.get(input)
+
+        if (!debouncedSendData) {
+          debouncedSendData = Helper.debounce((data: any) => this.sendData(data), 500)
+
+          this.inputDebounceMap.set(input, debouncedSendData)
+        }
+
+        /**
+         * Call the debounced function with the data
+         */
+        debouncedSendData(data)
+      }
+    }
   }
 
   /**
@@ -173,16 +192,6 @@ class CategoryHandler {
     else if (target.classList.contains('delete')) this.deleteCategory(target)
     else if (target.classList.contains('up')) this.moveUpCategory(target)
     else if (target.classList.contains('down')) this.moveDownCategory(target)
-  }
-
-  /**
-   * Event handler for change event
-   * @param event
-   */
-  private handleChange(event: Event): void {
-    const target = event.target as HTMLElement
-
-    //
   }
 
   /**
@@ -346,7 +355,7 @@ class CategoryHandler {
       /**
        * Send data to API
        */
-      const data = { action: 'add-first' }
+      const data: SendData = { action: 'add-first' }
       this.sendData(data, tempId)
 
       /**
@@ -376,7 +385,7 @@ class CategoryHandler {
       /**
        * Send data to API
        */
-      const data = { action: 'add', target: li.id }
+      const data: SendData = { action: 'add', target: li.id }
       this.sendData(data, tempId)
 
       /**
@@ -417,7 +426,7 @@ class CategoryHandler {
       /**
        * Send data to API
        */
-      const data = { action: 'add-nested', target: li.id }
+      const data: SendData = { action: 'add-nested', target: li.id }
       this.sendData(data, tempId)
 
       /**
@@ -444,7 +453,7 @@ class CategoryHandler {
         /**
          * Send data to API
          */
-        const data = { action: 'delete', target: li.id }
+        const data: SendData = { action: 'delete', target: li.id }
         this.sendData(data)
 
         /**
@@ -472,7 +481,7 @@ class CategoryHandler {
         /**
          * Send data to API
          */
-        const data = { action: 'up', target: li.id }
+        const data: SendData = { action: 'up', target: li.id }
         this.sendData(data)
 
         /**
@@ -500,7 +509,7 @@ class CategoryHandler {
         /**
          * Send data to API
          */
-        const data = { action: 'down', target: li.id }
+        const data: SendData = { action: 'down', target: li.id }
         this.sendData(data)
 
         /**
