@@ -72,7 +72,14 @@ class CategoryHandler {
   private processDOM(): void {
     if (!this.categoriesEl) return
 
-    // processDom
+    const existingList: NodeListOf<HTMLLIElement> = this.categoriesEl.querySelectorAll('li')
+
+    existingList.forEach((li: HTMLLIElement) => {
+      const buttonGroup: HTMLDivElement | null = li.querySelector('.buttons-group')
+      if (buttonGroup && buttonGroup.children.length === 0) {
+        buttonGroup.appendChild(this.createButtons())
+      }
+    })
   }
 
   /**
@@ -103,6 +110,43 @@ class CategoryHandler {
     const target = event.target as HTMLElement
 
     //
+  }
+
+  /**
+   * Create a group of buttons for a category
+   * @returns
+   */
+  private createButtons(): HTMLDivElement {
+    const buttonGroup: HTMLDivElement = document.createElement('div')
+    buttonGroup.className = 'buttons-group'
+
+    const addButton: HTMLButtonElement = document.createElement('button')
+    addButton.className = 'add'
+    addButton.textContent = window.localization.getLocalizedText('add')
+
+    const addNestedButton: HTMLButtonElement = document.createElement('button')
+    addNestedButton.className = 'addNested'
+    addNestedButton.textContent = window.localization.getLocalizedText('addNested')
+
+    const deleteButton: HTMLButtonElement = document.createElement('button')
+    deleteButton.className = 'delete'
+    deleteButton.textContent = window.localization.getLocalizedText('delete')
+
+    const upButton: HTMLButtonElement = document.createElement('button')
+    upButton.className = 'up'
+    upButton.textContent = window.localization.getLocalizedText('up')
+
+    const downButton: HTMLButtonElement = document.createElement('button')
+    downButton.className = 'down'
+    downButton.textContent = window.localization.getLocalizedText('down')
+
+    buttonGroup.appendChild(addButton)
+    buttonGroup.appendChild(addNestedButton)
+    buttonGroup.appendChild(deleteButton)
+    buttonGroup.appendChild(upButton)
+    buttonGroup.appendChild(downButton)
+
+    return buttonGroup
   }
 }
 

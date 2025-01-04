@@ -3,6 +3,11 @@ interface Dictionary {
   error: string
   appElementNotFound: string
   somethingWentWrong: string
+  add: string
+  addNested: string
+  delete: string
+  up: string
+  down: string
 }
 
 interface Localization {
