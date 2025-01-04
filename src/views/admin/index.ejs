@@ -7,17 +7,33 @@
         <h2><%= global.dictionary.categories.categories %></h2>
         <div id="categories">
             <% if (categories.length > 0) { %>
-                <ul>
-                    <% categories.forEach(category => { %>
-                        <li id="category.id">
-                            <input type="text" />
-                            <div class="buttons-group"></div>
-                        </li>
-                    <% }) %>
-                </ul>
+                <% function renderCategories(categories) { %>
+                    <%
+                        const sordedCategories = categories.slice().sort((a,b) => {
+                            if (a.order !== b.order) {
+                                return a.order - b.order;
+                            }
+                            return a.name.localeCompare(b.name);
+                        });
+                    %>
+                    <ul>
+                        <% sordedCategories.forEach(function(category) { %>
+                            <li id="<%= category.id %>">
+                                <input type="text" value="<%= category.name %>">
+                                <div class="buttons-group"></div>
+
+                                <% if (category.children && category.children.length > 0) { %>
+                                    <% renderCategories(category.children); %>
+                                <% } %>
+                            </li>
+                        <% }); %>
+                    </ul>
+                <% } %>
+
+                <% renderCategories(categories); %>
             <% } else { %>
                 <button id="add-first"><%= global.dictionary.categories.addFirst %></button>
-            <% } %>             
+            <% } %>
         </div>
     </section>
 </main>
