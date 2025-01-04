@@ -1,5 +1,7 @@
 import express from 'express'
+import ApiCategoryController from '../controllers/ApiCategoryController'
 import ApiController from '../controllers/ApiController'
+import AuthMiddleware from '../middlewares/AuthMiddleware'
 
 /**
  * Router for handling api-related routes
@@ -23,6 +25,11 @@ class ApiRouter {
      * CSRF token
      */
     this.router.get('/csrf-token', ApiController.getCsrfToken)
+
+    /**
+     * Categories
+     */
+    this.router.post('/categories', AuthMiddleware.admin, ApiCategoryController.categoriesPost)
   }
 }
 

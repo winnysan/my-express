@@ -22,7 +22,9 @@
     "youHaveBeenLoggedIn": "Boli ste prihlásený",
     "youHaveBeenLoggedOut": "Boli ste odhlásený",
     "invalidCredentials": "Zlé prihlasovacie údaje",
-    "csrfTokenNotAvailable": "CSRF token nie je dostupný"
+    "csrfTokenNotAvailable": "CSRF token nie je dostupný",
+    "invalidData": "Neplatné data",
+    "unauthorized": "Neoprávnené"
   },
   "pages": {
     "error": "Chyba",

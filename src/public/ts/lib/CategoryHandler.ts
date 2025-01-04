@@ -1,4 +1,16 @@
+import ApiClient, { ApiResponse } from './ApiCLient'
 import Helper from './Helper'
+
+type ApiCategoryResponse = ApiResponse & {
+  status?: number
+  newId?: string
+}
+
+type SendData = {
+  action: string
+  target?: string
+  value?: string
+}
 
 /**
  * Handler for managing categories
@@ -8,6 +20,7 @@ class CategoryHandler {
   private categoriesId: string
   private categoriesEl: HTMLDivElement | null = null
   private listenerAttached: boolean = false
+  private apiClient: ApiClient<ApiCategoryResponse>
 
   /**
    * Bind the event handler to avoid multiple bindings
@@ -22,6 +35,7 @@ class CategoryHandler {
    */
   private constructor(categoriesId: string) {
     this.categoriesId = categoriesId
+    this.apiClient = new ApiClient<ApiCategoryResponse>(`${window.location.protocol}//${window.location.host}/api`)
 
     this.handleInputBound = this.handleInput.bind(this)
     this.handleClickBound = this.handleClick.bind(this)
@@ -230,6 +244,28 @@ class CategoryHandler {
   }
 
   /**
+   * Method to send dato to the API
+   * @param data
+   * @param tempId
+   */
+  private sendData(data: SendData, tempId?: string) {
+    this.apiClient
+      .fetch(data, 'categories')
+      .then(response => {
+        if (response.newId && tempId) {
+          /**
+           * Replace temporaty ID with the actual _id from the databae
+           */
+          const li = Helper.selectElement<HTMLLIElement>(`#${tempId}`)
+          if (li) li.id = response.newId
+        }
+
+        console.log(response)
+      })
+      .catch(err => console.error(err))
+  }
+
+  /**
    * Genearate a unique 8-digit ID
    */
   private generateUniqueId(): string {
@@ -264,7 +300,7 @@ class CategoryHandler {
   private showOrHideAddFirstButton(): void {
     if (!this.categoriesEl) return
 
-    let addFirstButton: HTMLButtonElement | null = document.querySelector('#add-first') as HTMLButtonElement
+    let addFirstButton: HTMLButtonElement | null = Helper.selectElement<HTMLButtonElement>('#add-first')
     const existingUl: HTMLUListElement | null = this.categoriesEl.querySelector('ul')
 
     if (existingUl && existingUl.querySelectorAll('li').length > 0) {
@@ -291,6 +327,7 @@ class CategoryHandler {
    */
   private addFirstCategory(): void {
     const tempId = `category-${this.generateUniqueId()}`
+
     const newLi: HTMLLIElement = this.createLiElement(tempId)
 
     /**
@@ -305,6 +342,12 @@ class CategoryHandler {
        */
       this.categoriesEl.innerHTML = ''
       this.categoriesEl.appendChild(ul)
+
+      /**
+       * Send data to API
+       */
+      const data = { action: 'add-first' }
+      this.sendData(data, tempId)
 
       /**
        * Update buttons
@@ -329,6 +372,12 @@ class CategoryHandler {
        * Insert the new LI after the current LI
        */
       li.parentNode?.insertBefore(newLi, li.nextSibling)
+
+      /**
+       * Send data to API
+       */
+      const data = { action: 'add', target: li.id }
+      this.sendData(data, tempId)
 
       /**
        * Update buttons
@@ -366,6 +415,12 @@ class CategoryHandler {
       ul.append(newLi)
 
       /**
+       * Send data to API
+       */
+      const data = { action: 'add-nested', target: li.id }
+      this.sendData(data, tempId)
+
+      /**
        * Update buttons
        */
       this.updateButtonState()
@@ -385,13 +440,19 @@ class CategoryHandler {
 
       if (confirmDelete) {
         li.remove()
-      }
 
-      /**
-       * Update buttons
-       */
-      this.updateButtonState()
-      this.showOrHideAddFirstButton()
+        /**
+         * Send data to API
+         */
+        const data = { action: 'delete', target: li.id }
+        this.sendData(data)
+
+        /**
+         * Update buttons
+         */
+        this.updateButtonState()
+        this.showOrHideAddFirstButton()
+      }
     }
   }
 
@@ -407,6 +468,12 @@ class CategoryHandler {
 
       if (prevLi) {
         li.parentNode?.insertBefore(li, prevLi)
+
+        /**
+         * Send data to API
+         */
+        const data = { action: 'up', target: li.id }
+        this.sendData(data)
 
         /**
          * Update buttons
@@ -429,6 +496,12 @@ class CategoryHandler {
 
       if (nextLi) {
         li.parentNode?.insertBefore(nextLi, li)
+
+        /**
+         * Send data to API
+         */
+        const data = { action: 'down', target: li.id }
+        this.sendData(data)
 
         /**
          * Update buttons

@@ -23,6 +23,8 @@ export type Dictionary = {
     youHaveBeenLoggedOut: string
     invalidCredentials: string
     csrfTokenNotAvailable: string
+    invalidData: string
+    unauthorized: string
   }
   pages: {
     error: string

@@ -22,7 +22,9 @@
     "youHaveBeenLoggedIn": "You have been logged in",
     "youHaveBeenLoggedOut": "You have been logged out",
     "invalidCredentials": "Invalid credentials",
-    "csrfTokenNotAvailable": "CSRF token not available"
+    "csrfTokenNotAvailable": "CSRF token not available",
+    "invalidData": "Invalid data",
+    "unauthorized": "Unauthorized"
   },
   "pages": {
     "error": "Error",

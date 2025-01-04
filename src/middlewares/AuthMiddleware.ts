@@ -59,7 +59,11 @@ class AuthMiddleware {
     if (req.session.user && req.session.user.role === Role.ADMIN) {
       next()
     } else {
-      res.redirect('/')
+      if (req.is('application/json')) {
+        res.status(401).json({ message: global.dictionary.messages.unauthorized })
+      } else {
+        res.redirect('/')
+      }
     }
   })
 
