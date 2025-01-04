@@ -21,7 +21,8 @@
     "youHaveBeenRegisteredAndLoggedIn": "Boli ste zaregistrovaní a prihlásený",
     "youHaveBeenLoggedIn": "Boli ste prihlásený",
     "youHaveBeenLoggedOut": "Boli ste odhlásený",
-    "invalidCredentials": "Zlé prihlasovacie údaje"
+    "invalidCredentials": "Zlé prihlasovacie údaje",
+    "csrfTokenNotAvailable": "CSRF token nie je dostupný"
   },
   "pages": {
     "error": "Chyba",

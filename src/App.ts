@@ -14,6 +14,7 @@ import ErrorMiddleware from './middlewares/ErrorMiddleware'
 import LocalizationMiddleware from './middlewares/LocalizationMiddleware'
 import upload from './middlewares/UploadMiddleware'
 import AdminRouter from './routes/AdminRouter'
+import ApiRouter from './routes/ApiRouter'
 import AuthRouter from './routes/AuthRouter'
 import PageRouter from './routes/PageRouter'
 import PostRouter from './routes/PostRouter'
@@ -71,6 +72,7 @@ class App {
     this.app.use(CsrfMiddleware.init())
     this.app.use(AjaxMiddleware.use())
     this.app.use(LocalizationMiddleware.use())
+    this.app.use(AuthMiddleware.authCheck)
     this.app.use(express.static(path.join(__dirname, './public')))
   }
 
@@ -90,10 +92,11 @@ class App {
    * @private
    */
   private setRoutes(): void {
-    this.app.use('/', AuthMiddleware.authCheck, PageRouter)
-    this.app.use('/posts', AuthMiddleware.authCheck, PostRouter)
-    this.app.use('/admin', AuthMiddleware.authCheck, AdminRouter)
-    this.app.use('/auth', AuthMiddleware.authCheck, AuthRouter)
+    this.app.use('/', PageRouter)
+    this.app.use('/posts', PostRouter)
+    this.app.use('/admin', AdminRouter)
+    this.app.use('/auth', AuthRouter)
+    this.app.use('/api', ApiRouter)
   }
 
   /**

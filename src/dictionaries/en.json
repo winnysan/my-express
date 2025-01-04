@@ -21,7 +21,8 @@
     "youHaveBeenRegisteredAndLoggedIn": "You have been registered and logged in",
     "youHaveBeenLoggedIn": "You have been logged in",
     "youHaveBeenLoggedOut": "You have been logged out",
-    "invalidCredentials": "Invalid credentials"
+    "invalidCredentials": "Invalid credentials",
+    "csrfTokenNotAvailable": "CSRF token not available"
   },
   "pages": {
     "error": "Error",
