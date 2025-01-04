@@ -24,6 +24,8 @@ export type Dictionary = {
     invalidCredentials: string
     csrfTokenNotAvailable: string
     invalidData: string
+    unknownAction: string
+    invalidDataForUpdate: string
     unauthorized: string
   }
   pages: {
@@ -53,5 +55,25 @@ export type Dictionary = {
   categories: {
     categories: string
     addFirst: string
+    new: string
+    firstCategoryCreated: string
+    missingCatedoryIdToAddAfter: string
+    categoryNotFound: string
+    categoryCreated: string
+    missingParentCategoryId: string
+    parentCategoryNotFound: string
+    nestedCategoryCreated: string
+    missingCategoryIdToDelete: string
+    categoryDeleted: string
+    missingCategoryIdToMoveUp: string
+    categoryIsAlreadyAtTheTop: string
+    previousCategoryNotFound: string
+    categoryMovedUp: string
+    missingCategoryIdToMoveDown: string
+    noCategoryToMoveDown: string
+    categoryIsAlreadyAtTheEnd: string
+    nextCategoryNotFound: string
+    categoryMovedDown: string
+    categoryRenamed: string
   }
 }

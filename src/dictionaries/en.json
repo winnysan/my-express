@@ -24,6 +24,8 @@
     "invalidCredentials": "Invalid credentials",
     "csrfTokenNotAvailable": "CSRF token not available",
     "invalidData": "Invalid data",
+    "unknownAction": "Unknown action",
+    "invalidDataForUpdate": "Invalid data for update",
     "unauthorized": "Unauthorized"
   },
   "pages": {
@@ -52,6 +54,26 @@
   },
   "categories": {
     "categories": "Categories",
-    "addFirst": "Add first"
+    "addFirst": "Add first",
+    "new": "new",
+    "firstCategoryCreated": "First category has been successfully created",
+    "missingCatedoryIdToAddAfter": "Missing category ID to add after",
+    "categoryNotFound": "Category not found",
+    "categoryCreated": "Category has been successfully created",
+    "missingParentCategoryId": "Missing parent category ID",
+    "parentCategoryNotFound": "Parent category not found",
+    "nestedCategoryCreated": "Nested category has been successfully created",
+    "missingCategoryIdToDelete": "Missing category ID to delete",
+    "categoryDeleted": "Category with subcategories has been successfully deleted",
+    "missingCategoryIdToMoveUp": "Missing category ID to move up",
+    "categoryIsAlreadyAtTheTop": "Category is already at the top od the list",
+    "previousCategoryNotFound": "Previous category not found",
+    "categoryMovedUp": "Category has been successfully moved up",
+    "missingCategoryIdToMoveDown": "Missing category ID to move down",
+    "noCategoryToMoveDown": "No categories to move down",
+    "categoryIsAlreadyAtTheEnd": "Category is already at the end of the list",
+    "nextCategoryNotFound": "Next category not found",
+    "categoryMovedDown": "Category has been successfully moved down",
+    "categoryRenamed": "Category has been successfully renamed"
   }
 }

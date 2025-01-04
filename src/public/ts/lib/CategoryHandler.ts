@@ -8,8 +8,18 @@ type ApiCategoryResponse = ApiResponse & {
 
 type SendData = {
   action: string
-  target?: string
+  id?: string
   value?: string
+}
+
+enum CategoryAction {
+  ADD_FIRST = 'add-first',
+  ADD = 'add',
+  ADD_NESTED = 'add-nested',
+  DELETE = 'delete',
+  UP = 'up',
+  DOWN = 'down',
+  RENAME = 'rename',
 }
 
 /**
@@ -158,7 +168,7 @@ class CategoryHandler {
       const li: HTMLLIElement | null = input.closest('li')
 
       if (li) {
-        const data: SendData = { action: 'input', target: li.id, value: input.value }
+        const data: SendData = { action: CategoryAction.RENAME, id: li.id, value: input.value }
 
         /**
          * Get or create a debounced function for this input
@@ -355,7 +365,7 @@ class CategoryHandler {
       /**
        * Send data to API
        */
-      const data: SendData = { action: 'add-first' }
+      const data: SendData = { action: CategoryAction.ADD_FIRST }
       this.sendData(data, tempId)
 
       /**
@@ -385,7 +395,7 @@ class CategoryHandler {
       /**
        * Send data to API
        */
-      const data: SendData = { action: 'add', target: li.id }
+      const data: SendData = { action: CategoryAction.ADD, id: li.id }
       this.sendData(data, tempId)
 
       /**
@@ -426,7 +436,7 @@ class CategoryHandler {
       /**
        * Send data to API
        */
-      const data: SendData = { action: 'add-nested', target: li.id }
+      const data: SendData = { action: CategoryAction.ADD_NESTED, id: li.id }
       this.sendData(data, tempId)
 
       /**
@@ -453,7 +463,7 @@ class CategoryHandler {
         /**
          * Send data to API
          */
-        const data: SendData = { action: 'delete', target: li.id }
+        const data: SendData = { action: CategoryAction.DELETE, id: li.id }
         this.sendData(data)
 
         /**
@@ -481,7 +491,7 @@ class CategoryHandler {
         /**
          * Send data to API
          */
-        const data: SendData = { action: 'up', target: li.id }
+        const data: SendData = { action: CategoryAction.UP, id: li.id }
         this.sendData(data)
 
         /**
@@ -509,7 +519,7 @@ class CategoryHandler {
         /**
          * Send data to API
          */
-        const data: SendData = { action: 'down', target: li.id }
+        const data: SendData = { action: CategoryAction.DOWN, id: li.id }
         this.sendData(data)
 
         /**

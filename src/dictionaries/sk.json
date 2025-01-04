@@ -24,6 +24,8 @@
     "invalidCredentials": "Zlé prihlasovacie údaje",
     "csrfTokenNotAvailable": "CSRF token nie je dostupný",
     "invalidData": "Neplatné data",
+    "unknownAction": "Neznáma akcia",
+    "invalidDataForUpdate": "Neplatné data pre aktualizáciu",
     "unauthorized": "Neoprávnené"
   },
   "pages": {
@@ -52,6 +54,26 @@
   },
   "categories": {
     "categories": "Kategórie",
-    "addFirst": "Pridať prvú"
+    "addFirst": "Pridať prvú",
+    "new": "new",
+    "firstCategoryCreated": "Prvá kategória bola úspešne vytvorená",
+    "missingCatedoryIdToAddAfter": "Chýba ID kategórie za ktorý sa má pridať",
+    "categoryNotFound": "Kategória sa nenašla",
+    "categoryCreated": "Kategória bola úspešne vytvorená",
+    "missingParentCategoryId": "Chýba ID nadradenej kategórie",
+    "parentCategoryNotFound": "Nadradená kategória sa nenašla",
+    "nestedCategoryCreated": "Vnorená kategória bola úspešne vytvorená",
+    "missingCategoryIdToDelete": "Chýba ID kategórie na vymazanie",
+    "categoryDeleted": "Kategória s podkategóriami bola úspešne vymazaná",
+    "missingCategoryIdToMoveUp": "Chýba ID kategórie pre posunutie hore",
+    "categoryIsAlreadyAtTheTop": "Kategória je aktuálne na vrchu",
+    "previousCategoryNotFound": "Predchádzajúca kategória sa nenašla",
+    "categoryMovedUp": "Kategória bola úspešne posunutá nahor",
+    "missingCategoryIdToMoveDown": "Chýba ID kategórie pre posunutie dole",
+    "noCategoryToMoveDown": "Nie je kategória na posunutie dole",
+    "categoryIsAlreadyAtTheEnd": "Kategória je aktuálne na spodku",
+    "nextCategoryNotFound": "Nasledovná kategória sa nenašla",
+    "categoryMovedDown": "Kategória bola úspešne posunutá dole",
+    "categoryRenamed": "Kategória bola úspešne premenovaná"
   }
 }
