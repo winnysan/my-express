@@ -46,5 +46,9 @@
     "fieldDoesNotMatchOtherDefault": "Pole ::field sa nezhoduje s ::other",
     "fieldMustByUniqueDefault": "Pole ::field musí byť unikátne",
     "errorCheckingUniquenessForFieldDefault": "Chyba pri zisťovaní unikátnosti poľa ::field"
+  },
+  "categories": {
+    "categories": "Kategórie",
+    "addFirst": "Pridaď prvú"
   }
 }

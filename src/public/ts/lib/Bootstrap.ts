@@ -1,3 +1,4 @@
+import CategoryHandler from './CategoryHandler'
 import FormHandler from './FormHandler'
 import Helper from './Helper'
 
@@ -37,6 +38,11 @@ class Bootstrap {
      */
     new FormHandler('#form')
     new FormHandler('#form-logout')
+
+    /**
+     * Categories
+     */
+    CategoryHandler.getInstance('#categories')
   }
 }
 

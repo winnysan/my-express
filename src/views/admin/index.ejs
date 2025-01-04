@@ -2,4 +2,19 @@
 
 <main class="container" data-title="<%= title %>">
     <h1><%= global.dictionary.pages.admin %></h1>
+
+    <section>
+        <h2><%= global.dictionary.categories.categories %></h2>
+        <div id="categories">
+            <% if (categories.length > 0) { %>
+                <ul>
+                    <% categories.forEach(category => { %>
+                        <li id="category.id">category</li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <button id="add-first"><%= global.dictionary.categories.addFirst %></button>
+            <% } %>             
+        </div>
+    </section>
 </main>

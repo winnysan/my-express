@@ -47,4 +47,8 @@ export type Dictionary = {
     fieldMustByUniqueDefault: string
     errorCheckingUniquenessForFieldDefault: string
   }
+  categories: {
+    categories: string
+    addFirst: string
+  }
 }

@@ -14,6 +14,7 @@ class AdminController {
       title: global.dictionary.title.adminPage,
       csrfToken: req.csrfToken?.() || '',
       user: req.session.user,
+      categories: [],
     })
   })
 }
