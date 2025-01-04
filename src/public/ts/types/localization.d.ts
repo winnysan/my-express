@@ -4,10 +4,13 @@ interface Dictionary {
   appElementNotFound: string
   somethingWentWrong: string
   add: string
+  addFirst: string
   addNested: string
   delete: string
   up: string
   down: string
+  new: string
+  categoryDeleteConfirm: string
 }
 
 interface Localization {
