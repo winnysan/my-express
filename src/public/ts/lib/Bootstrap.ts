@@ -42,7 +42,8 @@ class Bootstrap {
     /**
      * Categories
      */
-    CategoryHandler.getInstance('#categories')
+    const categoryHandler = CategoryHandler.getInstance('#categories')
+    categoryHandler.refresh()
   }
 }
 

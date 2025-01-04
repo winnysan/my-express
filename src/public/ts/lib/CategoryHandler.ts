@@ -67,6 +67,54 @@ class CategoryHandler {
   }
 
   /**
+   * Public method to refresh the handler
+   */
+  public refresh(): void {
+    const newCategoriesEl = Helper.selectElement<HTMLDivElement>(this.categoriesId)
+
+    if (newCategoriesEl && newCategoriesEl !== this.categoriesEl) {
+      /**
+       * Remove event listeners from the old element
+       */
+      if (this.categoriesEl && this.listenerAttached) {
+        this.categoriesEl.removeEventListener('input', this.handleInputBound)
+        this.categoriesEl.removeEventListener('click', this.handleClickBound)
+        this.categoriesEl.removeEventListener('change', this.handleChangeBound)
+      }
+
+      /**
+       * Update categoriesEl to the new element
+       */
+      this.categoriesEl = newCategoriesEl
+
+      /**
+       * Attach event listeners to the new element
+       */
+      if (this.categoriesEl) {
+        this.categoriesEl.addEventListener('input', this.handleInputBound)
+        this.categoriesEl.addEventListener('click', this.handleClickBound)
+        this.categoriesEl.addEventListener('change', this.handleChangeBound)
+      }
+
+      /**
+       * Reprocess tje DOM
+       */
+      this.processDOM()
+    } else if (!this.categoriesEl) {
+      /**
+       * If cateforiesEl was not found, attempt to attach event listeners
+       */
+      this.attachEventListeners()
+      this.processDOM()
+    } else {
+      /**
+       * categoriesEl is the same, just reprocess the DOM
+       */
+      this.processDOM()
+    }
+  }
+
+  /**
    * Method to process the current DOM - add buttons to <li> elements and update states
    */
   private processDOM(): void {
