@@ -9,8 +9,23 @@ class CategoryHandler {
   private categoriesEl: HTMLDivElement | null = null
   private listenerAttached: boolean = false
 
-  constructor(categoriesId: string) {
+  /**
+   * Bind the event handler to avoid multiple bindings
+   */
+  private handleInputBound: (event: Event) => void
+  private handleClickBound: (event: MouseEvent) => void
+  private handleChangeBound: (event: Event) => void
+
+  /**
+   * Private contructor to secure the Singleton pattern
+   * @param categoriesId
+   */
+  private constructor(categoriesId: string) {
     this.categoriesId = categoriesId
+
+    this.handleInputBound = this.handleInput.bind(this)
+    this.handleClickBound = this.handleClick.bind(this)
+    this.handleChangeBound = this.handleChange.bind(this)
 
     this.initialize()
   }
@@ -43,7 +58,9 @@ class CategoryHandler {
     this.categoriesEl = Helper.selectElement<HTMLDivElement>(this.categoriesId)
 
     if (this.categoriesEl && !this.listenerAttached) {
-      // attachEventListeners
+      this.categoriesEl.addEventListener('input', this.handleInputBound)
+      this.categoriesEl.addEventListener('click', this.handleClickBound)
+      this.categoriesEl.addEventListener('change', this.handleChangeBound)
 
       this.listenerAttached = true
     }
@@ -56,6 +73,36 @@ class CategoryHandler {
     if (!this.categoriesEl) return
 
     // processDom
+  }
+
+  /**
+   * Event handler for inputs events
+   * @param event
+   */
+  private handleInput(event: Event): void {
+    const target = event.target as HTMLElement
+
+    //
+  }
+
+  /**
+   * Event handler for click events
+   * @param event
+   */
+  private handleClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement
+
+    //
+  }
+
+  /**
+   * Event handler for change event
+   * @param event
+   */
+  private handleChange(event: Event): void {
+    const target = event.target as HTMLElement
+
+    //
   }
 }
 
