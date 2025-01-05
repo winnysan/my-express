@@ -1,11 +1,13 @@
 import { Request, Response } from 'express'
 import AsyncHandler from '../lib/AsyncHandler'
 import Category, { ICategory } from '../models/Category'
+import { Locale, locale } from '../types/locale'
 
 type CategoryList = {
   id: string
   name: string
   order: number
+  locale: Locale
   children: CategoryList[]
 }
 
@@ -25,6 +27,7 @@ class AdminController {
       csrfToken: req.csrfToken?.() || '',
       user: req.session.user,
       categories: this.nestedCategories(categories),
+      locales: locale.locales,
     })
   })
 
@@ -46,6 +49,7 @@ class AdminController {
         id: c._id.toString(),
         name: c.name,
         order: c.order,
+        locale: c.locale,
         children: this.nestedCategories(categories, c._id.toString()),
       })
     }

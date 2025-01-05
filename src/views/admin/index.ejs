@@ -20,6 +20,15 @@
                         <% sordedCategories.forEach(function(category) { %>
                             <li id="<%= category.id %>">
                                 <input type="text" value="<%= category.name %>">
+                                <select class="category-locale">
+                                    <% locales.forEach(locale => { %>
+                                        <option value="<%= locale %>"
+                                            <%= category.locale === locale ? 'selected' : '' %>
+                                        >
+                                            <%= global.dictionary.categories[locale] %>
+                                        </option>
+                                    <% }) %>
+                                </select>
                                 <div class="buttons-group"></div>
 
                                 <% if (category.children && category.children.length > 0) { %>

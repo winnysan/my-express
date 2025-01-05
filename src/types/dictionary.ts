@@ -56,6 +56,8 @@ export type Dictionary = {
     categories: string
     addFirst: string
     new: string
+    en: string
+    sk: string
     firstCategoryCreated: string
     missingCatedoryIdToAddAfter: string
     categoryNotFound: string
@@ -75,5 +77,6 @@ export type Dictionary = {
     nextCategoryNotFound: string
     categoryMovedDown: string
     categoryRenamed: string
+    categoryLocaleUpdated: string
   }
 }

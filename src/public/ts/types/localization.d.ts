@@ -11,6 +11,8 @@ interface Dictionary {
   down: string
   new: string
   categoryDeleteConfirm: string
+  en: string
+  sk: string
 }
 
 interface Localization {

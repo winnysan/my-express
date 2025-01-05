@@ -53,6 +53,9 @@ class ApiCategoryController {
       case CategoryAction.RENAME:
         responseData = await this.renameCategory(data)
         break
+      case CategoryAction.SET_LOCALE:
+        responseData = await this.setLocaleCategory(data)
+        break
 
       default:
         return res.status(400).json({ message: global.dictionary.messages.unknownAction })
@@ -242,6 +245,22 @@ class ApiCategoryController {
     if (!updatedCategory) return { message: global.dictionary.categories.categoryNotFound, status: 404 }
 
     return { message: global.dictionary.categories.categoryRenamed }
+  }
+
+  /**
+   * Set the locale of category
+   * @param data
+   * @returns
+   */
+  private async setLocaleCategory(data: ReceiveData): Promise<ResponseData> {
+    if (!data.id || typeof data.value !== 'string')
+      return { message: global.dictionary.messages.invalidDataForUpdate, status: 400 }
+
+    const updatedCategory = await Category.findByIdAndUpdate(data.id, { locale: data.value }, { new: true })
+
+    if (!updatedCategory) return { message: global.dictionary.categories.categoryNotFound, status: 404 }
+
+    return { message: global.dictionary.categories.categoryLocaleUpdated }
   }
 }
 

@@ -56,6 +56,8 @@
     "categories": "Kategórie",
     "addFirst": "Pridať prvú",
     "new": "new",
+    "en": "Anglicky",
+    "sk": "Slovensky",
     "firstCategoryCreated": "Prvá kategória bola úspešne vytvorená",
     "missingCatedoryIdToAddAfter": "Chýba ID kategórie za ktorý sa má pridať",
     "categoryNotFound": "Kategória sa nenašla",
@@ -74,6 +76,7 @@
     "categoryIsAlreadyAtTheEnd": "Kategória je aktuálne na spodku",
     "nextCategoryNotFound": "Nasledovná kategória sa nenašla",
     "categoryMovedDown": "Kategória bola úspešne posunutá dole",
-    "categoryRenamed": "Kategória bola úspešne premenovaná"
+    "categoryRenamed": "Kategória bola úspešne premenovaná",
+    "categoryLocaleUpdated": "Lokalizácia kategórie bola úspešne aktualizovaná"
   }
 }

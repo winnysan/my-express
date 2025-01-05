@@ -39,6 +39,7 @@ a {
 }
 
 input,
+select,
 button {
   outline: none;
   background-color: transparent;
@@ -370,7 +371,8 @@ form#form {
     }
   }
 
-  & button {
+  & button,
+  select {
     font-size: 0.8rem;
     text-transform: uppercase;
     color: var(--white);

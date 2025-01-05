@@ -16,6 +16,8 @@ window.localization = {
       down: 'Down',
       new: 'New',
       categoryDeleteConfirm: 'Are you sure you want to delete this category and all its subcategories?',
+      en: 'English',
+      sk: 'Slovak',
     },
     sk: {
       scriptLoadedSuccessfully: 'Script úspešne načítaný',
@@ -30,6 +32,8 @@ window.localization = {
       down: 'Dole',
       new: 'Nová',
       categoryDeleteConfirm: 'Naozaj chcete odstrániť kategoriu vrátane všetkých podkategorii?',
+      en: 'Anglicky',
+      sk: 'Slovensky',
     },
   },
   getLocalizedText: function (key) {

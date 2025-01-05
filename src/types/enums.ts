@@ -21,4 +21,5 @@ export enum CategoryAction {
   UP = 'up',
   DOWN = 'down',
   RENAME = 'rename',
+  SET_LOCALE = 'set-locale',
 }

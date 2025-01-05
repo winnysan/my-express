@@ -20,6 +20,12 @@ enum CategoryAction {
   UP = 'up',
   DOWN = 'down',
   RENAME = 'rename',
+  SET_LOCALE = 'set-locale',
+}
+
+enum Locales {
+  EN = 'en',
+  SK = 'sk',
 }
 
 /**
@@ -38,6 +44,7 @@ class CategoryHandler {
    */
   private handleInputBound: (event: Event) => void
   private handleClickBound: (event: MouseEvent) => void
+  private handleChangeBound: (event: Event) => void
 
   /**
    * Private contructor to secure the Singleton pattern
@@ -49,6 +56,7 @@ class CategoryHandler {
 
     this.handleInputBound = this.handleInput.bind(this)
     this.handleClickBound = this.handleClick.bind(this)
+    this.handleChangeBound = this.handleChange.bind(this)
 
     this.initialize()
   }
@@ -83,6 +91,7 @@ class CategoryHandler {
     if (this.categoriesEl && !this.listenerAttached) {
       this.categoriesEl.addEventListener('input', this.handleInputBound)
       this.categoriesEl.addEventListener('click', this.handleClickBound)
+      this.categoriesEl.addEventListener('change', this.handleChangeBound)
 
       this.listenerAttached = true
     }
@@ -101,6 +110,7 @@ class CategoryHandler {
       if (this.categoriesEl && this.listenerAttached) {
         this.categoriesEl.removeEventListener('input', this.handleInputBound)
         this.categoriesEl.removeEventListener('click', this.handleClickBound)
+        this.categoriesEl.removeEventListener('click', this.handleChangeBound)
       }
 
       /**
@@ -114,6 +124,7 @@ class CategoryHandler {
       if (this.categoriesEl) {
         this.categoriesEl.addEventListener('input', this.handleInputBound)
         this.categoriesEl.addEventListener('click', this.handleClickBound)
+        this.categoriesEl.addEventListener('click', this.handleChangeBound)
       }
 
       /**
@@ -205,6 +216,27 @@ class CategoryHandler {
   }
 
   /**
+   * Event handler for change events
+   * @param event
+   */
+  private handleChange(event: Event): void {
+    const target = event.target as HTMLElement
+
+    if (target.tagName.toLowerCase() === 'select' && target.classList.contains('category-locale')) {
+      const select: HTMLSelectElement = target as HTMLSelectElement
+      const li: HTMLLIElement | null = select.closest('li')
+
+      if (li) {
+        /**
+         * Send data to API
+         */
+        const data: SendData = { action: CategoryAction.SET_LOCALE, id: li.id, value: select.value }
+        this.sendData(data)
+      }
+    }
+  }
+
+  /**
    * Create a group of buttons for a category
    * @returns
    */
@@ -254,12 +286,35 @@ class CategoryHandler {
     input.type = 'text'
     input.value = window.localization.getLocalizedText('new')
 
+    const select: HTMLSelectElement = this.createSelect()
+
     const buttonGroup: HTMLDivElement = this.createButtons()
 
     li.appendChild(input)
+    li.appendChild(select)
     li.appendChild(buttonGroup)
 
     return li
+  }
+
+  /**
+   * Create a select element for category locales
+   * @returns
+   */
+  private createSelect(): HTMLSelectElement {
+    const select: HTMLSelectElement = document.createElement('select')
+    select.className = 'category-locale'
+
+    const locales = Object.values(Locales)
+    locales.forEach(locale => {
+      const option = document.createElement('option')
+      option.value = locale
+      option.textContent = window.localization.getLocalizedText(locale)
+
+      select.appendChild(option)
+    })
+
+    return select
   }
 
   /**
