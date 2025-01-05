@@ -38,6 +38,7 @@ class CategoryHandler {
   private listenerAttached: boolean = false
   private apiClient: ApiClient<ApiCategoryResponse>
   private inputDebounceMap: WeakMap<HTMLInputElement, (data: any) => void> = new WeakMap()
+  private toastEl: HTMLUListElement | undefined
 
   /**
    * Bind the event handler to avoid multiple bindings
@@ -53,6 +54,7 @@ class CategoryHandler {
   private constructor(categoriesId: string) {
     this.categoriesId = categoriesId
     this.apiClient = new ApiClient<ApiCategoryResponse>(`${window.location.protocol}//${window.location.host}/api`)
+    this.toastEl = Helper.makeToast('#toast')
 
     this.handleInputBound = this.handleInput.bind(this)
     this.handleClickBound = this.handleClick.bind(this)
@@ -334,7 +336,8 @@ class CategoryHandler {
           if (li) li.id = response.newId
         }
 
-        console.log(response)
+        if (response.status) Helper.addToastMessage(this.toastEl, response.message, 'danger')
+        else Helper.addToastMessage(this.toastEl, response.message, 'success')
       })
       .catch(err => console.error(err))
   }
