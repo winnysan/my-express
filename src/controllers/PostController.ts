@@ -16,6 +16,18 @@ class PostController {
       user: req.session.user,
     })
   })
+
+  /**
+   * Posts page
+   */
+  public newPostPage = AsyncHandler.wrap(async (req: Request, res: Response) => {
+    res.render('post/new', {
+      layout: res.locals.isAjax ? false : 'layouts/main',
+      title: global.dictionary.title.newPostPage,
+      csrfToken: req.csrfToken?.() || '',
+      user: req.session.user,
+    })
+  })
 }
 
 export default new PostController()

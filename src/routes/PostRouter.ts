@@ -24,6 +24,10 @@ class PostRouter {
      * Post page
      */
     this.router.get('/', AuthMiddleware.protect, PostController.postsPage)
+    /**
+     * New post page
+     */
+    this.router.get('/new', AuthMiddleware.protect, PostController.newPostPage)
   }
 }
 

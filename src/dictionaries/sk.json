@@ -2,6 +2,7 @@
   "navigation": {
     "home": "Domov",
     "posts": "Príspevky",
+    "addNewPost": "Pridať nový príspevok",
     "admin": "Administrácia",
     "register": "Registrácia",
     "login": "Prihlásenie",
@@ -10,6 +11,7 @@
   "title": {
     "homePage": "Domovská stránka",
     "postsPage": "Stránka s príspevkami",
+    "newPostPage": "Nový príspevok",
     "adminPage": "Administrácia",
     "registerPage": "Registrácia",
     "loginPage": "Prihlásenie",
@@ -32,6 +34,7 @@
     "error": "Chyba",
     "helloE": "Ahoj!",
     "posts": "Príspevky",
+    "newPost": "Nový príspevok",
     "admin": "Administrácia",
     "register": "Registrácia",
     "login": "Registrácia",

@@ -2,6 +2,7 @@ export type Dictionary = {
   navigation: {
     home: string
     posts: string
+    addNewPost: string
     admin: string
     register: string
     login: string
@@ -10,6 +11,7 @@ export type Dictionary = {
   title: {
     homePage: string
     postsPage: string
+    newPostPage: string
     adminPage: string
     registerPage: string
     loginPage: string
@@ -32,6 +34,7 @@ export type Dictionary = {
     error: string
     helloE: string
     posts: string
+    newPost: string
     admin: string
     register: string
     login: string
