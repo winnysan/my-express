@@ -48,6 +48,25 @@ class ValidationMiddleware {
       next()
     }
   })
+
+  /**
+   * Middleware function for validating post data
+   */
+  public static newPost = AsyncHandler.wrap(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const validation = new Validator(req)
+
+    validation.field('title').required()
+
+    validation.field('body').required()
+
+    await validation.runValidations()
+
+    if (validation.errors.length > 0) {
+      res.json({ validation: validation.errors })
+    } else {
+      next()
+    }
+  })
 }
 
 export default ValidationMiddleware

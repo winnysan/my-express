@@ -28,6 +28,19 @@ class PostController {
       user: req.session.user,
     })
   })
+
+  /**
+   * Create a new post
+   */
+  public newPost = AsyncHandler.wrap(async (req: Request, res: Response) => {
+    const { title, body } = req.body
+
+    console.log({ title, body })
+
+    res.status(201).json({
+      message: 'ok',
+    })
+  })
 }
 
 export default new PostController()

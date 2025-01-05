@@ -45,6 +45,9 @@ export type Dictionary = {
     name: string
     password: string
     passwordConfirmation: string
+    title: string
+    body: string
+    categories: string
     submit: string
   }
   validation: {

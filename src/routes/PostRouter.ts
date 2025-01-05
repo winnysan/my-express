@@ -1,6 +1,7 @@
 import express from 'express'
 import PostController from '../controllers/PostController'
 import AuthMiddleware from '../middlewares/AuthMiddleware'
+import ValidationMiddleware from '../middlewares/ValidationMiddleware'
 
 /**
  * Router for handling post-related routes
@@ -24,10 +25,12 @@ class PostRouter {
      * Post page
      */
     this.router.get('/', AuthMiddleware.protect, PostController.postsPage)
+
     /**
      * New post page
      */
     this.router.get('/new', AuthMiddleware.protect, PostController.newPostPage)
+    this.router.post('/new', AuthMiddleware.protect, ValidationMiddleware.newPost, PostController.newPost)
   }
 }
 

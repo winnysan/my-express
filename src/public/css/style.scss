@@ -32,6 +32,12 @@ h1 {
   margin-bottom: 3rem;
 }
 
+h2 {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+}
+
 a {
   cursor: pointer;
   color: inherit;
@@ -253,6 +259,10 @@ form#form {
   padding: 1rem;
   border: 1px solid var(--transparent-light);
   border-radius: 0.5rem;
+
+  &.post-form {
+    width: 100%;
+  }
 
   @media (max-width: 1024px) {
     width: 100%;

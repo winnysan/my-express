@@ -1,5 +1,23 @@
 <%- include('../partials/header.ejs') %>
 
 <main class="container" data-title="<%= title %>">
-    <h1><%= global.dictionary.pages.newPost %></h1>
+    <h2><%= global.dictionary.pages.newPost %></h2>
+
+    <form id="form" action="/posts/new" method="post" enctype="multipart/form-data" class="post-form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <div>
+            <label for="title"><%= global.dictionary.form.title %></label>
+            <input type="text" name="title">
+        </div>
+        <div>
+            <label for="body"><%= global.dictionary.form.body %></label>
+            <textarea name="body"></textarea>
+        </div>
+        <div>
+            <label><%= global.dictionary.form.categories %></label>
+        </div>
+        <div>
+            <button type="submit"><%= global.dictionary.form.submit %></button>
+        </div>
+    </form>
 </main>

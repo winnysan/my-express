@@ -37,7 +37,7 @@
     "newPost": "Nový príspevok",
     "admin": "Administrácia",
     "register": "Registrácia",
-    "login": "Registrácia",
+    "login": "Prihlásenie",
     "letsCodeExpressDifferently": "Poďme písať Express inak"
   },
   "form": {
@@ -45,6 +45,9 @@
     "name": "Meno",
     "password": "Heslo",
     "passwordConfirmation": "Potvrdiť heslo",
+    "title": "Titulok",
+    "body": "Text",
+    "categories": "Kategórie",
     "submit": "Odoslať"
   },
   "validation": {
