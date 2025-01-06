@@ -83,7 +83,7 @@ class ProcessImage {
       }
 
       this.file.mimetype = `image/${this.format}`
-      const extMap = { jpeg: '.jpg', png: '.png', avif: 'avif', gif: '.gif' }
+      const extMap = { jpeg: '.jpg', png: '.png', avif: '.avif', gif: '.gif' }
       const originalExt = path.extname(this.file.originalname)
       const newExt = extMap[this.format]
       this.file.originalname = this.file.originalname.replace(originalExt, newExt)
