@@ -268,7 +268,7 @@ form#form {
     width: 100%;
   }
 
-  & div {
+  & div:not(.editor, .toolbar, .content) {
     display: flex;
     flex-direction: column;
     row-gap: 0.2rem;
@@ -326,7 +326,7 @@ form#form {
       }
     }
 
-    & > button {
+    & > button:not(.toolbar > button) {
       color: var(--white);
       background-color: var(--black);
       margin-top: 1rem;
@@ -337,6 +337,42 @@ form#form {
       &:hover {
         background-color: var(--primary);
         transition: background-color 0.3s ease-in-out;
+      }
+    }
+
+    & .editor {
+      & .toolbar {
+        display: flex;
+        column-gap: 0.2rem;
+        margin-bottom: 0.5rem;
+
+        & button {
+          font-size: 0.8rem;
+          text-transform: uppercase;
+          color: var(--white);
+          background-color: var(--black);
+          padding: 0.2rem 0.4rem;
+          border-radius: 0.2rem;
+          cursor: pointer;
+
+          &:hover {
+            background-color: var(--primary);
+            transition: background-color 0.3s ease-in-out;
+          }
+        }
+      }
+
+      & .content {
+        font-size: 1rem;
+        width: 100%;
+        min-height: 10rem;
+        padding: 0.5rem;
+        border: 1px solid var(--transparent-light);
+        border-radius: 0.3rem;
+
+        &:focus {
+          outline: 2px solid var(--primary);
+        }
       }
     }
   }

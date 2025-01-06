@@ -3,7 +3,13 @@
 <main class="container" data-title="<%= title %>">
     <h2><%= global.dictionary.pages.newPost %></h2>
 
-    <form id="form" action="/posts/new" method="post" enctype="multipart/form-data" class="post-form">
+    <form id="form"
+        action="/posts/new"
+        method="post"
+        enctype="multipart/form-data"
+        data-form="editor"
+        class="post-form"
+    >
         <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
         <div>
             <label for="title"><%= global.dictionary.form.title %></label>

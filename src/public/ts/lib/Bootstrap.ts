@@ -2,6 +2,7 @@ import CategoryHandler from './CategoryHandler'
 import CategorySelectHandler from './CategorySelectHandler'
 import FormHandler from './FormHandler'
 import Helper from './Helper'
+import SimpleEditor from './SimpleEditor'
 
 /**
  * Bootstrap class responsible for initializing various components and handling UI interactions
@@ -37,6 +38,8 @@ class Bootstrap {
     /**
      * Form handlers
      */
+    const editor = SimpleEditor.create('#form')
+
     new FormHandler('#form')
     new FormHandler('#form-logout')
 
