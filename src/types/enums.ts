@@ -23,3 +23,17 @@ export enum CategoryAction {
   RENAME = 'rename',
   SET_LOCALE = 'set-locale',
 }
+
+export enum ImageFormat {
+  JPEG = 'jpeg',
+  PNG = 'png',
+  AVIF = 'avif',
+  GIF = 'gif',
+}
+
+export enum Mimetype {
+  IMAGE_JPEG = 'image/jpeg',
+  IMAGE_PNG = 'image/png',
+  IMAGE_AVIF = 'image/avif',
+  IMAGE_GIF = 'image/gif',
+}

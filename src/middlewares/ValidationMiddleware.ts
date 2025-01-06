@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 import AsyncHandler from '../lib/AsyncHandler'
 import Validator from '../lib/Validator'
 import User from '../models/User'
+import { Mimetype } from '../types/enums'
 
 /**
  * Middleware class for handling input validation
@@ -59,7 +60,9 @@ class ValidationMiddleware {
 
     validation.field('body').required()
 
-    validation.field('files').mimetype(['image/jpeg', 'image/png', 'image/avif', 'image/gif'])
+    validation
+      .field('files')
+      .mimetype([Mimetype.IMAGE_JPEG, Mimetype.IMAGE_PNG, Mimetype.IMAGE_AVIF, Mimetype.IMAGE_GIF])
 
     await validation.runValidations()
 
