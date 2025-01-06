@@ -40,7 +40,7 @@ class Bootstrap {
      */
     const editor = SimpleEditor.create('#form')
 
-    new FormHandler('#form')
+    new FormHandler('#form', editor)
     new FormHandler('#form-logout')
 
     /**

@@ -1,4 +1,5 @@
 import Helper from './Helper'
+import SimpleEditor from './SimpleEditor'
 import SpaRouter from './SpaRouter'
 
 /**
@@ -7,13 +8,15 @@ import SpaRouter from './SpaRouter'
 class FormHandler {
   private formEl: HTMLFormElement | null
   private toastEl: HTMLUListElement | undefined
+  private editor?: SimpleEditor
 
   /**
    * Initialize the FormHandler
    * @param formSelector
    */
-  constructor(formSelector: string) {
+  constructor(formSelector: string, editor?: SimpleEditor) {
     this.formEl = Helper.selectElement<HTMLFormElement>(formSelector)
+    this.editor = editor
 
     if (this.formEl) {
       this.toastEl = Helper.makeToast('#toast')
@@ -45,6 +48,48 @@ class FormHandler {
        * Remove any existing error indicators
        */
       this.formEl.querySelectorAll('.is-error').forEach(element => element.classList.remove('is-error'))
+
+      /**
+       * Append images present in the content
+       */
+      if (this.editor) {
+        console.log('editor')
+        console.log(this.editor.getImages())
+
+        /**
+         * Update the textarea value with the latest content
+         */
+        this.editor.updateTextarea()
+
+        /**
+         * Get the content from the editor
+         */
+        const content = this.editor.contentEl.value
+
+        /**
+         * Use a regular expression to find all markdown image syntaxes
+         */
+        const imageMarkdownRegex = /!\[[^\]]*\]\(([^)]+)\)/g
+        let match
+        const currentImageNames = new Set<string>()
+
+        /**
+         * Extract image names from the markdown content
+         */
+        while ((match = imageMarkdownRegex.exec(content)) !== null) {
+          const imageName = match[1]
+          currentImageNames.add(imageName)
+        }
+
+        /**
+         * Append only images present in the content
+         */
+        this.editor.getImages().forEach(image => {
+          if (currentImageNames.has(image.originalName)) {
+            formData.append('files', image.file, image.originalName)
+          }
+        })
+      }
 
       try {
         if (loadingIndicator) loadingIndicator.style.display = 'block'

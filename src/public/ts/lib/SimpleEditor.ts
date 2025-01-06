@@ -15,7 +15,7 @@ class SimpleEditor {
   private inputEl: HTMLTextAreaElement | null
   private editorEl: HTMLDivElement = document.createElement('div')
   private toolbarEl: HTMLDivElement = document.createElement('div')
-  private contentEl: HTMLTextAreaElement = document.createElement('textarea')
+  public contentEl: HTMLTextAreaElement = document.createElement('textarea')
   private images: { originalName: string; file: File }[] = []
 
   /**
@@ -273,6 +273,13 @@ class SimpleEditor {
      * Trigger the file input dialog
      */
     input.click()
+  }
+
+  /**
+   * Retrieves the list of images inserted into the editor
+   */
+  public getImages() {
+    return this.images
   }
 }
 
