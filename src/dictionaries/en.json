@@ -48,6 +48,7 @@
     "title": "Title",
     "body": "Body",
     "categories": "Categories",
+    "selectCategories": "Select categories",
     "submit": "Submit"
   },
   "validation": {

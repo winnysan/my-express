@@ -48,6 +48,7 @@ export type Dictionary = {
     title: string
     body: string
     categories: string
+    selectCategories: string
     submit: string
   }
   validation: {

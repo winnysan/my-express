@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import AsyncHandler from '../lib/AsyncHandler'
+import Category, { ICategory } from '../models/Category'
 
 /**
  * Controller class for handling post-related operations
@@ -21,11 +22,14 @@ class PostController {
    * Posts page
    */
   public newPostPage = AsyncHandler.wrap(async (req: Request, res: Response) => {
+    const categories: ICategory[] = await Category.find({ locale: global.locale })
+
     res.render('post/new', {
       layout: res.locals.isAjax ? false : 'layouts/main',
       title: global.dictionary.title.newPostPage,
       csrfToken: req.csrfToken?.() || '',
       user: req.session.user,
+      categories,
     })
   })
 
@@ -33,9 +37,9 @@ class PostController {
    * Create a new post
    */
   public newPost = AsyncHandler.wrap(async (req: Request, res: Response) => {
-    const { title, body } = req.body
+    const { title, body, categories } = req.body
 
-    console.log({ title, body })
+    console.log({ title, body, categories })
 
     res.status(201).json({
       message: 'ok',

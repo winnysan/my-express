@@ -15,6 +15,23 @@
         </div>
         <div>
             <label><%= global.dictionary.form.categories %></label>
+            <div id="categories-select">
+                <div id="categories-selected-list"></div>
+                <input
+                    type="text"
+                    id="categories-input"
+                    placeholder="<%= global.dictionary.form.selectCategories %>"
+                    autocomplete="off"
+                >
+                <div id="categories-dropdown" class="dropdown">
+                    <% categories.forEach(category => { %>
+                        <span class="dropdown-item" data-id="<%= category._id.toString() %>">
+                            <%= category.name %>
+                        </span>
+                    <% }) %>
+                </div>
+                
+            </div>
         </div>
         <div>
             <button type="submit"><%= global.dictionary.form.submit %></button>

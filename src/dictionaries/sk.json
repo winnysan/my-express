@@ -48,6 +48,7 @@
     "title": "Titulok",
     "body": "Text",
     "categories": "Kategórie",
+    "selectCategories": "Vyberte kategórie",
     "submit": "Odoslať"
   },
   "validation": {

@@ -1,4 +1,5 @@
 import CategoryHandler from './CategoryHandler'
+import CategorySelectHandler from './CategorySelectHandler'
 import FormHandler from './FormHandler'
 import Helper from './Helper'
 
@@ -44,6 +45,11 @@ class Bootstrap {
      */
     const categoryHandler = CategoryHandler.getInstance('#categories')
     categoryHandler.refresh()
+
+    /**
+     * Categories select
+     */
+    new CategorySelectHandler('#categories-select')
   }
 }
 
