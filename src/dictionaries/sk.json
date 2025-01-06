@@ -57,7 +57,8 @@
     "fieldMustBeAtLeastCharacterDefault": "Pole ::field musí mať aspoň ::length znakov",
     "fieldDoesNotMatchOtherDefault": "Pole ::field sa nezhoduje s ::other",
     "fieldMustByUniqueDefault": "Pole ::field musí byť unikátne",
-    "errorCheckingUniquenessForFieldDefault": "Chyba pri zisťovaní unikátnosti poľa ::field"
+    "errorCheckingUniquenessForFieldDefault": "Chyba pri zisťovaní unikátnosti poľa ::field",
+    "invalidFileFormat": "Neplatný formát súboru"
   },
   "categories": {
     "categories": "Kategórie",

@@ -59,6 +59,8 @@ class ValidationMiddleware {
 
     validation.field('body').required()
 
+    validation.field('files').mimetype(['image/jpeg', 'image/png', 'image/avif', 'image/gif'])
+
     await validation.runValidations()
 
     if (validation.errors.length > 0) {

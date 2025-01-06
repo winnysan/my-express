@@ -38,8 +38,9 @@ class PostController {
    */
   public newPost = AsyncHandler.wrap(async (req: Request, res: Response) => {
     const { title, body, categories } = req.body
+    const images = req.files
 
-    console.log({ title, body, categories })
+    console.log({ title, body, categories, images })
 
     res.status(201).json({
       message: 'ok',

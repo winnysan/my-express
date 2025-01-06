@@ -58,6 +58,7 @@ export type Dictionary = {
     fieldDoesNotMatchOtherDefault: string
     fieldMustByUniqueDefault: string
     errorCheckingUniquenessForFieldDefault: string
+    invalidFileFormat: string
   }
   categories: {
     categories: string

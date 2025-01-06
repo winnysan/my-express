@@ -47,6 +47,20 @@ class Validator {
   }
 
   /**
+   * Gets the uploaded files for specific field
+   * @param name
+   * @returns
+   */
+  public getFiles(name: string): Express.Multer.File[] | undefined {
+    let files = this.req.files as Express.Multer.File[]
+    files = files.filter(file => file.fieldname === name)
+
+    if (!files) return undefined
+
+    return files
+  }
+
+  /**
    * Adds a validation function to the validation list
    * @param fn
    */
@@ -198,6 +212,29 @@ class FieldValidator {
         )
       }
     })
+    return this
+  }
+
+  /**
+   * Checks if the uploaded files have valid MIME types
+   * @param types
+   * @param message
+   * @returns
+   */
+  mimetype(types: string[], message?: string): this {
+    this.validation.addValidation(() => {
+      const files = this.validation.getFiles(this.name)
+
+      if (!files || files.length === 0) return
+
+      for (const file of files) {
+        if (!types.includes(file.mimetype)) {
+          this.validation.addError(this.name, message || global.dictionary.validation.invalidFileFormat)
+          break
+        }
+      }
+    })
+
     return this
   }
 }

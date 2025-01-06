@@ -57,7 +57,8 @@
     "fieldMustBeAtLeastCharacterDefault": "Field ::field must be least ::length characters",
     "fieldDoesNotMatchOtherDefault": "Field ::field does not match ::other",
     "fieldMustByUniqueDefault": "Field ::field must be unique",
-    "errorCheckingUniquenessForFieldDefault": "Error checking uniqueness for field ::field"
+    "errorCheckingUniquenessForFieldDefault": "Error checking uniqueness for field ::field",
+    "invalidFileFormat": "Invalid file format"
   },
   "categories": {
     "categories": "Categories",
