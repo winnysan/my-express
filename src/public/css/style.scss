@@ -27,12 +27,30 @@ body {
 }
 
 h1 {
-  font-size: 1.5rem;
-  text-transform: uppercase;
+  position: relative;
+  width: 100%;
   margin-bottom: 3rem;
+  font-size: 1.7rem;
+
+  @media (max-width: 640px) {
+    margin-bottom: 2rem;
+  }
+  &::before {
+    content: attr(data-title);
+    position: absolute;
+    top: 1.3rem;
+    left: 2rem;
+    right: 0;
+    opacity: 0.1;
+    overflow: hidden;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
-h2 {
+h2:not(article h2) {
   font-size: 1.2rem;
   text-transform: uppercase;
   margin-bottom: 3rem;
@@ -104,13 +122,15 @@ main {
   flex-grow: 1;
   padding: 2rem 0;
 
-  & section {
+  & section,
+  aside {
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
     padding: 1rem;
     border: 1px solid var(--transparent-light);
     border-radius: 0.5rem;
+    height: fit-content;
 
     h2 {
       font-size: 1.2rem;
@@ -477,6 +497,67 @@ form#form {
 
       &:hover {
         background-color: var(--black);
+      }
+    }
+  }
+}
+
+.post {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  & article {
+    margin: 0 auto;
+
+    & h2 {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    & h3 {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    & p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    & img {
+      width: 100%;
+    }
+  }
+
+  & aside {
+    & > div {
+      display: flex;
+      flex-direction: column;
+      row-gap: 0.2rem;
+    }
+
+    & .author {
+      font-size: 1.2rem;
+      color: var(--primary);
+    }
+
+    & .categories {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 0.2rem;
+      row-gap: 0.3rem;
+
+      & span {
+        color: var(--primary);
+        padding: 0.2rem 0.4rem;
+        border: 1px solid var(--transparent-light);
+        border-radius: 0.2rem;
       }
     }
   }

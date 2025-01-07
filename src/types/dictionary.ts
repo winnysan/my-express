@@ -39,6 +39,9 @@ export type Dictionary = {
     admin: string
     register: string
     login: string
+    author: string
+    published: string
+    categories: string
     letsCodeExpressDifferently: string
   }
   form: {

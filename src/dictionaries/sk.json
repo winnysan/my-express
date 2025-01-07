@@ -39,6 +39,9 @@
     "admin": "Administrácia",
     "register": "Registrácia",
     "login": "Prihlásenie",
+    "author": "Autor",
+    "published": "Zverejnené",
+    "categories": "Kategórie",
     "letsCodeExpressDifferently": "Poďme písať Express inak"
   },
   "form": {

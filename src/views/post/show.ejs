@@ -1,11 +1,33 @@
 <%- include('../partials/header.ejs') %>
 
 <main class="container" data-title="<%= title %>">
-    <h1><%= post.title %></h2>
+    <h1 data-title="<%= post.title %>"><%= post.title %></h1>
 
     <% if (isAuthor) { %>
         edit post
     <% } else { %>
-        <article><%- post.body %></article>     
+        <div class="post">
+            <article><%- article %></article>
+            <aside>
+                <div>
+                    <label><%= global.dictionary.pages.author %></label>
+                    <p class="author"><%= post.author.name %></p>                    
+                </div>
+                <div>
+                    <label><%= global.dictionary.pages.published %></label>
+                    <p class="author"><%= post.createdAt.toLocaleDateString(global.locale) %></p>                    
+                </div>
+                <% if (post.categories.length > 0) { %>
+                    <div>
+                        <label><%= global.dictionary.pages.categories %></label>
+                        <p class="categories">
+                            <% post.categories.forEach(category => { %>
+                                <span><%= category.name %></span>
+                            <% }) %>
+                        </p>
+                    </div>
+                <% } %>
+            </aside>
+        </div>
     <% } %>
 </main>

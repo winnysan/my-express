@@ -38,7 +38,7 @@ const postSchema = new mongoose.Schema<IPost>(
     body: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
     images: [imageSchema],
-    categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', default: undefined }],
+    categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category', default: undefined }],
     locale: { type: String, required: true, default: locale.locales[0] },
   },
   { timestamps: true }

@@ -39,6 +39,9 @@
     "admin": "Admin",
     "register": "Register",
     "login": "Login",
+    "author": "Author",
+    "published": "Published",
+    "categories": "Categories",
     "letsCodeExpressDifferently": "Let's code Express differently"
   },
   "form": {

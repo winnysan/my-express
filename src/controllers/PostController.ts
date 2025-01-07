@@ -126,6 +126,7 @@ class PostController {
         csrfToken: req.csrfToken?.() || '',
         user: req.session.user,
         post,
+        article: Helper.parseBody(post.body),
         isAuthor,
         categories,
       })
