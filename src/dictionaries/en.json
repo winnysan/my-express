@@ -28,7 +28,8 @@
     "invalidData": "Invalid data",
     "unknownAction": "Unknown action",
     "invalidDataForUpdate": "Invalid data for update",
-    "unauthorized": "Unauthorized"
+    "unauthorized": "Unauthorized",
+    "postCreated": "The post has been successfully created"
   },
   "pages": {
     "error": "Error",

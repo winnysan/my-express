@@ -28,7 +28,8 @@
     "invalidData": "Neplatné data",
     "unknownAction": "Neznáma akcia",
     "invalidDataForUpdate": "Neplatné data pre aktualizáciu",
-    "unauthorized": "Neoprávnené"
+    "unauthorized": "Neoprávnené",
+    "postCreated": "Príspevok bol úspešne vytvorený"
   },
   "pages": {
     "error": "Chyba",

@@ -6,7 +6,7 @@ import AsyncHandler from '../lib/AsyncHandler'
 import Helper from '../lib/Helper'
 import ProcessImage from '../lib/ProcessImage'
 import Category, { ICategory } from '../models/Category'
-import Post from '../models/Post'
+import Post, { IPost } from '../models/Post'
 import { ImageFormat } from '../types/enums'
 
 /**
@@ -74,8 +74,8 @@ class PostController {
             body = body.replace(regex, `![$1](${imageUrl})`)
 
             return {
+              originalname,
               uuid,
-              name: file.originalname,
               extension,
               mime: file.mimetype,
               size: file.size,
@@ -92,9 +92,44 @@ class PostController {
       slug: `${Helper.slugify(title)}-${Date.now()}`,
       images,
       categories,
+      locale: global.locale,
     })
 
-    res.status(201).json({ message: 'ok', post })
+    res.status(201).json({
+      message: global.dictionary.messages.postCreated,
+      redirect: `/posts/${post.slug}`,
+    })
+  })
+
+  /**
+   * Retrieves a post by its slug and renders it in the response
+   */
+  public getPostBySlug = AsyncHandler.wrap(async (req: Request, res: Response) => {
+    const post: IPost | null = await Post.findOne({ slug: req.params.slug })
+      .populate('author', 'name')
+      .populate('categories', 'name')
+
+    if (!post) {
+      res.status(404)
+
+      throw new Error(`${req.originalUrl} ${global.dictionary.messages.notFound}`)
+    } else {
+      const isAuthor = req.session.user ? req.session.user._id.equals(post.author._id) : false
+
+      let categories: ICategory[] = []
+
+      if (isAuthor) categories = await Category.find({ locale: post.locale })
+
+      res.render('post/show', {
+        layout: res.locals.isAjax ? false : 'layouts/main',
+        title: post.title,
+        csrfToken: req.csrfToken?.() || '',
+        user: req.session.user,
+        post,
+        isAuthor,
+        categories,
+      })
+    }
   })
 }
 

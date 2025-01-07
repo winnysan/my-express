@@ -1,8 +1,9 @@
 import mongoose from 'mongoose'
+import { Locale, locale } from '../types/locale'
 
 type Image = {
+  originalname: string
   uuid: string
-  name: string
   extension: string
   mime: string
   size: number
@@ -16,13 +17,14 @@ export interface IPost extends mongoose.Document {
   slug: string
   images: Image[]
   categories?: mongoose.Types.ObjectId[]
+  locale: Locale
   createdAt: Date
   updatedAt: Date
 }
 
 const imageSchema = new mongoose.Schema<Image>({
+  originalname: { type: String, required: true },
   uuid: { type: String, required: true },
-  name: { type: String, required: true },
   extension: { type: String, required: true },
   mime: { type: String, required: true },
   size: { type: Number, required: true },
@@ -37,6 +39,7 @@ const postSchema = new mongoose.Schema<IPost>(
     slug: { type: String, required: true, unique: true },
     images: [imageSchema],
     categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', default: undefined }],
+    locale: { type: String, required: true, default: locale.locales[0] },
   },
   { timestamps: true }
 )

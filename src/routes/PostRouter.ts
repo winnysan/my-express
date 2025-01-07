@@ -31,6 +31,11 @@ class PostRouter {
      */
     this.router.get('/new', AuthMiddleware.protect, PostController.newPostPage)
     this.router.post('/new', AuthMiddleware.protect, ValidationMiddleware.newPost, PostController.newPost)
+
+    /**
+     * Post by slug
+     */
+    this.router.get('/:slug', PostController.getPostBySlug)
   }
 }
 

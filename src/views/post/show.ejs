@@ -1,0 +1,11 @@
+<%- include('../partials/header.ejs') %>
+
+<main class="container" data-title="<%= title %>">
+    <h1><%= post.title %></h2>
+
+    <% if (isAuthor) { %>
+        edit post
+    <% } else { %>
+        <article><%- post.body %></article>     
+    <% } %>
+</main>
