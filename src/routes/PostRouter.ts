@@ -30,7 +30,7 @@ class PostRouter {
      * New post page
      */
     this.router.get('/new', AuthMiddleware.protect, PostController.newPostPage)
-    this.router.post('/new', AuthMiddleware.protect, ValidationMiddleware.newPost, PostController.newPost)
+    this.router.post('/new', AuthMiddleware.protect, ValidationMiddleware.post, PostController.newPost)
 
     /**
      * Post by slug
@@ -40,7 +40,7 @@ class PostRouter {
     /**
      * Edit post
      */
-    this.router.post('/edit/:id', AuthMiddleware.protect, PostController.editPost)
+    this.router.post('/edit/:id', AuthMiddleware.protect, ValidationMiddleware.post, PostController.editPost)
   }
 }
 

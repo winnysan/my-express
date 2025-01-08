@@ -30,6 +30,7 @@ export type Dictionary = {
     invalidDataForUpdate: string
     unauthorized: string
     postCreated: string
+    postEdited: string
   }
   pages: {
     error: string

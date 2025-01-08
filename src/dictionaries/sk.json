@@ -29,7 +29,8 @@
     "unknownAction": "Neznáma akcia",
     "invalidDataForUpdate": "Neplatné data pre aktualizáciu",
     "unauthorized": "Neoprávnené",
-    "postCreated": "Príspevok bol úspešne vytvorený"
+    "postCreated": "Príspevok bol úspešne vytvorený",
+    "postEdited": "Príspevok bol upravený"
   },
   "pages": {
     "error": "Chyba",

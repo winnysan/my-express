@@ -53,7 +53,7 @@ class ValidationMiddleware {
   /**
    * Middleware function for validating post data
    */
-  public static newPost = AsyncHandler.wrap(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  public static post = AsyncHandler.wrap(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const validation = new Validator(req)
 
     validation.field('title').required()
