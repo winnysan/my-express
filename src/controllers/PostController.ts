@@ -102,6 +102,17 @@ class PostController {
   })
 
   /**
+   * Edits an existing post in the database
+   */
+  public editPost = AsyncHandler.wrap(async (req: Request, res: Response) => {
+    const id = req.params.id
+    const { title, body, categories } = req.body
+    const images = req.files
+
+    res.status(200).json({ id, title, body, categories, images })
+  })
+
+  /**
    * Retrieves a post by its slug and renders it in the response
    */
   public getPostBySlug = AsyncHandler.wrap(async (req: Request, res: Response) => {

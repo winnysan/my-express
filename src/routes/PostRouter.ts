@@ -36,6 +36,11 @@ class PostRouter {
      * Post by slug
      */
     this.router.get('/:slug', PostController.getPostBySlug)
+
+    /**
+     * Edit post
+     */
+    this.router.post('/edit/:id', AuthMiddleware.protect, PostController.editPost)
   }
 }
 
