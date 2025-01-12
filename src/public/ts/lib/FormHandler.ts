@@ -53,9 +53,6 @@ class FormHandler {
        * Append images present in the content
        */
       if (this.editor) {
-        console.log('editor')
-        console.log(this.editor.getImages())
-
         /**
          * Update the textarea value with the latest content
          */

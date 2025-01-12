@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import fs from 'fs-extra'
+import mongoose from 'mongoose'
 import path from 'path'
 import { v4 as uuidv4 } from 'uuid'
 import AsyncHandler from '../lib/AsyncHandler'
@@ -9,20 +10,189 @@ import ProcessImage from '../lib/ProcessImage'
 import Category, { ICategory } from '../models/Category'
 import Post, { IPost } from '../models/Post'
 import { ImageFormat, Role } from '../types/enums'
+import { locale } from '../types/locale'
 
 /**
  * Controller class for handling post-related operations
  */
 class PostController {
   /**
-   * Posts page
+   * Posts page with filtered posts
    */
   public postsPage = AsyncHandler.wrap(async (req: Request, res: Response) => {
+    const { page, perpage, categories, locales, author, sort, order, search } = req.query
+    const query: Record<string, any> = {}
+
+    /**
+     * Validate and filter by categories
+     */
+    if (categories) {
+      const categoryArray = Array.isArray(categories) ? categories : (categories as string).split(',')
+      const validCategories = categoryArray.filter(category => mongoose.Types.ObjectId.isValid(category as string))
+      if (validCategories.length > 0) query.categories = { $in: validCategories }
+    }
+
+    /**
+     * Validate and filter by author
+     */
+    if (author && mongoose.Types.ObjectId.isValid(author as string)) {
+      query.author = author
+    }
+
+    /**
+     * Filter by locales
+     */
+    if (locales) {
+      const localeArray = Array.isArray(locales) ? locales : (locales as string).split(',')
+      query.locale = { $in: localeArray }
+    } else {
+      query.locale = global.locale
+    }
+
+    /**
+     * Search filter - diacritics insensitive
+     */
+    if (search) {
+      const searchRegex = Helper.diacriticsInsensitiveRegex(search as string)
+      query.$or = [{ title: { $regex: searchRegex, $options: 'i' } }, { body: { $regex: searchRegex, $options: 'i' } }]
+    }
+
+    /**
+     * Pagination and sorting
+     */
+    const pageNumber = parseInt(page as string, 10) || 1
+    const perPageNumber = parseInt(perpage as string, 10) || 10
+    const sortOrder = order === 'desc' ? 1 : -1
+    const allowedSortFields = ['createdAt', 'updatedAt', 'title']
+    const sortField = sort && allowedSortFields.includes(sort as string) ? sort : 'createdAt'
+    const allowedOrderFields = ['asc', 'desc']
+
+    /**
+     * Fill query-related arrays for rendering
+     */
+    const queryCategories = categories
+      ? Array.isArray(categories)
+        ? categories.filter(category => mongoose.Types.ObjectId.isValid(category as string))
+        : (categories as string).split(',').filter(category => mongoose.Types.ObjectId.isValid(category))
+      : []
+    const queryAuthor = author && mongoose.Types.ObjectId.isValid(author as string) ? (author as string) : ''
+    const queryLocales = locales ? (Array.isArray(locales) ? locales : (locales as string).split(',')) : [global.locale]
+    const querySearch = search ? (search as string) : ''
+    const querySortBy = sort && allowedSortFields.includes(sort as string) ? sort : 'createdAt'
+    const queryOrderBy = order && allowedOrderFields.includes(order as string) ? order : 'asc'
+
+    /**
+     * Execute query for posts
+     */
+    const postsPromise = Post.find(query)
+      .sort({ [sortField as string]: sortOrder })
+      .skip((pageNumber - 1) * perPageNumber)
+      .limit(perPageNumber)
+    const totalPostsPromise = Post.countDocuments(query)
+
+    /**
+     * Fetch categories
+     */
+    const allCategoriesPromise = Category.aggregate([
+      {
+        $match: {
+          parent_id: null,
+        },
+      },
+      {
+        $graphLookup: {
+          from: 'categories',
+          startWith: '$_id',
+          connectFromField: '_id',
+          connectToField: 'parent_id',
+          as: 'subcategories',
+        },
+      },
+      {
+        $group: {
+          _id: '$locale',
+          records: {
+            $push: {
+              _id: '$_id',
+              name: '$name',
+              parent_id: '$parent_id',
+              subcategories: '$subcategories',
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          locale: '$_id',
+          records: 1,
+        },
+      },
+    ])
+
+    /**
+     * Fetch authors with post counts
+     */
+    const authorsPromise = Post.aggregate([
+      { $group: { _id: '$author', postCount: { $sum: 1 } } },
+      { $lookup: { from: 'users', localField: '_id', foreignField: '_id', as: 'authorDetails' } },
+      { $unwind: '$authorDetails' },
+      { $project: { _id: 1, postCount: 1, 'authorDetails.name': 1, 'authorDetails.email': 1 } },
+    ])
+
+    /**
+     * Await all promises
+     */
+    const [posts, totalPosts, allCategories, authors] = await Promise.all([
+      postsPromise,
+      totalPostsPromise,
+      allCategoriesPromise,
+      authorsPromise,
+    ])
+
+    /**
+     * Sort categories by order and locale
+     */
+    allCategories.forEach(group => {
+      // @ts-ignore
+      group.records.forEach(record => {
+        if (record.subcategories) {
+          // @ts-ignore
+          record.subcategories.sort((a, b) => a.order - b.order)
+        }
+      })
+    })
+    const sortedCategories = [
+      ...allCategories.filter(group => group.locale === global.locale),
+      ...allCategories.filter(group => group.locale !== global.locale),
+    ]
+
+    /**
+     * Prioritize locales by global locale
+     */
+    const prioritizedLocales = [global.locale, ...locale.locales.filter(locale => locale !== global.locale)]
+
     res.render('post/index', {
       layout: res.locals.isAjax ? false : 'layouts/main',
       title: global.dictionary.title.postsPage,
       csrfToken: req.csrfToken?.() || '',
       user: req.session.user,
+      posts,
+      categories: sortedCategories,
+      authors,
+      locales: prioritizedLocales,
+      queryCategories,
+      queryAuthor,
+      queryLocales,
+      querySearch,
+      querySortBy,
+      queryOrderBy,
+      meta: {
+        total: totalPosts,
+        page: pageNumber,
+        perpage: perPageNumber,
+        totalPages: Math.ceil(totalPosts / perPageNumber),
+      },
     })
   })
 

@@ -16,6 +16,10 @@ const categorySchema = new mongoose.Schema<ICategory>({
   locale: { type: String, required: true, default: locale.locales[0] },
 })
 
+categorySchema.index({ locale: 1 })
+categorySchema.index({ name: 1 })
+categorySchema.index({ parent_id: 1 })
+
 const Category = mongoose.model<ICategory>('Category', categorySchema)
 
 export default Category

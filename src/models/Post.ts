@@ -44,6 +44,12 @@ const postSchema = new mongoose.Schema<IPost>(
   { timestamps: true }
 )
 
+postSchema.index({ author: 1 })
+postSchema.index({ categories: 1 })
+postSchema.index({ locale: 1 })
+postSchema.index({ createdAt: 1 })
+postSchema.index({ title: 'text', body: 'text' })
+
 const Post = mongoose.model<IPost>('Post', postSchema)
 
 export default Post
