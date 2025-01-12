@@ -74,8 +74,9 @@ class ApiCategoryController {
     const nextOrderFirst = topCategories.length > 0 ? topCategories[0].order + 1 : 1
 
     const newFirstCategory = new Category({
-      name: global.dictionary.categories.new,
+      name: '…',
       order: nextOrderFirst,
+      locale: data.value || global.locale,
     })
 
     const savedFirstCategory = await newFirstCategory.save()
@@ -100,9 +101,10 @@ class ApiCategoryController {
     await Category.updateMany({ parent_id: parentId, order: { $gte: nextOrderAdd } }, { $inc: { order: 1 } })
 
     const newCategory = new Category({
-      name: global.dictionary.categories.new,
+      name: '…',
       parent_id: parentId,
       order: nextOrderAdd,
+      locale: data.value || global.locale,
     })
 
     const savedCategory = await newCategory.save()
@@ -124,9 +126,10 @@ class ApiCategoryController {
     const nextOrderNested = childCategories.length > 0 ? childCategories[0].order + 1 : 1
 
     const newNestedCategory = new Category({
-      name: global.dictionary.categories.new,
+      name: '…',
       parent_id: parentCategory._id,
       order: nextOrderNested,
+      locale: data.value || global.locale,
     })
 
     const savedNestedCategory = await newNestedCategory.save()

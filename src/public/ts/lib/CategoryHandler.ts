@@ -39,6 +39,7 @@ class CategoryHandler {
   private apiClient: ApiClient<ApiCategoryResponse>
   private inputDebounceMap: WeakMap<HTMLInputElement, (data: any) => void> = new WeakMap()
   private toastEl: HTMLUListElement | undefined
+  private locale: Locale
 
   /**
    * Bind the event handler to avoid multiple bindings
@@ -55,6 +56,7 @@ class CategoryHandler {
     this.categoriesId = categoriesId
     this.apiClient = new ApiClient<ApiCategoryResponse>(`${window.location.protocol}//${window.location.host}/api`)
     this.toastEl = Helper.makeToast('#toast')
+    this.locale = (document.documentElement.lang as Locale) || 'en'
 
     this.handleInputBound = this.handleInput.bind(this)
     this.handleClickBound = this.handleClick.bind(this)
@@ -286,7 +288,7 @@ class CategoryHandler {
 
     const input: HTMLInputElement = document.createElement('input')
     input.type = 'text'
-    input.value = window.localization.getLocalizedText('new')
+    input.value = '…'
 
     const select: HTMLSelectElement = this.createSelect()
 
@@ -312,6 +314,8 @@ class CategoryHandler {
       const option = document.createElement('option')
       option.value = locale
       option.textContent = window.localization.getLocalizedText(locale)
+
+      if (locale === this.locale) option.selected = true
 
       select.appendChild(option)
     })
@@ -423,7 +427,7 @@ class CategoryHandler {
       /**
        * Send data to API
        */
-      const data: SendData = { action: CategoryAction.ADD_FIRST }
+      const data: SendData = { action: CategoryAction.ADD_FIRST, value: this.locale }
       this.sendData(data, tempId)
 
       /**
@@ -453,7 +457,7 @@ class CategoryHandler {
       /**
        * Send data to API
        */
-      const data: SendData = { action: CategoryAction.ADD, id: li.id }
+      const data: SendData = { action: CategoryAction.ADD, id: li.id, value: this.locale }
       this.sendData(data, tempId)
 
       /**
@@ -494,7 +498,7 @@ class CategoryHandler {
       /**
        * Send data to API
        */
-      const data: SendData = { action: CategoryAction.ADD_NESTED, id: li.id }
+      const data: SendData = { action: CategoryAction.ADD_NESTED, id: li.id, value: this.locale }
       this.sendData(data, tempId)
 
       /**
