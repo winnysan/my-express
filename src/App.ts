@@ -4,15 +4,16 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import express from 'express'
 import expressLayouts from 'express-ejs-layouts'
-import session from 'express-session'
 import path from 'path'
 import Database from './lib/Database'
 import AjaxMiddleware from './middlewares/AjaxMiddleware'
 import AuthMiddleware from './middlewares/AuthMiddleware'
+import CorsMiddleware from './middlewares/CorsMiddleware'
 import CsrfMiddleware from './middlewares/CsrfMiddleware'
 import ErrorMiddleware from './middlewares/ErrorMiddleware'
 import IconMiddleware from './middlewares/IconMiddleware'
 import LocalizationMiddleware from './middlewares/LocalizationMiddleware'
+import SessionMiddleware from './middlewares/SessionMiddleware'
 import upload from './middlewares/UploadMiddleware'
 import AdminRouter from './routes/AdminRouter'
 import ApiRouter from './routes/ApiRouter'
@@ -60,15 +61,8 @@ class App {
     this.app.use(bodyParser.json())
     this.app.use(bodyParser.urlencoded({ extended: true }))
     this.app.use(cookieParser())
-    this.app.use(cors())
-    this.app.use(
-      session({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: true,
-        cookie: { secure: false },
-      })
-    )
+    this.app.use(CorsMiddleware.use())
+    this.app.use(SessionMiddleware.use())
     this.app.use(upload.array('files'))
     this.app.use(CsrfMiddleware.init())
     this.app.use(AjaxMiddleware.use())
