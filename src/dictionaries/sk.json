@@ -54,6 +54,17 @@
     "body": "Text",
     "categories": "Kategórie",
     "selectCategories": "Vyberte kategórie",
+    "search": "Vyhľadávanie",
+    "searchPosts": "Hladaj príspevky...",
+    "languages": "Jazyky",
+    "authors": "Autori",
+    "anyAuthors": "Všetci autori",
+    "sortBy": "Zotriediť podľa",
+    "dateCreated": "Dátum vytvorenia",
+    "lastUpdated": "Poslednej úpravy",
+    "orderBy": "Zoradiť",
+    "ascending": "Vzostupne",
+    "descending": "Zostupne",
     "submit": "Odoslať"
   },
   "validation": {

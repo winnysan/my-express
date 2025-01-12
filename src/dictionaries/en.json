@@ -54,6 +54,17 @@
     "body": "Body",
     "categories": "Categories",
     "selectCategories": "Select categories",
+    "search": "Search",
+    "searchPosts": "Search posts...",
+    "languages": "Languages",
+    "authors": "Authors",
+    "anyAuthors": "Any authors",
+    "sortBy": "Sort by",
+    "dateCreated": "Date created",
+    "lastUpdated": "Last updated",
+    "orderBy": "Order by",
+    "ascending": "Ascending",
+    "descending": "Descending",
     "submit": "Submit"
   },
   "validation": {

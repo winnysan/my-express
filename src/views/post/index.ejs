@@ -1,9 +1,118 @@
 <%- include('../partials/header.ejs') %>
 
 <main class="container" data-title="<%= title %>">
-    <h1><%= global.dictionary.pages.posts %></h1>
-
     <section>
         <a href="/posts/new" class="link"><%= global.dictionary.navigation.addNewPost %></a>
     </section>
+
+    <div class="posts">
+        <form id="form-filter" action="/posts" method="get" class="filter-form">
+            <div>
+                <h4><%= global.dictionary.form.search %></h4>
+                <input
+                  type="text"
+                  name="search"
+                  placeholder="<%= global.dictionary.form.searchPosts %>"
+                  value="<%= querySearch || '' %>"
+                />
+            </div>
+
+            <div class="categoryList">
+                <% function renderCategories(categories) { %>
+                  <% categories.forEach(category => { %>
+                      <li>
+                        <label>
+                          <input
+                            type="checkbox"
+                            name="categories"
+                            value="<%= category._id.toString() %>"
+                            <% if (queryCategories.includes(category._id.toString())) { %> checked <% } %>
+                          >
+                          <%= category.name %>
+                        </label>
+                        <% if (category.subcategories && category.subcategories.length > 0) { %>
+                          <ul>
+                            <%= renderCategories(category.subcategories) %>
+                          </ul>
+                        <% } %>
+                      </li>
+                  <% }); %>
+                <% } %>
+                
+                <% categories.forEach(localeGroup => { %>
+                  <h4><%= global.dictionary.form.categories %> (<%= global.dictionary.categories[localeGroup.locale] %>)</h4>
+                  <ul>
+                    <%= renderCategories(localeGroup.records) %>
+                  </ul>
+                <% }); %>
+            </div>
+
+            <div>
+              <h4><%= global.dictionary.form.languages %></h4>
+              <% locales.forEach(locale => { %>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="locales"
+                    value="<%= locale %>"
+                    <% if ((queryLocales || []).includes(locale)) { %> checked <% } %>
+                  />
+                  <%= global.dictionary.categories[locale] %>
+                </label>
+              <% }); %>
+            </div>
+
+            <div>
+              <h4><%= global.dictionary.form.authors %></h4>
+              <select name="author">
+                <option value=""><%= global.dictionary.form.anyAuthors %></option>
+                <% authors.forEach(author => { %>
+                  <option value="<%= author._id.toString() %>" <% if (author._id.toString() === queryAuthor) { %> selected <% } %>>
+                      <%= author.authorDetails.name %> (<%= author.postCount %>)
+                  </option>
+                <% }); %>
+              </select>
+            </div>
+
+            <div>
+              <h4><%= global.dictionary.form.sortBy %></h4>
+              <select name="sort">
+                <option value="createdAt" <% if (querySortBy === 'createdAt') { %> selected <% } %>>
+                    <%= global.dictionary.form.dateCreated %>
+                </option>
+                <option value="title" <% if (querySortBy === 'title') { %> selected <% } %>>
+                    <%= global.dictionary.form.title %>
+                </option>
+                <option value="updatedAt" <% if (querySortBy === 'updatedAt') { %> selected <% } %>>
+                    <%= global.dictionary.form.lastUpdated %>
+                </option>
+              </select>
+            </div>
+
+            <div>
+              <h4><%= global.dictionary.form.orderBy %></h4>
+              <select name="order">
+                <option value="asc" <% if (queryOrderBy === 'asc') { %> selected <% } %>>
+                    <%= global.dictionary.form.ascending %>
+                </option>
+                <option value="desc" <% if (queryOrderBy === 'desc') { %> selected <% } %>>
+                    <%= global.dictionary.form.descending %>
+                </option>
+              </select>
+            </div>
+
+            <div>
+              <button type="submit"><%= global.dictionary.form.submit %></button>
+            </div>
+        </form>
+        <div>
+            <h2><%= global.dictionary.pages.posts %></h2>
+
+            <% if (posts.length === 0) { %>
+              <p><%= global.dictionary.messages.notFound %></p>
+            <% } else { %>               
+              <div><%= posts %></div>             
+            <% } %>
+        </div>
+    </div>
 </main>

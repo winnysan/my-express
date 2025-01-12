@@ -54,6 +54,18 @@ export type Dictionary = {
     body: string
     categories: string
     selectCategories: string
+    search: string
+    searchPosts: string
+    languages: string
+    authors: string
+    anyAuthors: string
+    sortBy: string
+    dateCreated: string
+    lastUpdated: string
+    orderBy: string
+    ascending: string
+    descending: string
+
     submit: string
   }
   validation: {
