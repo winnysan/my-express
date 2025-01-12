@@ -1,5 +1,6 @@
 import CategoryHandler from './CategoryHandler'
 import CategorySelectHandler from './CategorySelectHandler'
+import FilterFormHandler from './FilterFormHandler'
 import FormHandler from './FormHandler'
 import Helper from './Helper'
 import SimpleEditor from './SimpleEditor'
@@ -42,6 +43,8 @@ class Bootstrap {
 
     new FormHandler('#form', editor)
     new FormHandler('#form-logout')
+
+    new FilterFormHandler('#form-filter', ['categories', 'locales'])
 
     /**
      * Categories
