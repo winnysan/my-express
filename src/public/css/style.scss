@@ -208,11 +208,6 @@ header {
     display: none;
     user-select: none;
 
-    & svg {
-      width: 32px;
-      height: 32px;
-    }
-
     @media (max-width: 640px) {
       display: block;
     }
@@ -665,6 +660,12 @@ form#form-filter {
         & .meta {
           display: flex;
           column-gap: 1rem;
+
+          & span {
+            display: flex;
+            align-items: center;
+            column-gap: 0.5rem;
+          }
         }
       }
     }

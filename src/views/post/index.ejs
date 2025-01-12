@@ -130,8 +130,14 @@
                     <div>
                       <h3><%= post.title %></h3>
                       <div class="meta">
-                        <span><%= post.author.name %></span> 
-                        <span><%= post.createdAt.toLocaleDateString(global.locale) %></span>
+                        <span>
+                          <%- include('../partials/icon.ejs', { name: 'user' }) %>
+                          <%= post.author.name %>
+                        </span> 
+                        <span>
+                          <%- include('../partials/icon.ejs', { name: 'calendar' }) %>
+                          <%= post.createdAt.toLocaleDateString(global.locale) %>
+                        </span>
                       </div>
                     </div>
                   </a>

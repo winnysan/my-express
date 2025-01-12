@@ -11,6 +11,7 @@ import AjaxMiddleware from './middlewares/AjaxMiddleware'
 import AuthMiddleware from './middlewares/AuthMiddleware'
 import CsrfMiddleware from './middlewares/CsrfMiddleware'
 import ErrorMiddleware from './middlewares/ErrorMiddleware'
+import IconMiddleware from './middlewares/IconMiddleware'
 import LocalizationMiddleware from './middlewares/LocalizationMiddleware'
 import upload from './middlewares/UploadMiddleware'
 import AdminRouter from './routes/AdminRouter'
@@ -73,6 +74,7 @@ class App {
     this.app.use(AjaxMiddleware.use())
     this.app.use(LocalizationMiddleware.use())
     this.app.use(AuthMiddleware.authCheck)
+    this.app.use(IconMiddleware.use())
     this.app.use(express.static(path.join(__dirname, './public')))
     this.app.use('/uploads', express.static(path.join(__dirname, '../uploads')))
   }
