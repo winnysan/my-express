@@ -86,6 +86,7 @@ class PostController {
      * Execute query for posts
      */
     const postsPromise = Post.find(query)
+      .populate('author', 'name')
       .sort({ [sortField as string]: sortOrder })
       .skip((pageNumber - 1) * perPageNumber)
       .limit(perPageNumber)

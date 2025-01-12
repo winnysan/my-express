@@ -26,6 +26,13 @@ task('typescript-transpile', () => {
 task('views-copy', () => src('./src/views/**/*.ejs').pipe(dest('./dist/views')))
 
 /**
+ * Copy assets to target folder
+ */
+task('assets-copy', () =>
+  src(['./src/public/**/*.jpg', './src/public/favicon.ico'], { encoding: false }).pipe(dest('./dist/public'))
+)
+
+/**
  * Frontend processing by webpack
  */
 task('webpack-build', done => {
@@ -72,4 +79,7 @@ task('ejs-update', done => {
 /**
  * Default task
  */
-task('default', series('build-clean', 'typescript-transpile', 'views-copy', 'webpack-build', 'ejs-update'))
+task(
+  'default',
+  series('build-clean', 'typescript-transpile', 'views-copy', 'assets-copy', 'webpack-build', 'ejs-update')
+)

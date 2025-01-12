@@ -1,9 +1,11 @@
 <%- include('../partials/header.ejs') %>
 
 <main class="container" data-title="<%= title %>">
-    <section>
-        <a href="/posts/new" class="link"><%= global.dictionary.navigation.addNewPost %></a>
-    </section>
+    <% if (typeof user !== 'undefined') { %>
+      <section>
+          <a href="/posts/new" class="link"><%= global.dictionary.navigation.addNewPost %></a>
+      </section>
+    <% } %>
 
     <div class="posts">
         <form id="form-filter" action="/posts" method="get" class="filter-form">
@@ -114,17 +116,31 @@
               <button type="submit"><%= global.dictionary.form.submit %></button>
             </div>
         </form>
-        <div>
+
+        <div class="content">
             <h2><%= global.dictionary.pages.posts %></h2>
 
             <% if (posts.length === 0) { %>
               <p><%= global.dictionary.messages.notFound %></p>
             <% } else { %>               
-              <div><%= posts %></div>
+              <div class="postsList">
+                <% posts.forEach(post => { %>
+                  <a href="/posts/<%= post.slug %>" class="post" data-link>
+                    <%- include('../partials/image.ejs', { post, thumb: false }) %>
+                    <div>
+                      <h3><%= post.title %></h3>
+                      <div class="meta">
+                        <span><%= post.author.name %></span> 
+                        <span><%= post.createdAt.toLocaleDateString(global.locale) %></span>
+                      </div>
+                    </div>
+                  </a>
+                <% }); %>
+              </div>
 
               <div class="pagination">
                 <% if (meta.page > 1) { %>
-                  <a href="<%= generatePaginationUrl(meta.page - 1) %>" data-link>
+                  <a href="<%= generatePaginationUrl(meta.page - 1) %>" class="link" data-link>
                     <%= global.dictionary.pages.previous %>
                   </a>
                 <% } %>
@@ -135,13 +151,11 @@
                 </span>
 
                 <% if (meta.page < meta.totalPages) { %>
-                  <a href="<%= generatePaginationUrl(meta.page + 1) %>" data-link>
+                  <a href="<%= generatePaginationUrl(meta.page + 1) %>" class="link" data-link>
                     <%= global.dictionary.pages.next %>
                   </a>
                 <% } %>
               </div>
-              
-              
             <% } %>
         </div>
     </div>
