@@ -43,6 +43,9 @@
     "author": "Autor",
     "published": "Zverejnené",
     "categories": "Kategórie",
+    "previous": "Predchádzajúce",
+    "next": "Nasledujúce",
+    "page": "Stránka",
     "letsCodeExpressDifferently": "Poďme písať Express inak"
   },
   "form": {
@@ -65,6 +68,7 @@
     "orderBy": "Zoradiť",
     "ascending": "Vzostupne",
     "descending": "Zostupne",
+    "perPage": "Na stránku",
     "submit": "Odoslať"
   },
   "validation": {

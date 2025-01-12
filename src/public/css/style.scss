@@ -592,4 +592,17 @@ form#form-filter {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
   }
+
+  & .pagination {
+    display: flex;
+    column-gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media (max-width: 640px) {
+      align-items: center;
+      flex-direction: column;
+      row-gap: 1rem;
+    }
+  }
 }

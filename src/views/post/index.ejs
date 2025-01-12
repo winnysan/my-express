@@ -100,6 +100,15 @@
                 </option>
               </select>
             </div>
+            
+            <div>
+              <h4><%= global.dictionary.form.perPage %></h4>
+              <select name="perpage">
+                  <option value="12" <% if (queryPerPage === '12') { %> selected <% } %>>12</option>
+                  <option value="24" <% if (queryPerPage === '24') { %> selected <% } %>>24</option>
+                  <option value="36" <% if (queryPerPage === '36') { %> selected <% } %>>36</option>
+              </select>
+            </div>
 
             <div>
               <button type="submit"><%= global.dictionary.form.submit %></button>
@@ -111,7 +120,28 @@
             <% if (posts.length === 0) { %>
               <p><%= global.dictionary.messages.notFound %></p>
             <% } else { %>               
-              <div><%= posts %></div>             
+              <div><%= posts %></div>
+
+              <div class="pagination">
+                <% if (meta.page > 1) { %>
+                  <a href="<%= generatePaginationUrl(meta.page - 1) %>" data-link>
+                    <%= global.dictionary.pages.previous %>
+                  </a>
+                <% } %>
+
+                <span>
+                  <span><%= global.dictionary.pages.posts %>: <%= meta.total %>,</span>
+                  <span><%= global.dictionary.pages.page %>: <%= meta.page %> / <%= meta.totalPages %></span>
+                </span>
+
+                <% if (meta.page < meta.totalPages) { %>
+                  <a href="<%= generatePaginationUrl(meta.page + 1) %>" data-link>
+                    <%= global.dictionary.pages.next %>
+                  </a>
+                <% } %>
+              </div>
+              
+              
             <% } %>
         </div>
     </div>

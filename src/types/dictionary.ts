@@ -43,6 +43,9 @@ export type Dictionary = {
     author: string
     published: string
     categories: string
+    previous: string
+    next: string
+    page: string
     letsCodeExpressDifferently: string
   }
   form: {
@@ -65,7 +68,7 @@ export type Dictionary = {
     orderBy: string
     ascending: string
     descending: string
-
+    perPage: string
     submit: string
   }
   validation: {

@@ -12,6 +12,7 @@ declare global {
       MONGO_URI: string
       ADMIN_EMAIL: string | undefined
       JWT_SECRET: string
+      PER_PAGE: number
     }
   }
   namespace Express {

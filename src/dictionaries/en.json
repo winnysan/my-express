@@ -43,6 +43,9 @@
     "author": "Author",
     "published": "Published",
     "categories": "Categories",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page",
     "letsCodeExpressDifferently": "Let's code Express differently"
   },
   "form": {
@@ -65,6 +68,7 @@
     "orderBy": "Order by",
     "ascending": "Ascending",
     "descending": "Descending",
+    "perPage": "Per page",
     "submit": "Submit"
   },
   "validation": {

@@ -61,7 +61,7 @@ class PostController {
      * Pagination and sorting
      */
     const pageNumber = parseInt(page as string, 10) || 1
-    const perPageNumber = parseInt(perpage as string, 10) || 10
+    const perPageNumber = parseInt(perpage as string, 10) || process.env.PER_PAGE
     const sortOrder = order === 'desc' ? 1 : -1
     const allowedSortFields = ['createdAt', 'updatedAt', 'title']
     const sortField = sort && allowedSortFields.includes(sort as string) ? sort : 'createdAt'
@@ -80,6 +80,7 @@ class PostController {
     const querySearch = search ? (search as string) : ''
     const querySortBy = sort && allowedSortFields.includes(sort as string) ? sort : 'createdAt'
     const queryOrderBy = order && allowedOrderFields.includes(order as string) ? order : 'asc'
+    const queryPerPage = String(perPageNumber)
 
     /**
      * Execute query for posts
@@ -172,6 +173,18 @@ class PostController {
      */
     const prioritizedLocales = [global.locale, ...locale.locales.filter(locale => locale !== global.locale)]
 
+    /**
+     * Generating pagination URL
+     * @param page
+     * @param query
+     * @returns
+     */
+    const generatePaginationUrl = (page: number, query: Record<string, any>): string => {
+      const queryParams = new URLSearchParams(query)
+      queryParams.set('page', page.toString())
+      return `/posts?${queryParams.toString()}`
+    }
+
     res.render('post/index', {
       layout: res.locals.isAjax ? false : 'layouts/main',
       title: global.dictionary.title.postsPage,
@@ -187,12 +200,15 @@ class PostController {
       querySearch,
       querySortBy,
       queryOrderBy,
+      queryPerPage,
       meta: {
         total: totalPosts,
         page: pageNumber,
         perpage: perPageNumber,
         totalPages: Math.ceil(totalPosts / perPageNumber),
       },
+      query: req.query,
+      generatePaginationUrl: (page: number) => generatePaginationUrl(page, req.query),
     })
   })
 
