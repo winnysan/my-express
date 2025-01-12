@@ -114,7 +114,7 @@ class CategoryHandler {
       if (this.categoriesEl && this.listenerAttached) {
         this.categoriesEl.removeEventListener('input', this.handleInputBound)
         this.categoriesEl.removeEventListener('click', this.handleClickBound)
-        this.categoriesEl.removeEventListener('click', this.handleChangeBound)
+        this.categoriesEl.removeEventListener('change', this.handleChangeBound)
       }
 
       /**
@@ -128,7 +128,7 @@ class CategoryHandler {
       if (this.categoriesEl) {
         this.categoriesEl.addEventListener('input', this.handleInputBound)
         this.categoriesEl.addEventListener('click', this.handleClickBound)
-        this.categoriesEl.addEventListener('click', this.handleChangeBound)
+        this.categoriesEl.addEventListener('change', this.handleChangeBound)
       }
 
       /**
