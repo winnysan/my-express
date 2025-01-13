@@ -46,6 +46,13 @@
     "previous": "Previous",
     "next": "Next",
     "page": "Page",
+    "title": "Title",
+    "body": "Body",
+    "slug": "Slug",
+    "language": "Language",
+    "createdAt": "Created at",
+    "updatedAt": "Updated at",
+    "actions": "Actions",
     "letsCodeExpressDifferently": "Let's code Express differently"
   },
   "form": {

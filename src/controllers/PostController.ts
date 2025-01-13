@@ -9,18 +9,20 @@ import Logger from '../lib/Logger'
 import ProcessImage from '../lib/ProcessImage'
 import Category, { ICategory } from '../models/Category'
 import Post, { IPost } from '../models/Post'
+import { IUser } from '../models/User'
 import { ImageFormat, Role } from '../types/enums'
 import { locale } from '../types/locale'
+import BaseController from './BaseController'
 
 /**
  * Controller class for handling post-related operations
  */
-class PostController {
+class PostController extends BaseController {
   /**
    * Posts page with filtered posts
    */
   public postsPage = AsyncHandler.wrap(async (req: Request, res: Response) => {
-    const { page, perpage, categories, locales, author, sort, order, search } = req.query
+    const { page, perpage, userpage, userperpage, categories, locales, author, sort, order, search } = req.query
     const query: Record<string, any> = {}
 
     /**
@@ -62,6 +64,8 @@ class PostController {
      */
     const pageNumber = parseInt(page as string, 10) || 1
     const perPageNumber = parseInt(perpage as string, 10) || process.env.PER_PAGE
+    const userPageNumber = parseInt(userpage as string, 10) || 1
+    const userPerPageNumber = parseInt(userperpage as string, 10) || 10
     const sortOrder = order === 'desc' ? 1 : -1
     const allowedSortFields = ['createdAt', 'updatedAt', 'title']
     const sortField = sort && allowedSortFields.includes(sort as string) ? sort : 'createdAt'
@@ -143,13 +147,28 @@ class PostController {
     ])
 
     /**
+     * Fetch posts by a verified user
+     */
+    const user: IUser | undefined = req.session.user
+    const userPostsPromise = user
+      ? Post.find({ author: user._id })
+          .sort({ createdAt: -1 })
+          .skip((userPageNumber - 1) * userPerPageNumber)
+          .limit(userPerPageNumber)
+      : Promise.resolve([])
+
+    const totalUserPostsPromise = user ? Post.countDocuments({ author: user._id }) : Promise.resolve(0)
+
+    /**
      * Await all promises
      */
-    const [posts, totalPosts, allCategories, authors] = await Promise.all([
+    const [posts, totalPosts, allCategories, authors, userPosts, totalUserPosts] = await Promise.all([
       postsPromise,
       totalPostsPromise,
       allCategoriesPromise,
       authorsPromise,
+      userPostsPromise,
+      totalUserPostsPromise,
     ])
 
     /**
@@ -174,16 +193,18 @@ class PostController {
      */
     const prioritizedLocales = [global.locale, ...locale.locales.filter(locale => locale !== global.locale)]
 
-    /**
-     * Generating pagination URL
-     * @param page
-     * @param query
-     * @returns
-     */
-    const generatePaginationUrl = (page: number, query: Record<string, any>): string => {
-      const queryParams = new URLSearchParams(query)
-      queryParams.set('page', page.toString())
-      return `/posts?${queryParams.toString()}`
+    const postsMeta = {
+      total: totalPosts,
+      page: pageNumber,
+      perpage: perPageNumber,
+      totalPages: Math.ceil(totalPosts / perPageNumber),
+    }
+
+    const userPostsMeta = {
+      total: totalUserPosts,
+      page: userPageNumber,
+      perpage: userPerPageNumber,
+      totalPages: Math.ceil(totalUserPosts / userPerPageNumber),
     }
 
     res.render('post/index', {
@@ -192,6 +213,7 @@ class PostController {
       csrfToken: req.csrfToken?.() || '',
       user: req.session.user,
       posts,
+      userPosts,
       categories: sortedCategories,
       authors,
       locales: prioritizedLocales,
@@ -202,14 +224,12 @@ class PostController {
       querySortBy,
       queryOrderBy,
       queryPerPage,
-      meta: {
-        total: totalPosts,
-        page: pageNumber,
-        perpage: perPageNumber,
-        totalPages: Math.ceil(totalPosts / perPageNumber),
-      },
+      postsMeta,
+      userPostsMeta,
       query: req.query,
-      generatePaginationUrl: (page: number) => generatePaginationUrl(page, req.query),
+      generatePaginationUrl: (page: number) => this.generatePaginationUrl('/posts', page, req.query),
+      generateUserPaginationUrl: (page: number) =>
+        this.generatePaginationUrl('/posts', undefined, { ...req.query, userpage: page }),
     })
   })
 

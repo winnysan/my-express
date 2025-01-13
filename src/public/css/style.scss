@@ -2,6 +2,7 @@
   --black: #101010;
   --white: #fefefe;
   --primary: #0284c7;
+  --light: #ccc;
   --dark: #262626;
   --transparent-light: rgba(0, 0, 0, 0.2);
   --transparent-dark: rgba(0, 0, 0, 0.5);
@@ -79,6 +80,9 @@ html {
 }
 
 .link {
+  display: flex;
+  align-items: center;
+  column-gap: 0.3rem;
   white-space: nowrap;
   transition: color 0.3s;
 
@@ -670,17 +674,90 @@ form#form-filter {
       }
     }
   }
+}
 
-  & .pagination {
-    display: flex;
-    column-gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
+.pagination {
+  display: flex;
+  column-gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
 
-    @media (max-width: 640px) {
+  @media (max-width: 640px) {
+    align-items: center;
+    flex-direction: column;
+    row-gap: 1rem;
+  }
+
+  & .disabled {
+    color: var(--transparent-light);
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  & th,
+  td {
+    border: 1px solid var(--light);
+    padding: 0.5rem;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  & th {
+    background-color: var(--transparent-light);
+    font-weight: normal;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  & td {
+    min-width: 3rem;
+    max-height: 3rem;
+    line-height: 1.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-clamp: 2;
+    white-space: normal;
+  }
+
+  & .center {
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  & .actions {
+    vertical-align: middle;
+
+    & span {
+      display: flex;
+      justify-content: space-around;
       align-items: center;
-      flex-direction: column;
-      row-gap: 1rem;
+
+      & .delete-post {
+        cursor: pointer;
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    &.postsTable th:nth-child(2),
+    &.postsTable td:nth-child(2),
+    &.postsTable th:nth-child(6),
+    &.postsTable td:nth-child(6) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    &.postsTable th:nth-child(3),
+    &.postsTable td:nth-child(3),
+    &.postsTable th:nth-child(4),
+    &.postsTable td:nth-child(4),
+    &.postsTable th:nth-child(5),
+    &.postsTable td:nth-child(5) {
+      display: none;
     }
   }
 }

@@ -46,6 +46,13 @@
     "previous": "Predchádzajúce",
     "next": "Nasledujúce",
     "page": "Stránka",
+    "title": "Titulok",
+    "body": "Text",
+    "slug": "Slug",
+    "language": "Jazyk",
+    "createdAt": "Vytvorené",
+    "updatedAt": "Upravené",
+    "actions": "Akcie",
     "letsCodeExpressDifferently": "Poďme písať Express inak"
   },
   "form": {

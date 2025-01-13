@@ -46,6 +46,13 @@ export type Dictionary = {
     previous: string
     next: string
     page: string
+    title: string
+    body: string
+    slug: string
+    language: string
+    createdAt: string
+    updatedAt: string
+    actions: string
     letsCodeExpressDifferently: string
   }
   form: {
