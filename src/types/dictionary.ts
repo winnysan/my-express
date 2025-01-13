@@ -31,6 +31,7 @@ export type Dictionary = {
     unauthorized: string
     postCreated: string
     postEdited: string
+    postDeleted: string
   }
   pages: {
     error: string

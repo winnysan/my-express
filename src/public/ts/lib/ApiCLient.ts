@@ -46,14 +46,19 @@ class ApiClient<TResponse = ApiResponse> {
    * Sends a POST request to the speciefied endpoint with CSRF protection and returns the response from the API
    * @param data
    * @param endpoint
+   * @param method
    * @returns
    */
-  public async fetch<U>(data: U, endpoint: string): Promise<TResponse> {
+  public async fetch<U>(
+    data: U,
+    endpoint: string,
+    method: 'post' | 'get' | 'put' | 'delete' = 'post'
+  ): Promise<TResponse> {
     try {
       const csrfToken = await this.getCsrfToken()
 
       const response = await fetch(`${this.baseEndpoint}/${endpoint}`, {
-        method: 'post',
+        method,
         headers: {
           'Content-Type': 'application/json',
           'X-CSRF-Token': csrfToken,

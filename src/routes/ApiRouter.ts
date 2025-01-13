@@ -1,6 +1,7 @@
 import express from 'express'
 import ApiCategoryController from '../controllers/ApiCategoryController'
 import ApiController from '../controllers/ApiController'
+import ApiPostController from '../controllers/ApiPostController'
 import AuthMiddleware from '../middlewares/AuthMiddleware'
 
 /**
@@ -30,6 +31,11 @@ class ApiRouter {
      * Categories
      */
     this.router.post('/categories', AuthMiddleware.admin, ApiCategoryController.categoriesPost)
+
+    /**
+     * Posts
+     */
+    this.router.delete('/posts/:id', AuthMiddleware.protect, ApiPostController.deletePostById)
   }
 }
 

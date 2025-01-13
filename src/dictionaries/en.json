@@ -30,7 +30,8 @@
     "invalidDataForUpdate": "Invalid data for update",
     "unauthorized": "Unauthorized",
     "postCreated": "The post has been successfully created",
-    "postEdited": "The post has been successfully edited"
+    "postEdited": "The post has been successfully edited",
+    "postDeleted": "The post has been successfully deleted"
   },
   "pages": {
     "error": "Error",

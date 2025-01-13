@@ -1,3 +1,4 @@
+import ApiClient, { ApiResponse } from './ApiCLient'
 import CategoryHandler from './CategoryHandler'
 import CategorySelectHandler from './CategorySelectHandler'
 import FilterFormHandler from './FilterFormHandler'
@@ -9,6 +10,8 @@ import SimpleEditor from './SimpleEditor'
  * Bootstrap class responsible for initializing various components and handling UI interactions
  */
 class Bootstrap {
+  private static toastEl: HTMLUListElement | undefined = Helper.makeToast('#toast')
+
   static initialize(): void {
     /**
      * Navigation elements
@@ -56,6 +59,42 @@ class Bootstrap {
      * Categories select
      */
     new CategorySelectHandler('#categories-select')
+
+    /**
+     * Delete posts
+     */
+    type DeleteResponse = ApiResponse & { data: { total: number } }
+
+    const apiDeletePost = new ApiClient<DeleteResponse>(`${window.location.protocol}//${window.location.host}/api`)
+    const totalUserPostsEl = Helper.selectElement<HTMLSpanElement>('#totalUserPosts')
+
+    document.querySelectorAll<HTMLButtonElement>('.delete-post').forEach(button => {
+      button.addEventListener('click', async (e: MouseEvent) => {
+        const postId = button.getAttribute('data-id')
+
+        if (postId && confirm(window.localization.getLocalizedText('postDeleteConfirm'))) {
+          apiDeletePost
+            .fetch({}, `posts/${postId}`, 'delete')
+            .then(response => {
+              const row = button.closest('tr')
+
+              if (row) row.remove()
+              if (totalUserPostsEl) totalUserPostsEl.textContent = String(response.data.total)
+
+              Helper.addToastMessage(Bootstrap.toastEl, response.message, 'success')
+            })
+            .catch(err => {
+              Helper.addToastMessage(
+                Bootstrap.toastEl,
+                window.localization.getLocalizedText('somethingWentWrong'),
+                'danger'
+              )
+
+              console.error(err)
+            })
+        }
+      })
+    })
   }
 }
 

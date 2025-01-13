@@ -3,7 +3,7 @@
 <main class="container" data-title="<%= title %>">
     <% if (typeof user !== 'undefined') { %>
       <section>
-          <a href="/posts/new" class="link">
+          <a href="/posts/new" class="link" data-link>
             <%= global.dictionary.navigation.addNewPost %>
             <%- include('../partials/icon.ejs', { name: 'pencil' }) %>
           </a>
@@ -55,7 +55,7 @@
               <% } %>
           
               <span>
-                <span><%= global.dictionary.pages.posts %>: <%= userPostsMeta.total %>,</span>
+                <span><%= global.dictionary.pages.posts %>: <span id="totalUserPosts"><%= userPostsMeta.total %></span>,</span>
                 <span><%= global.dictionary.pages.page %>: <%= userPostsMeta.page %> / <%= userPostsMeta.totalPages %></span>
               </span>
           

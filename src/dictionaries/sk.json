@@ -30,7 +30,8 @@
     "invalidDataForUpdate": "Neplatné data pre aktualizáciu",
     "unauthorized": "Neoprávnené",
     "postCreated": "Príspevok bol úspešne vytvorený",
-    "postEdited": "Príspevok bol upravený"
+    "postEdited": "Príspevok bol upravený",
+    "postDeleted": "Príspevok bol zmazaný"
   },
   "pages": {
     "error": "Chyba",

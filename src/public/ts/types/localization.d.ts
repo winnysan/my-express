@@ -11,6 +11,7 @@ interface Dictionary {
   down: string
   new: string
   categoryDeleteConfirm: string
+  postDeleteConfirm: string
   en: string
   sk: string
 }
