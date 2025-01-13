@@ -474,6 +474,7 @@ form#form-filter {
       display: flex;
       align-items: center;
       column-gap: 2rem;
+      row-gap: 0.3rem;
       flex-wrap: wrap;
       padding: 0.1rem 0;
 
@@ -486,11 +487,22 @@ form#form-filter {
         &:focus {
           outline: 2px solid var(--primary);
         }
+
+        @media (max-width: 640px) {
+          width: 100%;
+        }
       }
 
       & .buttons-group {
         display: flex;
         column-gap: 0.2rem;
+
+        @media (max-width: 640px) {
+          flex-wrap: wrap;
+          row-gap: 0.2rem;
+          margin-left: auto;
+          margin-bottom: 0.5rem;
+        }
       }
     }
   }
@@ -744,19 +756,29 @@ table {
   @media (max-width: 1024px) {
     &.postsTable th:nth-child(2),
     &.postsTable td:nth-child(2),
+    &.postsTable th:nth-child(3),
+    &.postsTable td:nth-child(3),
     &.postsTable th:nth-child(6),
-    &.postsTable td:nth-child(6) {
+    &.postsTable td:nth-child(6),
+    &.adminPostsTable th:nth-child(2),
+    &.adminPostsTable td:nth-child(2),
+    &.adminPostsTable th:nth-child(3),
+    &.adminPostsTable td:nth-child(3),
+    &.adminPostsTable th:nth-child(7),
+    &.adminPostsTable td:nth-child(7) {
       display: none;
     }
   }
 
   @media (max-width: 640px) {
-    &.postsTable th:nth-child(3),
-    &.postsTable td:nth-child(3),
     &.postsTable th:nth-child(4),
     &.postsTable td:nth-child(4),
     &.postsTable th:nth-child(5),
-    &.postsTable td:nth-child(5) {
+    &.postsTable td:nth-child(5),
+    &.adminPostsTable th:nth-child(5),
+    &.adminPostsTable td:nth-child(5),
+    &.adminPostsTable th:nth-child(6),
+    &.adminPostsTable td:nth-child(6) {
       display: none;
     }
   }

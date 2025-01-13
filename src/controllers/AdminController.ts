@@ -1,25 +1,41 @@
 import { Request, Response } from 'express'
 import AsyncHandler from '../lib/AsyncHandler'
-import Category, { ICategory } from '../models/Category'
-import { Locale, locale } from '../types/locale'
-
-type CategoryList = {
-  id: string
-  name: string
-  order: number
-  locale: Locale
-  children: CategoryList[]
-}
+import Category from '../models/Category'
+import Post from '../models/Post'
+import { locale } from '../types/locale'
+import BaseController from './BaseController'
 
 /**
  * Controller class for handling admin-related operations
  */
-class AdminController {
+class AdminController extends BaseController {
   /**
    * Admin page
    */
   public adminPage = AsyncHandler.wrap(async (req: Request, res: Response) => {
-    const categories = await Category.find()
+    const { page, perpage } = req.query
+
+    const pageNumber = parseInt(page as string, 10) || 1
+    const perPageNumber = parseInt(perpage as string, 10) || 10
+
+    const categoriesPromise = Category.find()
+
+    const postsPromise = Post.find()
+      .populate('author', 'name')
+      .sort({ createdAt: -1 })
+      .skip((pageNumber - 1) * perPageNumber)
+      .limit(perPageNumber)
+
+    const totalPostsPromise = Post.countDocuments()
+
+    const [categories, posts, totalPosts] = await Promise.all([categoriesPromise, postsPromise, totalPostsPromise])
+
+    const postsMeta = {
+      total: totalPosts,
+      page: pageNumber,
+      perpage: perPageNumber,
+      totalPages: Math.ceil(totalPosts / perPageNumber),
+    }
 
     res.render('admin/index', {
       layout: res.locals.isAjax ? false : 'layouts/main',
@@ -27,34 +43,12 @@ class AdminController {
       csrfToken: req.csrfToken?.() || '',
       user: req.session.user,
       categories: this.nestedCategories(categories),
+      posts,
+      postsMeta,
       locales: locale.locales,
+      generatePaginationUrl: (page: number) => this.generatePaginationUrl('/admin', page, req.query),
     })
   })
-
-  /**
-   * Recursively organizes categories into a nested structure
-   * @param categories
-   * @param parentId
-   * @returns
-   */
-  private nestedCategories(categories: ICategory[], parentId: string | null = null): any {
-    const categoryList: CategoryList[] = []
-    let category: ICategory[]
-
-    if (parentId == null) category = categories.filter(category => category.parent_id == null)
-    else category = categories.filter(category => String(category.parent_id) == String(parentId))
-
-    for (let c of category) {
-      categoryList.push({
-        id: c._id.toString(),
-        name: c.name,
-        order: c.order,
-        locale: c.locale,
-        children: this.nestedCategories(categories, c._id.toString()),
-      })
-    }
-    return categoryList
-  }
 }
 
 export default new AdminController()

@@ -45,4 +45,68 @@
             <% } %>
         </div>
     </section>
+
+    <section>
+        <h2><%= global.dictionary.pages.posts %></h2>
+
+        <% if (posts.length > 0) { %>
+            <table class="adminPostsTable">
+              <thead>
+                <tr>
+                  <th><%= global.dictionary.pages.title %></th>
+                  <th><%= global.dictionary.pages.body %></th>
+                  <th><%= global.dictionary.pages.slug %></th>
+                  <th><%= global.dictionary.pages.author %></th>
+                  <th><%= global.dictionary.pages.language %></th>
+                  <th><%= global.dictionary.pages.createdAt %></th>
+                  <th><%= global.dictionary.pages.updatedAt %></th>
+                  <th><%= global.dictionary.pages.actions %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% posts.forEach(post => { %>
+                  <tr>
+                    <td><%= post.title %></td>
+                    <td><%= post.body %></td>
+                    <td><%= post.slug %></td>
+                    <td class="center"><%= post.author.name %></td>
+                    <td class="center"><%= post.locale %></td>
+                    <td class="center"><%= new Date(post.createdAt).toLocaleString(global.locale) %></td>
+                    <td class="center"><%= new Date(post.updatedAt).toLocaleString(global.locale) %></td>
+                    <td class="actions">
+                        <span>
+                            <button type="button" class="delete-post" data-id="<%= post._id.toString() %>">
+                                <%- include('../partials/icon.ejs', { name: 'delete', color: '#dc2626' }) %>
+                            </button>
+                      </span>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          
+            <div class="pagination">
+              <% if (postsMeta.page > 1) { %>
+                <a href="<%= generatePaginationUrl(postsMeta.page - 1) %>" class="link" data-link>
+                  <%= global.dictionary.pages.previous %>
+                </a>
+              <% } else { %>
+                  <span class="disabled"><%= global.dictionary.pages.previous %></span>
+              <% } %>
+          
+              <span>
+                <span><%= global.dictionary.pages.posts %>: <span id="totalUserPosts"><%= postsMeta.total %></span>,</span>
+                <span><%= global.dictionary.pages.page %>: <%= postsMeta.page %> / <%= postsMeta.totalPages %></span>
+              </span>
+          
+              <% if (postsMeta.page < postsMeta.totalPages) { %>
+                <a href="<%= generatePaginationUrl(postsMeta.page + 1) %>" class="link" data-link>
+                  <%= global.dictionary.pages.next %>
+                </a>
+              <% } else { %>
+                 <span class="disabled"><%= global.dictionary.pages.next %></span>
+              <% } %>
+            </div>
+          <% } %>
+    </section>
 </main>
