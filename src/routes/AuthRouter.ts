@@ -48,6 +48,12 @@ class AuthRouter {
       ValidationMiddleware.forgot,
       AuthController.forgotPasswordSendMail
     )
+
+    /**ß
+     * Reset password
+     */
+    this.router.get('/reset-password', AuthMiddleware.public, AuthController.resetPasswordPage)
+    this.router.post('/reset-password', AuthMiddleware.public, ValidationMiddleware.reset, AuthController.resetPassword)
   }
 }
 

@@ -17,6 +17,7 @@
     "registerPage": "Register page",
     "loginPage": "Login page",
     "forgotPasswordPage": "Forgotten password page",
+    "resetPasswordPage": "Reset password page",
     "errorPage": "Error page"
   },
   "messages": {
@@ -35,7 +36,10 @@
     "postEdited": "The post has been successfully edited",
     "postDeleted": "The post has been successfully deleted",
     "emailNotExist": "Email does not exist",
-    "emailSent": "Email has been sent"
+    "userNotExist": "User does not exist",
+    "emailSent": "Email has been sent",
+    "invalidLink": "Invalid link",
+    "passwordChanged": "Password has been successfully changed"
   },
   "pages": {
     "error": "Error",
@@ -46,6 +50,7 @@
     "register": "Register",
     "login": "Login",
     "forgotPasswordQ": "Forgotten password?",
+    "resetPassword": "Reset password",
     "author": "Author",
     "published": "Published",
     "categories": "Categories",

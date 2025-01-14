@@ -17,6 +17,7 @@
     "registerPage": "Registrácia",
     "loginPage": "Prihlásenie",
     "forgotPasswordPage": "Zabudnuté heslo",
+    "resetPasswordPage": "Resetovanie hesla",
     "errorPage": "Chyba"
   },
   "messages": {
@@ -35,7 +36,10 @@
     "postEdited": "Príspevok bol upravený",
     "postDeleted": "Príspevok bol zmazaný",
     "emailNotExist": "Email neexistuje",
-    "emailSent": "Email bol odoslaný"
+    "userNotExist": "Užívateľ neexistuje",
+    "emailSent": "Email bol odoslaný",
+    "invalidLink": "Neplatný odkaz",
+    "passwordChanged": "Heslo bolo zmenené"
   },
   "pages": {
     "error": "Chyba",
@@ -46,6 +50,7 @@
     "register": "Registrácia",
     "login": "Prihlásenie",
     "forgotPasswordQ": "Zabudnuté heslo?",
+    "resetPassword": "Resetovanie hesla",
     "author": "Autor",
     "published": "Zverejnené",
     "categories": "Kategórie",

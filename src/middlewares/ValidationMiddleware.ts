@@ -89,6 +89,27 @@ class ValidationMiddleware {
       next()
     }
   })
+
+  /**
+   * Middleware function for validating reset password data
+   */
+  public static reset = AsyncHandler.wrap(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const validation = new Validator(req)
+
+    validation.field('_token').required()
+
+    validation.field('password').required().min(8)
+
+    validation.field('passwordConfirmation').required().confirm('password')
+
+    await validation.runValidations()
+
+    if (validation.errors.length > 0) {
+      res.json({ validation: validation.errors })
+    } else {
+      next()
+    }
+  })
 }
 
 export default ValidationMiddleware

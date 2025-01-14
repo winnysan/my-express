@@ -3,10 +3,17 @@ import { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import AsyncHandler from '../lib/AsyncHandler'
 import Mailer from '../lib/Mailer'
+import Message from '../lib/Message'
 import RenderElement, { ElementData } from '../lib/RenderElement'
 import SessionManger from '../lib/SesionManager'
 import User from '../models/User'
 import { Role } from '../types/enums'
+
+type Decoded = {
+  email: string
+  iat: number
+  exp: number
+}
 
 /**
  * Controller class for handling auth-related operations
@@ -363,7 +370,7 @@ class AuthController {
     }
 
     const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '60m' })
-    const link = `${req.protocol}://${req.get('host')}/reset-password?=${token}`
+    const link = `${req.protocol}://${req.get('host')}/auth/reset-password?token=${token}`
     const text = `${global.dictionary.pages.forgotPasswordQ} ${link}`
     const html = `<div style="font-family:sans-serif;">
   <h1 style="color:#555;">${global.dictionary.pages.forgotPasswordQ}</h1>
@@ -379,6 +386,161 @@ class AuthController {
 
     res.status(200).json({
       message: global.dictionary.messages.emailSent,
+    })
+  })
+
+  /**
+   * Reset password page
+   */
+  public resetPasswordPage = AsyncHandler.wrap(async (req: Request, res: Response) => {
+    const { token } = req.query
+
+    let isValid: boolean = false
+
+    if (token) {
+      try {
+        jwt.verify(token as string, process.env.JWT_SECRET) as unknown as Decoded
+
+        isValid = true
+      } catch (err: unknown) {
+        isValid = false
+      }
+    }
+
+    const form: ElementData = {
+      element: 'form',
+      attr: {
+        id: 'form',
+        action: '/auth/reset-password',
+        method: 'post',
+      },
+      children: [
+        // CSRF
+        {
+          element: 'input',
+          attr: {
+            type: 'hidden',
+            name: '_csrf',
+            value: req.csrfToken?.() || '',
+          },
+        },
+        // Token
+        {
+          element: 'input',
+          attr: {
+            type: 'hidden',
+            name: '_token',
+            value: (token as string) || '',
+          },
+        },
+        // Password group
+        {
+          element: 'div',
+          children: [
+            {
+              element: 'label',
+              attr: {
+                for: 'password',
+              },
+              content: global.dictionary.form.password,
+            },
+            {
+              element: 'input',
+              attr: {
+                type: 'password',
+                name: 'password',
+              },
+            },
+          ],
+        },
+        // Password confirmation group
+        {
+          element: 'div',
+          children: [
+            {
+              element: 'label',
+              attr: {
+                for: 'passwordConfirmation',
+              },
+              content: global.dictionary.form.passwordConfirmation,
+            },
+            {
+              element: 'input',
+              attr: {
+                type: 'password',
+                name: 'passwordConfirmation',
+              },
+            },
+          ],
+        },
+        // Submit
+        {
+          element: 'div',
+          children: [
+            {
+              element: 'button',
+              attr: {
+                type: 'submit',
+              },
+              content: global.dictionary.form.submit,
+            },
+          ],
+        },
+      ],
+    }
+
+    res.render('auth/reset', {
+      layout: res.locals.isAjax ? false : 'layouts/main',
+      title: global.dictionary.title.resetPasswordPage,
+      csrfToken: req.csrfToken?.() || '',
+      user: req.session.user,
+      form: new RenderElement(form).toString(),
+      isValid,
+    })
+  })
+
+  /**
+   * Reset password
+   */
+  public resetPassword = AsyncHandler.wrap(async (req: Request, res: Response) => {
+    const { password, _token } = req.body
+
+    const token: string | undefined = _token
+    let email: string | undefined
+
+    if (token) {
+      try {
+        const decoded = jwt.verify(token as string, process.env.JWT_SECRET) as unknown as Decoded
+
+        email = decoded.email
+      } catch (err: unknown) {
+        res.status(400)
+
+        throw new Error(Message.getErrorMessage(err))
+      }
+    }
+
+    if (!email) {
+      res.status(400)
+
+      throw new Error(global.dictionary.messages.emailNotExist)
+    }
+
+    const user = await User.findOneAndUpdate(
+      { email },
+      { password: await bcrypt.hash(password, await bcrypt.genSalt(10)) },
+      { new: true }
+    )
+
+    if (!user) {
+      res.status(400)
+
+      throw new Error(global.dictionary.messages.invalidDataForUpdate)
+    }
+
+    res.status(200).json({
+      message: global.dictionary.messages.passwordChanged,
+      redirect: '/auth/login',
     })
   })
 }

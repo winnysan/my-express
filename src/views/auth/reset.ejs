@@ -1,0 +1,13 @@
+<%- include('../partials/header.ejs') %>
+
+<main class="container" data-title="<%= title %>">
+    <h1><%= global.dictionary.pages.resetPassword %></h1>
+
+    <% if (isValid) { %>
+        <%- form %>     
+    <% } else { %>
+        <p><%= global.dictionary.messages.invalidLink %></p>
+    <% } %>
+
+</main>
+
