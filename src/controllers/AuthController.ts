@@ -1,6 +1,8 @@
 import bcrypt from 'bcryptjs'
 import { Request, Response } from 'express'
+import jwt from 'jsonwebtoken'
 import AsyncHandler from '../lib/AsyncHandler'
+import Mailer from '../lib/Mailer'
 import RenderElement, { ElementData } from '../lib/RenderElement'
 import SessionManger from '../lib/SesionManager'
 import User from '../models/User'
@@ -235,7 +237,7 @@ class AuthController {
         // Forgot password
         {
           element: 'div',
-          content: `<a href="/auth/forgot-password" class="link" data-link>${global.dictionary.navigation.forgotPasswordQ}</a>`,
+          content: `<a href="/auth/forgotten-password" class="link" data-link>${global.dictionary.navigation.forgotPasswordQ}</a>`,
         },
       ],
     }
@@ -288,7 +290,7 @@ class AuthController {
       element: 'form',
       attr: {
         id: 'form',
-        action: '/auth/forgot-password',
+        action: '/auth/forgotten-password',
         method: 'post',
       },
       children: [
@@ -347,7 +349,7 @@ class AuthController {
   })
 
   /**
-   * Authenticates a user
+   * Send reset password link
    */
   public forgotPasswordSendMail = AsyncHandler.wrap(async (req: Request, res: Response) => {
     const { email } = req.body
@@ -360,7 +362,20 @@ class AuthController {
       throw new Error(global.dictionary.messages.emailNotExist)
     }
 
-    // send mail
+    const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '60m' })
+    const link = `${req.protocol}://${req.get('host')}/reset-password?=${token}`
+    const text = `${global.dictionary.pages.forgotPasswordQ} ${link}`
+    const html = `<div style="font-family:sans-serif;">
+  <h1 style="color:#555;">${global.dictionary.pages.forgotPasswordQ}</h1>
+  <a href=${link} style="color:#777;">${link}</a>
+</div>`
+
+    await new Mailer().send({
+      to: email,
+      subject: global.dictionary.pages.forgotPasswordQ,
+      text,
+      html,
+    })
 
     res.status(200).json({
       message: global.dictionary.messages.emailSent,

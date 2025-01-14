@@ -41,12 +41,12 @@ class AuthRouter {
     /**
      * Forgot password
      */
-    this.router.get('/forgot-password', AuthMiddleware.public, AuthController.forgotPasswordPage)
+    this.router.get('/forgotten-password', AuthMiddleware.public, AuthController.forgotPasswordPage)
     this.router.post(
-      '/forgot-password',
+      '/forgotten-password',
       AuthMiddleware.public,
       ValidationMiddleware.forgot,
-      AuthController.forgotPasswordPage
+      AuthController.forgotPasswordSendMail
     )
   }
 }
