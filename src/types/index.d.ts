@@ -10,9 +10,15 @@ declare global {
       PORT: number
       SESSION_SECRET: string
       MONGO_URI: string
-      ADMIN_EMAIL: string | undefined
+      ADMIN_EMAIL?: string
       JWT_SECRET: string
       PER_PAGE: number
+      MAILER_HOST: string
+      MAILER_PORT: number
+      MAILER_SECURE: string
+      MAILER_USER?: string
+      MAILER_PASSWORD?: string
+      MAILER_FROM: string
     }
   }
   namespace Express {

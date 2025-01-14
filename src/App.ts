@@ -1,11 +1,12 @@
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
-import cors from 'cors'
 import dotenv from 'dotenv'
 import express from 'express'
 import expressLayouts from 'express-ejs-layouts'
 import path from 'path'
+import AsyncHandler from './lib/AsyncHandler'
 import Database from './lib/Database'
+import Mailer from './lib/Mailer'
 import AjaxMiddleware from './middlewares/AjaxMiddleware'
 import AuthMiddleware from './middlewares/AuthMiddleware'
 import CorsMiddleware from './middlewares/CorsMiddleware'
@@ -94,6 +95,28 @@ class App {
     this.app.use('/admin', AdminRouter)
     this.app.use('/auth', AuthRouter)
     this.app.use('/api', ApiRouter)
+
+    /**
+     * Mailer test
+     */
+    this.app.get(
+      '/mailer',
+      AsyncHandler.wrap(async (req: express.Request, res: express.Response) => {
+        const mailer = new Mailer()
+
+        const info = await mailer.send({
+          from: 'custom@example.com',
+          to: 'recipient@example.com',
+          cc: ['cc1@example.com', 'cc2@example.com'],
+          bcc: ['bcc1@example.com'],
+          subject: 'Test Subject',
+          text: 'Test Text',
+          html: '<b>Test HTML</b>',
+        })
+
+        res.send(`Message sent: ${JSON.stringify(info)}`)
+      })
+    )
   }
 
   /**
