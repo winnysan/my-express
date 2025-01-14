@@ -6,7 +6,8 @@
     "admin": "Administrácia",
     "register": "Registrácia",
     "login": "Prihlásenie",
-    "logout": "Odhlásenie"
+    "logout": "Odhlásenie",
+    "forgotPasswordQ": "Zabudnuté heslo?"
   },
   "title": {
     "homePage": "Domovská stránka",
@@ -15,6 +16,7 @@
     "adminPage": "Administrácia",
     "registerPage": "Registrácia",
     "loginPage": "Prihlásenie",
+    "forgotPasswordPage": "Zabudnuté heslo",
     "errorPage": "Chyba"
   },
   "messages": {
@@ -31,7 +33,9 @@
     "unauthorized": "Neoprávnené",
     "postCreated": "Príspevok bol úspešne vytvorený",
     "postEdited": "Príspevok bol upravený",
-    "postDeleted": "Príspevok bol zmazaný"
+    "postDeleted": "Príspevok bol zmazaný",
+    "emailNotExist": "Email neexistuje",
+    "emailSent": "Email bol odoslaný"
   },
   "pages": {
     "error": "Chyba",
@@ -41,6 +45,7 @@
     "admin": "Administrácia",
     "register": "Registrácia",
     "login": "Prihlásenie",
+    "forgotPasswordQ": "Zabudnuté heslo?",
     "author": "Autor",
     "published": "Zverejnené",
     "categories": "Kategórie",

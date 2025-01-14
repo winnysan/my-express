@@ -232,6 +232,11 @@ class AuthController {
             },
           ],
         },
+        // Forgot password
+        {
+          element: 'div',
+          content: `<a href="/auth/forgot-password" class="link" data-link>${global.dictionary.navigation.forgotPasswordQ}</a>`,
+        },
       ],
     }
 
@@ -274,6 +279,93 @@ class AuthController {
   public logoutUser = (req: Request, res: Response) => {
     SessionManger.destroyUserSession(req, res)
   }
+
+  /**
+   * Forgot password page
+   */
+  public forgotPasswordPage = AsyncHandler.wrap(async (req: Request, res: Response) => {
+    const form: ElementData = {
+      element: 'form',
+      attr: {
+        id: 'form',
+        action: '/auth/forgot-password',
+        method: 'post',
+      },
+      children: [
+        // CSRF
+        {
+          element: 'input',
+          attr: {
+            type: 'hidden',
+            name: '_csrf',
+            value: req.csrfToken?.() || '',
+          },
+        },
+        // Email group
+        {
+          element: 'div',
+          children: [
+            {
+              element: 'label',
+              attr: {
+                for: 'email',
+              },
+              content: global.dictionary.form.email,
+            },
+            {
+              element: 'input',
+              attr: {
+                type: 'email',
+                name: 'email',
+              },
+            },
+          ],
+        },
+        // Submit
+        {
+          element: 'div',
+          children: [
+            {
+              element: 'button',
+              attr: {
+                type: 'submit',
+              },
+              content: global.dictionary.form.submit,
+            },
+          ],
+        },
+      ],
+    }
+
+    res.render('auth/forgot', {
+      layout: res.locals.isAjax ? false : 'layouts/main',
+      title: global.dictionary.title.forgotPasswordPage,
+      csrfToken: req.csrfToken?.() || '',
+      user: req.session.user,
+      form: new RenderElement(form).toString(),
+    })
+  })
+
+  /**
+   * Authenticates a user
+   */
+  public forgotPasswordSendMail = AsyncHandler.wrap(async (req: Request, res: Response) => {
+    const { email } = req.body
+
+    const user = await User.findOne({ email })
+
+    if (!user) {
+      res.status(400)
+
+      throw new Error(global.dictionary.messages.emailNotExist)
+    }
+
+    // send mail
+
+    res.status(200).json({
+      message: global.dictionary.messages.emailSent,
+    })
+  })
 }
 
 export default new AuthController()

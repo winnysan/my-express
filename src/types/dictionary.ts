@@ -7,6 +7,7 @@ export type Dictionary = {
     register: string
     login: string
     logout: string
+    forgotPasswordQ: string
   }
   title: {
     homePage: string
@@ -15,6 +16,7 @@ export type Dictionary = {
     adminPage: string
     registerPage: string
     loginPage: string
+    forgotPasswordPage: string
     errorPage: string
   }
   messages: {
@@ -32,6 +34,8 @@ export type Dictionary = {
     postCreated: string
     postEdited: string
     postDeleted: string
+    emailNotExist: string
+    emailSent: string
   }
   pages: {
     error: string
@@ -41,6 +45,7 @@ export type Dictionary = {
     admin: string
     register: string
     login: string
+    forgotPasswordQ: string
     author: string
     published: string
     categories: string

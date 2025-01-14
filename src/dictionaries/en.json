@@ -6,7 +6,8 @@
     "admin": "Admin",
     "register": "Register",
     "login": "Login",
-    "logout": "Logout"
+    "logout": "Logout",
+    "forgotPasswordQ": "Forgotten password?"
   },
   "title": {
     "homePage": "Home page",
@@ -15,6 +16,7 @@
     "adminPage": "Admin page",
     "registerPage": "Register page",
     "loginPage": "Login page",
+    "forgotPasswordPage": "Forgotten password page",
     "errorPage": "Error page"
   },
   "messages": {
@@ -31,7 +33,9 @@
     "unauthorized": "Unauthorized",
     "postCreated": "The post has been successfully created",
     "postEdited": "The post has been successfully edited",
-    "postDeleted": "The post has been successfully deleted"
+    "postDeleted": "The post has been successfully deleted",
+    "emailNotExist": "Email does not exist",
+    "emailSent": "Email has been sent"
   },
   "pages": {
     "error": "Error",
@@ -41,6 +45,7 @@
     "admin": "Admin",
     "register": "Register",
     "login": "Login",
+    "forgotPasswordQ": "Forgotten password?",
     "author": "Author",
     "published": "Published",
     "categories": "Categories",

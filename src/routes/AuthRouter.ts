@@ -37,6 +37,17 @@ class AuthRouter {
      * Logout
      */
     this.router.post('/logout', AuthMiddleware.protect, AuthController.logoutUser)
+
+    /**
+     * Forgot password
+     */
+    this.router.get('/forgot-password', AuthMiddleware.public, AuthController.forgotPasswordPage)
+    this.router.post(
+      '/forgot-password',
+      AuthMiddleware.public,
+      ValidationMiddleware.forgot,
+      AuthController.forgotPasswordPage
+    )
   }
 }
 
