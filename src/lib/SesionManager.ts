@@ -28,8 +28,13 @@ class SessionManger {
    * Destroys the user's session by clearing the authentication cookie and removing the user from the session
    * @param req
    * @param res
+   * @param options
    */
-  public static destroyUserSession(req: Request, res: Response): void {
+  public static destroyUserSession(
+    req: Request,
+    res: Response,
+    options?: { message?: string; redirect?: string }
+  ): void {
     res.cookie('authToken', '', {
       httpOnly: true,
       expires: new Date(0),
@@ -38,8 +43,8 @@ class SessionManger {
     delete req.session.user
 
     res.status(200).json({
-      message: global.dictionary.messages.youHaveBeenLoggedOut,
-      redirect: '/',
+      message: options?.message || global.dictionary.messages.youHaveBeenLoggedOut,
+      redirect: options?.redirect || '/',
     })
   }
 }

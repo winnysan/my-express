@@ -30,6 +30,16 @@ class AdminRouter {
      * Account data change
      */
     this.router.post('/account', AuthMiddleware.protect, ValidationMiddleware.account, ProfileController.accountChange)
+
+    /**
+     * Account data change
+     */
+    this.router.post(
+      '/password',
+      AuthMiddleware.protect,
+      ValidationMiddleware.password,
+      ProfileController.passwordChange
+    )
   }
 }
 

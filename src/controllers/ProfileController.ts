@@ -1,6 +1,8 @@
+import bcrypt from 'bcryptjs'
 import { Request, Response } from 'express'
 import AsyncHandler from '../lib/AsyncHandler'
 import RenderElement, { ElementData } from '../lib/RenderElement'
+import SessionManger from '../lib/SesionManager'
 import User from '../models/User'
 
 /**
@@ -95,12 +97,111 @@ class ProfileController {
       ],
     }
 
+    const passwordForm: ElementData = {
+      element: 'form',
+      attr: {
+        id: 'form-password',
+        action: '/profile/password',
+        method: 'post',
+      },
+      children: [
+        // CSRF
+        {
+          element: 'input',
+          attr: {
+            type: 'hidden',
+            name: '_csrf',
+            value: req.csrfToken?.() || '',
+          },
+        },
+        // Old password group
+        {
+          element: 'div',
+          children: [
+            {
+              element: 'label',
+              attr: {
+                for: 'password',
+              },
+              content: global.dictionary.form.oldPassword,
+            },
+            {
+              element: 'input',
+              attr: {
+                type: 'password',
+                name: 'old',
+              },
+            },
+          ],
+        },
+        // Password group
+        {
+          element: 'div',
+          children: [
+            {
+              element: 'label',
+              attr: {
+                for: 'password',
+              },
+              content: global.dictionary.form.newPassword,
+            },
+            {
+              element: 'input',
+              attr: {
+                type: 'password',
+                name: 'password',
+              },
+            },
+          ],
+        },
+        // Password confirmation group
+        {
+          element: 'div',
+          children: [
+            {
+              element: 'label',
+              attr: {
+                for: 'passwordConfirmation',
+              },
+              content: global.dictionary.form.passwordConfirmation,
+            },
+            {
+              element: 'input',
+              attr: {
+                type: 'password',
+                name: 'passwordConfirmation',
+              },
+            },
+          ],
+        },
+        // Info
+        {
+          element: 'p',
+          content: global.dictionary.pages.logoutAfterPasswordChange,
+        },
+        // Submit
+        {
+          element: 'div',
+          children: [
+            {
+              element: 'button',
+              attr: {
+                type: 'submit',
+              },
+              content: global.dictionary.form.submit,
+            },
+          ],
+        },
+      ],
+    }
+
     res.render('profile/index', {
       layout: res.locals.isAjax ? false : 'layouts/main',
       title: global.dictionary.title.profilePage,
       csrfToken: req.csrfToken?.() || '',
       user: req.session.user,
       accountForm: new RenderElement(accountForm).toString(),
+      passwordForm: new RenderElement(passwordForm).toString(),
     })
   })
 
@@ -125,6 +226,43 @@ class ProfileController {
     }
 
     res.status(200).json({ message: global.dictionary.messages.saved })
+  })
+
+  /**
+   * Password change
+   */
+  public passwordChange = AsyncHandler.wrap(async (req: Request, res: Response) => {
+    const { old, password } = req.body
+
+    if (!req.session.user) {
+      res.status(401)
+
+      throw new Error(global.dictionary.messages.unauthorized)
+    }
+
+    const user = await User.findById(req.session.user._id)
+
+    if (!user) {
+      res.status(404)
+
+      throw new Error(global.dictionary.messages.userNotExist)
+    }
+
+    const isValid = await bcrypt.compare(old, user.password!)
+
+    if (!isValid) {
+      res.status(401)
+
+      throw new Error(global.dictionary.messages.invalidPassword)
+    }
+
+    user.password = await bcrypt.hash(password, await bcrypt.genSalt(10))
+    user.save()
+
+    SessionManger.destroyUserSession(req, res, {
+      message: global.dictionary.messages.passwordChangedAndLogout,
+      redirect: '/auth/login',
+    })
   })
 }
 

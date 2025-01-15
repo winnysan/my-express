@@ -29,6 +29,7 @@ export type Dictionary = {
     youHaveBeenLoggedIn: string
     youHaveBeenLoggedOut: string
     invalidCredentials: string
+    invalidPassword: string
     csrfTokenNotAvailable: string
     invalidData: string
     unknownAction: string
@@ -42,6 +43,7 @@ export type Dictionary = {
     emailSent: string
     invalidLink: string
     passwordChanged: string
+    passwordChangedAndLogout: string
     saved: string
   }
   pages: {
@@ -57,6 +59,7 @@ export type Dictionary = {
     profile: string
     account: string
     passwordChange: string
+    logoutAfterPasswordChange: string
     author: string
     published: string
     categories: string
@@ -76,6 +79,8 @@ export type Dictionary = {
     email: string
     name: string
     password: string
+    oldPassword: string
+    newPassword: string
     passwordConfirmation: string
     title: string
     body: string

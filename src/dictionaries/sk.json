@@ -29,6 +29,7 @@
     "youHaveBeenLoggedIn": "Boli ste prihlásený",
     "youHaveBeenLoggedOut": "Boli ste odhlásený",
     "invalidCredentials": "Zlé prihlasovacie údaje",
+    "invalidPassword": "Neplatné heslo",
     "csrfTokenNotAvailable": "CSRF token nie je dostupný",
     "invalidData": "Neplatné data",
     "unknownAction": "Neznáma akcia",
@@ -42,6 +43,7 @@
     "emailSent": "Email bol odoslaný",
     "invalidLink": "Neplatný odkaz",
     "passwordChanged": "Heslo bolo zmenené",
+    "passwordChangedAndLogout": "Heslo bolo zmenené a boli ste odhlásený",
     "saved": "Uložené"
   },
   "pages": {
@@ -57,6 +59,7 @@
     "profile": "Profil",
     "account": "Účet",
     "passwordChange": "Zmena hesla",
+    "logoutAfterPasswordChange": "Po zmene hesla budete odhlásený",
     "author": "Autor",
     "published": "Zverejnené",
     "categories": "Kategórie",
@@ -76,6 +79,8 @@
     "email": "Email",
     "name": "Meno",
     "password": "Heslo",
+    "oldPassword": "Staré heslo",
+    "newPassword": "Nové heslo",
     "passwordConfirmation": "Potvrdiť heslo",
     "title": "Titulok",
     "body": "Text",

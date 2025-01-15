@@ -29,6 +29,7 @@
     "youHaveBeenLoggedIn": "You have been logged in",
     "youHaveBeenLoggedOut": "You have been logged out",
     "invalidCredentials": "Invalid credentials",
+    "invalidPassword": "Invalid password",
     "csrfTokenNotAvailable": "CSRF token not available",
     "invalidData": "Invalid data",
     "unknownAction": "Unknown action",
@@ -42,6 +43,7 @@
     "emailSent": "Email has been sent",
     "invalidLink": "Invalid link",
     "passwordChanged": "Password has been successfully changed",
+    "passwordChangedAndLogout": "Password has been successfully changed and you have been logged out",
     "saved": "Saved"
   },
   "pages": {
@@ -57,6 +59,7 @@
     "profile": "Profile",
     "account": "Account",
     "passwordChange": "Password change",
+    "logoutAfterPasswordChange": "After changing your password, you will be logged out",
     "author": "Author",
     "published": "Published",
     "categories": "Categories",
@@ -76,6 +79,8 @@
     "email": "Email",
     "name": "Name",
     "password": "Password",
+    "oldPassword": "Old password",
+    "newPassword": "New password",
     "passwordConfirmation": "Password confirmation",
     "title": "Title",
     "body": "Body",
