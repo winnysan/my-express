@@ -8,6 +8,7 @@ export type Dictionary = {
     login: string
     logout: string
     forgotPasswordQ: string
+    profile: string
   }
   title: {
     homePage: string
@@ -18,6 +19,7 @@ export type Dictionary = {
     loginPage: string
     forgotPasswordPage: string
     resetPasswordPage: string
+    profilePage: string
     errorPage: string
   }
   messages: {
@@ -51,6 +53,9 @@ export type Dictionary = {
     login: string
     forgotPasswordQ: string
     resetPassword: string
+    profile: string
+    account: string
+    passwordChange: string
     author: string
     published: string
     categories: string

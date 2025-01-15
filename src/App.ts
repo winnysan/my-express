@@ -20,6 +20,7 @@ import ApiRouter from './routes/ApiRouter'
 import AuthRouter from './routes/AuthRouter'
 import PageRouter from './routes/PageRouter'
 import PostRouter from './routes/PostRouter'
+import ProfileRouter from './routes/ProfileRouter'
 
 dotenv.config()
 
@@ -94,6 +95,7 @@ class App {
     this.app.use('/posts', PostRouter)
     this.app.use('/admin', AdminRouter)
     this.app.use('/auth', AuthRouter)
+    this.app.use('/profile', ProfileRouter)
     this.app.use('/api', ApiRouter)
   }
 

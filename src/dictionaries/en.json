@@ -7,7 +7,8 @@
     "register": "Register",
     "login": "Login",
     "logout": "Logout",
-    "forgotPasswordQ": "Forgotten password?"
+    "forgotPasswordQ": "Forgotten password?",
+    "profile": "Profile"
   },
   "title": {
     "homePage": "Home page",
@@ -18,6 +19,7 @@
     "loginPage": "Login page",
     "forgotPasswordPage": "Forgotten password page",
     "resetPasswordPage": "Reset password page",
+    "profilePage": "Profile page",
     "errorPage": "Error page"
   },
   "messages": {
@@ -51,6 +53,9 @@
     "login": "Login",
     "forgotPasswordQ": "Forgotten password?",
     "resetPassword": "Reset password",
+    "profile": "Profile",
+    "account": "Account",
+    "passwordChange": "Password change",
     "author": "Author",
     "published": "Published",
     "categories": "Categories",
