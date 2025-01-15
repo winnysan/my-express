@@ -110,6 +110,23 @@ class ValidationMiddleware {
       next()
     }
   })
+
+  /**
+   * Middleware function for validating account data
+   */
+  public static account = AsyncHandler.wrap(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const validation = new Validator(req)
+
+    validation.field('name').required()
+
+    await validation.runValidations()
+
+    if (validation.errors.length > 0) {
+      res.json({ validation: validation.errors })
+    } else {
+      next()
+    }
+  })
 }
 
 export default ValidationMiddleware

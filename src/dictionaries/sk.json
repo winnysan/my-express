@@ -38,10 +38,11 @@
     "postEdited": "Príspevok bol upravený",
     "postDeleted": "Príspevok bol zmazaný",
     "emailNotExist": "Email neexistuje",
-    "userNotExist": "Užívateľ neexistuje",
+    "userNotExist": "Uenívateľ neexistuje",
     "emailSent": "Email bol odoslaný",
     "invalidLink": "Neplatný odkaz",
-    "passwordChanged": "Heslo bolo zmenené"
+    "passwordChanged": "Heslo bolo zmenené",
+    "saved": "Uložené"
   },
   "pages": {
     "error": "Chyba",

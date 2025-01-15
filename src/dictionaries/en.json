@@ -41,7 +41,8 @@
     "userNotExist": "User does not exist",
     "emailSent": "Email has been sent",
     "invalidLink": "Invalid link",
-    "passwordChanged": "Password has been successfully changed"
+    "passwordChanged": "Password has been successfully changed",
+    "saved": "Saved"
   },
   "pages": {
     "error": "Error",

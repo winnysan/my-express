@@ -42,6 +42,7 @@ export type Dictionary = {
     emailSent: string
     invalidLink: string
     passwordChanged: string
+    saved: string
   }
   pages: {
     error: string

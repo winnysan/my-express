@@ -1,6 +1,6 @@
 interface Element {
   element: string
-  attr?: { [key: string]: string }
+  attr?: { [key: string]: string | boolean }
   children?: ElementData
   content?: string
 }
@@ -49,7 +49,13 @@ class RenderElement {
       if (element.attr) {
         for (const a in element.attr) {
           if (Object.prototype.hasOwnProperty.call(element.attr, a)) {
-            attrs += ` ${a}="${element.attr[a]}"`
+            const value = element.attr[a]
+
+            if (value === true) {
+              attrs += ` ${a}`
+            } else if (value !== false && value !== null && value !== undefined) {
+              attrs += ` ${a}="${element.attr[a]}"`
+            }
           }
         }
       }

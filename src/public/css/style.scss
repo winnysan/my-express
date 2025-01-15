@@ -272,7 +272,8 @@ footer {
 }
 
 form#form,
-form#form-filter {
+form#form-filter,
+form#form-account {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
@@ -281,6 +282,12 @@ form#form-filter {
   padding: 1rem;
   border: 1px solid var(--transparent-light);
   border-radius: 0.5rem;
+
+  &#form-account {
+    width: 100%;
+    padding: 0;
+    border: 0;
+  }
 
   &.post-form,
   &.filter-form {
@@ -307,6 +314,11 @@ form#form-filter {
 
       &.is-error {
         border: 2px solid var(--toast-danger);
+      }
+
+      &:disabled {
+        background-color: var(--transparent-light);
+        color: var(--transparent-dark);
       }
     }
 
