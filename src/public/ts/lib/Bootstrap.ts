@@ -97,6 +97,68 @@ class Bootstrap {
         }
       })
     })
+
+    /**
+     * Handle likes
+     */
+    enum LikesActions {
+      LIKE = 'like',
+      UNLIKE = 'unlike',
+    }
+
+    type LikeData = {
+      action?: LikesActions
+      id?: string | null
+    }
+
+    type LikesResponse = ApiResponse & { data: { likes: string[] } }
+
+    const apiHandleLikes = new ApiClient<LikesResponse>(`${window.location.protocol}//${window.location.host}/api`)
+
+    document.querySelectorAll<HTMLButtonElement>('#likes button').forEach(button => {
+      button.addEventListener('click', async (e: MouseEvent) => {
+        const target = (e.target as HTMLElement).closest('button')
+        const postId = target?.getAttribute('data-id')
+        let data: LikeData = { id: postId }
+
+        if (target?.id === 'like') data.action = LikesActions.LIKE
+        if (target?.id === 'unlike') data.action = LikesActions.UNLIKE
+
+        if (data.id && data.action) {
+          apiHandleLikes
+            .fetch(data, `posts/${postId}`, 'put')
+            .then(response => {
+              const likes = response.data.likes
+
+              const likesContainer = Helper.selectElement<HTMLDivElement>('#likes')
+
+              if (likesContainer) {
+                const likesCount = likesContainer.querySelector('span')
+
+                if (likesCount) likesCount.textContent = String(likes.length)
+
+                const userId = likesContainer.getAttribute('data-user-id')
+
+                if (userId) {
+                  likesContainer.querySelector('#like')?.classList.toggle('hidden', likes.includes(userId))
+                  likesContainer.querySelector('#unlike')?.classList.toggle('hidden', !likes.includes(userId))
+                }
+              }
+
+              Helper.addToastMessage(Bootstrap.toastEl, response.message, 'success')
+            })
+            .catch(err => {
+              Helper.addToastMessage(
+                Bootstrap.toastEl,
+                window.localization.getLocalizedText('somethingWentWrong'),
+                'danger'
+              )
+
+              console.error(err)
+            })
+        }
+      })
+    })
   }
 }
 

@@ -82,6 +82,22 @@
                         </p>
                     </div>
                 <% } %>
+                <div id="likes" <% if (typeof user !== 'undefined') { %>
+                    data-user-id="<%= user._id.toString() %>"
+                <% } %>>
+                    <% if (typeof user !== 'undefined') { %>
+                        <% const myLike = post.likes.some(like => like._id.toString() === user._id.toString()); %>
+                        <button type="button" id="like" data-id="<%= post._id %>" class="<%= myLike ? 'hidden' : '' %>">
+                            <%- include('../partials/icon.ejs', { name: 'heart-outline' }) %>
+                        </button>
+                        <button type="button" id="unlike" data-id="<%= post._id %>" class="<%= myLike ? '' : 'hidden' %>">
+                            <%- include('../partials/icon.ejs', { name: 'heart-fill' }) %>
+                        </button>
+                    <% } else { %>
+                         <%- include('../partials/icon.ejs', { name: 'heart-outline' }) %>
+                    <% } %>
+                    <span><%= post.likes.length %></span>
+                </div>
             </aside>
         </div>
     <% } %>

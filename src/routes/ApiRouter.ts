@@ -36,6 +36,11 @@ class ApiRouter {
      * Posts
      */
     this.router.delete('/posts/:id', AuthMiddleware.protect, ApiPostController.deletePostById)
+
+    /**
+     * Likes
+     */
+    this.router.put('/posts/:id', AuthMiddleware.protect, ApiPostController.handleLikes)
   }
 }
 

@@ -17,6 +17,7 @@ export interface IPost extends mongoose.Document {
   slug: string
   images: Image[]
   categories?: mongoose.Types.ObjectId[]
+  likes?: mongoose.Types.ObjectId[]
   locale: Locale
   createdAt: Date
   updatedAt: Date
@@ -39,6 +40,7 @@ const postSchema = new mongoose.Schema<IPost>(
     slug: { type: String, required: true, unique: true },
     images: [imageSchema],
     categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category', default: undefined }],
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     locale: { type: String, required: true, default: locale.locales[0] },
   },
   { timestamps: true }
@@ -49,6 +51,7 @@ postSchema.index({ categories: 1 })
 postSchema.index({ locale: 1 })
 postSchema.index({ createdAt: 1 })
 postSchema.index({ title: 'text', body: 'text' })
+postSchema.index({ likes: 1 })
 
 const Post = mongoose.model<IPost>('Post', postSchema)
 

@@ -605,6 +605,29 @@ form#form-password {
         border-radius: 0.2rem;
       }
     }
+
+    & #likes {
+      flex-direction: row;
+      align-items: center;
+      column-gap: 0.5rem;
+      color: var(--transparent-dark);
+
+      & button {
+        cursor: pointer;
+
+        &#unlike {
+          color: var(--toast-danger);
+        }
+
+        &#like {
+          color: var(--transparent-dark);
+        }
+
+        &.hidden {
+          display: none;
+        }
+      }
+    }
   }
 }
 
