@@ -426,24 +426,29 @@ class PostController extends BaseController {
       res.status(404)
 
       throw new Error(`${req.originalUrl} ${global.dictionary.messages.notFound}`)
-    } else {
-      const isAuthor = req.session.user ? req.session.user._id.equals(post.author._id) : false
-
-      let categories: ICategory[] = []
-
-      if (isAuthor) categories = await Category.find({ locale: post.locale })
-
-      res.render('post/show', {
-        layout: res.locals.isAjax ? false : 'layouts/main',
-        title: post.title,
-        csrfToken: req.csrfToken?.() || '',
-        user: req.session.user,
-        post,
-        article: Helper.parseBody(post.body),
-        isAuthor,
-        categories,
-      })
     }
+
+    if (post.author._id.toString() !== req.session.user?._id.toString()) {
+      post.views += 1
+      await post.save()
+    }
+
+    const isAuthor = req.session.user ? req.session.user._id.equals(post.author._id) : false
+
+    let categories: ICategory[] = []
+
+    if (isAuthor) categories = await Category.find({ locale: post.locale })
+
+    res.render('post/show', {
+      layout: res.locals.isAjax ? false : 'layouts/main',
+      title: post.title,
+      csrfToken: req.csrfToken?.() || '',
+      user: req.session.user,
+      post,
+      article: Helper.parseBody(post.body),
+      isAuthor,
+      categories,
+    })
   })
 }
 

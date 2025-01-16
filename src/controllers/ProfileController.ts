@@ -257,7 +257,7 @@ class ProfileController {
     }
 
     user.password = await bcrypt.hash(password, await bcrypt.genSalt(10))
-    user.save()
+    await user.save()
 
     SessionManger.destroyUserSession(req, res, {
       message: global.dictionary.messages.passwordChangedAndLogout,

@@ -19,6 +19,7 @@ export interface IPost extends mongoose.Document {
   categories?: mongoose.Types.ObjectId[]
   likes?: mongoose.Types.ObjectId[]
   locale: Locale
+  views: number
   createdAt: Date
   updatedAt: Date
 }
@@ -42,6 +43,7 @@ const postSchema = new mongoose.Schema<IPost>(
     categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category', default: undefined }],
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     locale: { type: String, required: true, default: locale.locales[0] },
+    views: { type: Number, default: 0 },
   },
   { timestamps: true }
 )

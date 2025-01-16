@@ -208,6 +208,12 @@
                             <%= post.likes.length %>
                           </span>                         
                         <% } %>
+                        <% if (typeof post.views !== 'undefined' && post.views > 0) { %>
+                          <span>
+                              <%- include('../partials/icon.ejs', { name: 'eye' }) %>
+                              <span><%= post.views %></span>
+                          </span>
+                      <% } %>
                       </div>
                     </div>
                   </a>

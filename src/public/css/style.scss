@@ -606,25 +606,30 @@ form#form-password {
       }
     }
 
-    & #likes {
+    & .row {
       flex-direction: row;
-      align-items: center;
-      column-gap: 0.5rem;
-      color: var(--transparent-dark);
+      column-gap: 1rem;
 
-      & button {
-        cursor: pointer;
+      & #likes,
+      & .views {
+        flex-direction: row;
+        column-gap: 0.5rem;
+        color: var(--transparent-dark);
 
-        &#unlike {
-          color: var(--toast-danger);
-        }
+        & button {
+          cursor: pointer;
 
-        &#like {
-          color: var(--transparent-dark);
-        }
+          &#unlike {
+            color: var(--toast-danger);
+          }
 
-        &.hidden {
-          display: none;
+          &#like {
+            color: var(--transparent-dark);
+          }
+
+          &.hidden {
+            display: none;
+          }
         }
       }
     }
@@ -712,12 +717,15 @@ form#form-password {
 
         & .meta {
           display: flex;
+          flex-wrap: wrap;
           column-gap: 1rem;
+          row-gap: 0.3rem;
 
           & span {
             display: flex;
             align-items: center;
             column-gap: 0.5rem;
+            white-space: nowrap;
           }
         }
       }
