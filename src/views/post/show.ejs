@@ -66,18 +66,22 @@
             <aside>
                 <div>
                     <label><%= global.dictionary.pages.author %></label>
-                    <p class="author"><%= post.author.name %></p>                    
+                    <p class="info">
+                        <a href="/posts?author=<%= post.author._id.toString() %>" data-link>
+                            <%= post.author.name %></a>
+                    </p>                    
                 </div>
                 <div>
                     <label><%= global.dictionary.pages.published %></label>
-                    <p class="author"><%= post.createdAt.toLocaleDateString(global.locale) %></p>                    
+                    <p class="info"><%= post.createdAt.toLocaleDateString(global.locale) %></p>                    
                 </div>
                 <% if (post.categories.length > 0) { %>
                     <div>
                         <label><%= global.dictionary.pages.categories %></label>
                         <p class="categories">
                             <% post.categories.forEach(category => { %>
-                                <span><%= category.name %></span>
+                                <a href="/posts?categories=<%= category._id.toString() %>" data-link>
+                                    <%= category.name %></a>
                             <% }) %>
                         </p>
                     </div>

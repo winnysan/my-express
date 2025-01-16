@@ -558,6 +558,7 @@ form#form-password {
   }
 
   & article {
+    width: 100%;
     margin: 0 auto;
 
     & h2 {
@@ -573,10 +574,25 @@ form#form-password {
     & p {
       font-size: 1.2rem;
       margin-bottom: 1.5rem;
+      text-align: justify;
+      hyphens: auto;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     & img {
+      display: block;
       width: 100%;
+      max-width: 600px;
+      padding: 0.2rem;
+      margin: 0 auto;
+      outline: 1px solid var(--transparent-light);
+      border-radius: 0.5rem;
+
+      @media (max-width: 640px) {
+        padding: 0;
+        outline: none;
+      }
     }
   }
 
@@ -587,7 +603,7 @@ form#form-password {
       row-gap: 0.2rem;
     }
 
-    & .author {
+    & .info {
       font-size: 1.2rem;
       color: var(--primary);
     }
@@ -598,7 +614,7 @@ form#form-password {
       column-gap: 0.2rem;
       row-gap: 0.3rem;
 
-      & span {
+      & a {
         color: var(--primary);
         padding: 0.2rem 0.4rem;
         border: 1px solid var(--transparent-light);
@@ -612,7 +628,9 @@ form#form-password {
 
       & #likes,
       & .views {
+        display: flex;
         flex-direction: row;
+        align-items: center;
         column-gap: 0.5rem;
         color: var(--transparent-dark);
 
