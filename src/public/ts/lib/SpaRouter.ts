@@ -81,6 +81,8 @@ class SpaRouter {
           history.pushState(null, '', url)
         }
 
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+
         /**
          * Initializes bootstrap after navigation
          */

@@ -63,6 +63,11 @@ class Bootstrap {
     new CategorySelectHandler('#categories-select')
 
     /**
+     * Scroll to top
+     */
+    Helper.makeScrollButton('#scroll-to-top')
+
+    /**
      * Delete posts
      */
     type DeleteResponse = ApiResponse & { data: { total: number } }

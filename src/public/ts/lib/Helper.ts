@@ -73,6 +73,29 @@ class Helper {
       timeoutId = window.setTimeout(() => func(...args), delay)
     }
   }
+
+  /**
+   * Static method to create or return a scroll-to-top button by ID
+   * @param id
+   */
+  static makeScrollButton(id: string): void {
+    let scrollButton = Helper.selectElement<HTMLButtonElement>(id)
+
+    if (!scrollButton) {
+      scrollButton = document.createElement('button')
+      scrollButton.id = id.replace('#', '')
+      scrollButton.textContent = '▲'
+    }
+
+    document.body.appendChild(scrollButton)
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 200) scrollButton.style.display = 'block'
+      else scrollButton.style.display = 'none'
+    })
+
+    scrollButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
+  }
 }
 
 export default Helper

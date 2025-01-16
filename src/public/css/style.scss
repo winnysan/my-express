@@ -846,3 +846,24 @@ table {
     }
   }
 }
+
+#scroll-to-top {
+  position: fixed;
+  display: none;
+  bottom: 2rem;
+  right: 2rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  background-color: var(--black);
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: var(--primary);
+  }
+}
