@@ -85,6 +85,7 @@ class Helper {
       scrollButton = document.createElement('button')
       scrollButton.id = id.replace('#', '')
       scrollButton.textContent = '▲'
+      scrollButton.style.display = 'none'
     }
 
     document.body.appendChild(scrollButton)
