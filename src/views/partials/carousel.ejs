@@ -1,0 +1,30 @@
+<% if (posts.length > 0) { %>
+    <div class="carousel-wrapper">
+        <div id="carousel" class="carousel">
+            <% posts.forEach(post => { %>
+                <a href="/posts/<%= post.slug %>" class="carousel-item" data-link>
+                    <figure>
+                        <%- include('./image.ejs', { post, thumb: false }) %>
+                    </figure>
+                    <h3><%= post.title %></h3>
+                    <div class="meta">
+                        <span>
+                            <%- include('./icon.ejs', { name: 'user' }) %>
+                            <%= post.author.name || post.author %>
+                        </span> 
+                        <span>
+                            <%- include('./icon.ejs', { name: 'calendar' }) %>
+                            <%= post.createdAt.toLocaleDateString(global.locale) %>
+                        </span>
+                    </div>
+                </a>
+            <% }) %>
+            <div class="carousel-nav" data-dir="prev">
+                <%- include('./icon.ejs', { name: 'left' }) %>
+            </div>
+            <div class="carousel-nav" data-dir="next">
+                <%- include('./icon.ejs', { name: 'right' }) %>
+            </div>
+        </div>
+    </div>
+<% } %>

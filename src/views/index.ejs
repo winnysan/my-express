@@ -2,6 +2,10 @@
 
 <main class="container" data-title="<%= title %>">
     <%- include('./partials/hero.ejs', { posts: posts.latest.slice(0, 3) }) %>
+
+    <h2 class="newest"><%= global.dictionary.pages.top %></h2>
+
+    <%- include('./partials/carousel.ejs', { posts: posts.top }) %>
     
     <h2 class="newest"><%= global.dictionary.pages.latest %></h2>
 

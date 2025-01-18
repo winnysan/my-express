@@ -74,6 +74,7 @@ export type Dictionary = {
     updatedAt: string
     actions: string
     latest: string
+    top: string
     nextPosts: string
     letsCodeExpressDifferently: string
   }

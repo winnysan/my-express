@@ -66,7 +66,12 @@ class PageController {
             ],
             globalLocaleTop: [
               { $match: { locale: global.locale } },
-              { $sort: { likes: -1 } },
+              {
+                $addFields: {
+                  likesCount: { $size: { $ifNull: ['$likes', []] } },
+                },
+              },
+              { $sort: { likesCount: -1 } },
               { $limit: 5 },
               {
                 $lookup: {
@@ -83,7 +88,7 @@ class PageController {
                   slug: 1,
                   images: 1,
                   author: '$author.name',
-                  likes: { $size: '$likes' },
+                  likes: '$likesCount',
                   views: { $ifNull: ['$views', 0] },
                   createdAt: 1,
                 },

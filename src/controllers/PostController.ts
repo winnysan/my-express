@@ -358,7 +358,7 @@ class PostController extends BaseController {
             const thumbPath = path.join('uploads/thumbs/', filename)
 
             await new ProcessImage(file)
-              .resize({ width: 100, height: 100, crop: true })
+              .resize({ width: 300, height: 300, crop: true })
               .convert({ quality: 60 })
               .saveAs(thumbPath)
 

@@ -1,4 +1,5 @@
 import ApiClient, { ApiResponse } from './ApiCLient'
+import Carousel from './Carousel'
 import CategoryHandler from './CategoryHandler'
 import CategorySelectHandler from './CategorySelectHandler'
 import FilterFormHandler from './FilterFormHandler'
@@ -66,6 +67,11 @@ class Bootstrap {
      * Scroll to top
      */
     Helper.makeScrollButton('#scroll-to-top')
+
+    /**
+     * Initialize Carousel
+     */
+    new Carousel('#carousel')
 
     /**
      * Delete posts
