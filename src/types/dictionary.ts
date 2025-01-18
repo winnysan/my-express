@@ -73,6 +73,8 @@ export type Dictionary = {
     createdAt: string
     updatedAt: string
     actions: string
+    latest: string
+    nextPosts: string
     letsCodeExpressDifferently: string
   }
   form: {

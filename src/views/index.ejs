@@ -1,5 +1,31 @@
 <%- include('./partials/header.ejs') %>
 
 <main class="container" data-title="<%= title %>">
-    <%- include('./partials/hero.ejs', { posts: posts.latest }) %>
+    <%- include('./partials/hero.ejs', { posts: posts.latest.slice(0, 3) }) %>
+    
+    <h2 class="newest"><%= global.dictionary.pages.latest %></h2>
+
+    <div class="posts">
+        <div class="anotherLocale">
+            <% if (posts.anotherLocale) { %>
+                <% posts.anotherLocale.forEach(localePosts => { %>
+                    <h3><%= global.dictionary.categories[localePosts.locale] %></h3>
+
+                    <% localePosts.latest.forEach(post => { %>
+                        <%- include('./partials/post.ejs', { post, thumb: true }) %>
+                    <% }) %>
+                <% }) %>
+            <% } %>
+        </div>
+        <div class="postsList mt">
+            <% if (posts.latest) { %>
+                <% posts.latest.forEach(post => { %>
+                    <%- include('./partials/post.ejs', { post, thumb: false }) %>
+                <% }) %>
+            <% } %>
+            <a href="/posts" class="next-posts" data-link>
+                <span><%= global.dictionary.pages.nextPosts %></span>
+            </a>
+        </div>
+    </div>    
 </main>

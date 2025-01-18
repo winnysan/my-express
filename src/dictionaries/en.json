@@ -73,6 +73,8 @@
     "createdAt": "Created at",
     "updatedAt": "Updated at",
     "actions": "Actions",
+    "latest": "Latest",
+    "nextPosts": "Next posts",
     "letsCodeExpressDifferently": "Let's code Express differently"
   },
   "form": {

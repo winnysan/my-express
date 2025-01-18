@@ -73,6 +73,8 @@
     "createdAt": "Vytvorené",
     "updatedAt": "Upravené",
     "actions": "Akcie",
+    "latest": "Najnovšie",
+    "nextPosts": "Ďalšie príspevky",
     "letsCodeExpressDifferently": "Poďme písať Express inak"
   },
   "form": {
