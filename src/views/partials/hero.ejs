@@ -1,0 +1,7 @@
+<% if (posts.length > 0) { %>
+    <div class="hero">
+        <% posts.forEach(post => { %>
+            <%- include('./post.ejs', { post, thumb: false }) %>
+        <% }) %>
+    </div>
+<% } %>

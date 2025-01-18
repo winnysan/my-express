@@ -1,0 +1,28 @@
+<a href="/posts/<%= post.slug %>" class="post" data-link>
+    <%- include('./image.ejs', { post, thumb }) %>
+    <div>
+        <h3><%= post.title %></h3>
+        <div class="meta">
+            <span>
+                <%- include('./icon.ejs', { name: 'user' }) %>
+                <%= post.author.name || post.author %>
+            </span> 
+            <span>
+                <%- include('./icon.ejs', { name: 'calendar' }) %>
+                <%= post.createdAt.toLocaleDateString(global.locale) %>
+            </span>
+            <% if (post.likes.length || post.likes) { %>
+                <span>
+                    <%- include('./icon.ejs', { name: 'heart-outline' }) %>
+                    <%= post.likes.length || post.likes %>
+                </span>
+            <% } %>
+            <% if (typeof post.views !== 'undefined' && post.views > 0) { %>
+                <span>
+                    <%- include('./icon.ejs', { name: 'eye' }) %>
+                    <%= post.views %>
+                </span>
+            <% } %>
+        </div>
+    </div>
+</a>

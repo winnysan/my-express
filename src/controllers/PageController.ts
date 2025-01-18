@@ -8,6 +8,7 @@ type Post = {
   _id: ObjectId
   title: string
   slug: string
+  images: string[]
   author: string
   likes: number
   views: number
@@ -55,6 +56,7 @@ class PageController {
                 $project: {
                   title: 1,
                   slug: 1,
+                  images: 1,
                   author: '$author.name',
                   likes: { $size: { $ifNull: ['$likes', []] } },
                   views: { $ifNull: ['$views', 0] },
@@ -79,8 +81,9 @@ class PageController {
                 $project: {
                   title: 1,
                   slug: 1,
+                  images: 1,
                   author: '$author.name',
-                  likes: { $size: { $ifNull: ['$likes', []] } },
+                  likes: { $size: '$likes' },
                   views: { $ifNull: ['$views', 0] },
                   createdAt: 1,
                 },
@@ -107,6 +110,7 @@ class PageController {
                       _id: '$_id',
                       title: '$title',
                       slug: '$slug',
+                      images: '$images',
                       author: '$author.name',
                       likes: { $size: { $ifNull: ['$likes', []] } },
                       views: { $ifNull: ['$views', 0] },
