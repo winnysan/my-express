@@ -1182,3 +1182,74 @@ table {
     }
   }
 }
+
+.contact-us {
+  padding: 3rem 0;
+  color: var(--white);
+  background-color: var(--transparent-dark);
+
+  form {
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+
+    @media (max-width: 1024px) {
+      width: 75%;
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+      row-gap: 0.2rem;
+    }
+
+    & input,
+    & textarea {
+      font-size: 1rem;
+      padding: 0.5rem;
+      background-color: var(--white);
+      color: var(--black);
+      border: 2px solid var(--transparent-light);
+      border-radius: 0.3rem;
+
+      &.is-error {
+        border: 2px solid var(--toast-danger);
+      }
+
+      &:focus {
+        outline: 2px solid var(--primary);
+      }
+    }
+
+    & textarea {
+      min-height: 5rem;
+    }
+
+    & button {
+      align-self: end;
+      font-size: 0.8rem;
+      padding: 0.3rem 1rem;
+      text-transform: uppercase;
+      width: fit-content;
+      color: var(--black);
+      background-color: var(--white);
+      border-radius: 0.3rem;
+      cursor: pointer;
+
+      @media (max-width: 640px) {
+        width: 100%;
+      }
+
+      &:hover {
+        background-color: var(--primary);
+        transition: background-color 0.3s ease-in-out;
+      }
+    }
+  }
+}

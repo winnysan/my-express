@@ -76,6 +76,7 @@
     "latest": "Latest",
     "top": "Top",
     "nextPosts": "Next posts",
+    "contactUs": "Contact us",
     "letsCodeExpressDifferently": "Let's code Express differently"
   },
   "form": {
@@ -101,7 +102,10 @@
     "ascending": "Ascending",
     "descending": "Descending",
     "perPage": "Per page",
-    "submit": "Submit"
+    "submit": "Submit",
+    "yourEmail": "Your email",
+    "yourMessage": "Your message",
+    "sendMessage": "Send message"
   },
   "validation": {
     "fieldIsRequiredDefault": "Field ::field is required",

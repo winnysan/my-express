@@ -76,6 +76,7 @@
     "latest": "Najnovšie",
     "top": "Najlepšie",
     "nextPosts": "Ďalšie príspevky",
+    "contactUs": "Napíšte nám",
     "letsCodeExpressDifferently": "Poďme písať Express inak"
   },
   "form": {
@@ -101,7 +102,10 @@
     "ascending": "Vzostupne",
     "descending": "Zostupne",
     "perPage": "Na stránku",
-    "submit": "Odoslať"
+    "submit": "Odoslať",
+    "yourEmail": "Váš email",
+    "yourMessage": "Vaša správa",
+    "sendMessage": "Odoslať správu"
   },
   "validation": {
     "fieldIsRequiredDefault": "Pole ::field je povinné",

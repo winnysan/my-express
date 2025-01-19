@@ -76,6 +76,7 @@ export type Dictionary = {
     latest: string
     top: string
     nextPosts: string
+    contactUs: string
     letsCodeExpressDifferently: string
   }
   form: {
@@ -102,6 +103,9 @@ export type Dictionary = {
     descending: string
     perPage: string
     submit: string
+    yourEmail: string
+    yourMessage: string
+    sendMessage: string
   }
   validation: {
     fieldIsRequiredDefault: string
