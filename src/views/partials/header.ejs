@@ -25,6 +25,14 @@
                     </form>
                 </li>
             <% } %>
+            <li>
+                <button id="enable-light-mode" class="color-mode-button light-mode-hidden">
+                    <%- include('./icon.ejs', { name: 'sun' }) %>
+                </button>
+                <button id="enable-dark-mode" class="color-mode-button dark-mode-hidden">
+                    <%- include('./icon.ejs', { name: 'moon' }) %>
+                </button>
+            </li>
         </ul>
     </nav>
 </header>

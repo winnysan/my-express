@@ -97,6 +97,28 @@ class Helper {
 
     scrollButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
   }
+
+  /**
+   * Switcher the color mode between light and dark
+   */
+  static colorModeSwither(): void {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.color-mode-button')
+
+    buttons.forEach(button => {
+      button.addEventListener('click', (e: Event) => {
+        const target = e.currentTarget as HTMLButtonElement
+        const elementId = target.id
+
+        if (elementId === 'enable-light-mode') {
+          document.documentElement.setAttribute('data-color-mode', 'light')
+          localStorage.setItem('data-color-mode', 'light')
+        } else if (elementId === 'enable-dark-mode') {
+          document.documentElement.setAttribute('data-color-mode', 'dark')
+          localStorage.setItem('data-color-mode', 'dark')
+        }
+      })
+    })
+  }
 }
 
 export default Helper

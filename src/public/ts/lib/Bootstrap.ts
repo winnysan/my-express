@@ -15,6 +15,11 @@ class Bootstrap {
 
   static initialize(): void {
     /**
+     * Initialize color mode switcher
+     */
+    Helper.colorModeSwither()
+
+    /**
      * Navigation elements
      */
     const hamburgerButtonEl = Helper.selectElement<HTMLButtonElement>('#hamburger')

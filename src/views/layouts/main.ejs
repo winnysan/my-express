@@ -6,6 +6,38 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="/css/style.css" />
     <script type="text/javascript" src="/js/script.js" defer></script>
+    <style>
+        :root[data-color-mode='light'] {
+            --background-color: #fefefe;
+            --text-color: #101010
+        }
+        :root[data-color-mode='dark'] {
+            --background-color: #0f172a;
+            --text-color: #e2e8f0;
+        }
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        :root[data-color-mode='light'] .light-mode-hidden{
+            display: none;
+        }
+        :root[data-color-mode='dark'] .dark-mode-hidden {
+            display: none;
+        }
+    </style>
+    <script>
+        ;(()=> {
+            const matcher = window.matchMedia('(prefers-color-scheme: dark)')
+            const storedTheme = localStorage.getItem('data-color-mode')
+            const defaultTheme = storedTheme ? storedTheme : matcher.matches ? 'dark' : 'light'
+            document.documentElement.setAttribute('data-color-mode', defaultTheme)
+            matcher.addEventListener('change', () => {
+                const currentTheme = localStorage.getItem('data-color-mode')
+                if (!currentTheme) document.documentElement.setAttribute('data-color-mode', matcher.matches ? 'dark' : light)
+            })
+        })()
+    </script>
 </head>
 <body>
    <div id="app"><%- body %></div>
