@@ -1,4 +1,5 @@
 import nodemailer, { SentMessageInfo, Transporter } from 'nodemailer'
+import Logger from './Logger'
 import Message from './Message'
 
 interface MailOptions {
@@ -53,6 +54,8 @@ class Mailer {
         html: options.html,
         attachments: options.attachments,
       })
+
+      Logger.logToFile(`EMAIL: ${JSON.stringify(info)}`)
 
       return info
     } catch (err: unknown) {

@@ -3,6 +3,7 @@ import ApiCategoryController from '../controllers/ApiCategoryController'
 import ApiController from '../controllers/ApiController'
 import ApiPostController from '../controllers/ApiPostController'
 import AuthMiddleware from '../middlewares/AuthMiddleware'
+import ValidationMiddleware from '../middlewares/ValidationMiddleware'
 
 /**
  * Router for handling api-related routes
@@ -41,6 +42,11 @@ class ApiRouter {
      * Likes
      */
     this.router.put('/posts/:id', AuthMiddleware.protect, ApiPostController.handleLikes)
+
+    /**
+     * Contact us
+     */
+    this.router.post('/contact-us', ValidationMiddleware.contact, ApiController.contactUsMail)
   }
 }
 

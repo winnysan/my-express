@@ -49,6 +49,7 @@ class Bootstrap {
     new FormHandler('#form-logout')
     new FormHandler('#form-account')
     new FormHandler('#form-password')
+    new FormHandler('#form-contact')
 
     new FilterFormHandler('#form-filter', ['categories', 'locales'])
 
