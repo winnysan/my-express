@@ -4,22 +4,19 @@ import AsyncHandler from '../lib/AsyncHandler'
 import RenderElement, { ElementData } from '../lib/RenderElement'
 import SessionManger from '../lib/SesionManager'
 import User from '../models/User'
+import BaseController from './BaseController'
 
 /**
  * Controller class for handling profile-related operations
  */
-class ProfileController {
+class ProfileController extends BaseController {
   /**
    * Profile page
    */
   public profilePage = AsyncHandler.wrap(async (req: Request, res: Response) => {
     const user = req.session.user
 
-    if (!user) {
-      res.status(401)
-
-      throw new Error(global.dictionary.messages.unauthorized)
-    }
+    this.isExist(user, res, { statusCode: 401, message: global.dictionary.messages.unauthorized })
 
     const accountForm: ElementData = {
       element: 'form',
@@ -211,19 +208,11 @@ class ProfileController {
   public accountChange = AsyncHandler.wrap(async (req: Request, res: Response) => {
     const { name } = req.body
 
-    if (!req.session.user) {
-      res.status(401)
-
-      throw new Error(global.dictionary.messages.unauthorized)
-    }
+    this.isExist(req.session.user, res, { statusCode: 401, message: global.dictionary.messages.unauthorized })
 
     const user = await User.findByIdAndUpdate(req.session.user._id, { name }, { new: true })
 
-    if (!user) {
-      res.status(404)
-
-      throw new Error(global.dictionary.messages.somethingWentWrong)
-    }
+    this.isExist(user, res, { statusCode: 400 })
 
     res.status(200).json({ message: global.dictionary.messages.saved })
   })
@@ -234,27 +223,15 @@ class ProfileController {
   public passwordChange = AsyncHandler.wrap(async (req: Request, res: Response) => {
     const { old, password } = req.body
 
-    if (!req.session.user) {
-      res.status(401)
-
-      throw new Error(global.dictionary.messages.unauthorized)
-    }
+    this.isExist(req.session.user, res, { statusCode: 401, message: global.dictionary.messages.unauthorized })
 
     const user = await User.findById(req.session.user._id)
 
-    if (!user) {
-      res.status(404)
-
-      throw new Error(global.dictionary.messages.userNotExist)
-    }
+    this.isExist(user, res, { statusCode: 400, message: global.dictionary.messages.userNotExist })
 
     const isValid = await bcrypt.compare(old, user.password!)
 
-    if (!isValid) {
-      res.status(401)
-
-      throw new Error(global.dictionary.messages.invalidPassword)
-    }
+    this.isExist(isValid, res, { statusCode: 401, message: global.dictionary.messages.invalidPassword })
 
     user.password = await bcrypt.hash(password, await bcrypt.genSalt(10))
     await user.save()

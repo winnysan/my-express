@@ -10,7 +10,7 @@ import ProcessImage from '../lib/ProcessImage'
 import Category, { ICategory } from '../models/Category'
 import Post, { IPost } from '../models/Post'
 import { IUser } from '../models/User'
-import { ImageFormat, Role } from '../types/enums'
+import { ImageFormat } from '../types/enums'
 import { locale } from '../types/locale'
 import BaseController from './BaseController'
 
@@ -315,19 +315,9 @@ class PostController extends BaseController {
   public editPost = AsyncHandler.wrap(async (req: Request, res: Response) => {
     const post = await Post.findById(req.params.id)
 
-    if (!post) {
-      res.status(404)
+    this.isExist(post, res, { statusCode: 400 })
 
-      throw new Error(`${req.originalUrl} ${global.dictionary.messages.notFound}`)
-    }
-
-    if (post.author._id.toString() !== req.session.user?._id.toString()) {
-      if (req.session.user?.role !== Role.ADMIN) {
-        res.status(401)
-
-        throw new Error(global.dictionary.messages.unauthorized)
-      }
-    }
+    this.isOwner(req.session.user, post.author._id, res, { admin: true })
 
     let { title, body, categories } = req.body
 
@@ -422,11 +412,7 @@ class PostController extends BaseController {
       .populate('author', 'name')
       .populate('categories', 'name')
 
-    if (!post) {
-      res.status(404)
-
-      throw new Error(`${req.originalUrl} ${global.dictionary.messages.notFound}`)
-    }
+    this.isExist(post, res, { message: `${req.originalUrl} ${global.dictionary.messages.notFound}` })
 
     if (post.author._id.toString() !== req.session.user?._id.toString()) {
       post.views += 1

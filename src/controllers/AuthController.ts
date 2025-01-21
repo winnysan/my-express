@@ -8,6 +8,7 @@ import RenderElement, { ElementData } from '../lib/RenderElement'
 import SessionManger from '../lib/SesionManager'
 import User from '../models/User'
 import { Role } from '../types/enums'
+import BaseController from './BaseController'
 
 type Decoded = {
   email: string
@@ -18,7 +19,7 @@ type Decoded = {
 /**
  * Controller class for handling auth-related operations
  */
-class AuthController {
+class AuthController extends BaseController {
   /**
    * Renders the registration page
    */
@@ -363,11 +364,7 @@ class AuthController {
 
     const user = await User.findOne({ email })
 
-    if (!user) {
-      res.status(400)
-
-      throw new Error(global.dictionary.messages.emailNotExist)
-    }
+    this.isExist(user, res, { statusCode: 400, message: global.dictionary.messages.emailNotExist })
 
     const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '60m' })
     const link = `${req.protocol}://${req.get('host')}/auth/reset-password?token=${token}`
@@ -520,11 +517,7 @@ class AuthController {
       }
     }
 
-    if (!email) {
-      res.status(400)
-
-      throw new Error(global.dictionary.messages.emailNotExist)
-    }
+    this.isExist(email, res, { statusCode: 400, message: global.dictionary.messages.emailNotExist })
 
     const user = await User.findOneAndUpdate(
       { email },
@@ -532,11 +525,7 @@ class AuthController {
       { new: true }
     )
 
-    if (!user) {
-      res.status(400)
-
-      throw new Error(global.dictionary.messages.invalidDataForUpdate)
-    }
+    this.isExist(user, res, { statusCode: 400, message: global.dictionary.messages.invalidDataForUpdate })
 
     res.status(200).json({
       message: global.dictionary.messages.passwordChanged,

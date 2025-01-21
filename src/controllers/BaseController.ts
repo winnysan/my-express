@@ -1,4 +1,8 @@
+import { Response } from 'express'
+import mongoose from 'mongoose'
 import { ICategory } from '../models/Category'
+import { IUser } from '../models/User'
+import { Role } from '../types/enums'
 import { Locale } from '../types/locale'
 
 type CategoryList = {
@@ -13,6 +17,47 @@ type CategoryList = {
  * Base controller class to provide a standardized structure for controllers
  */
 class BaseController {
+  /**
+   * Validates if a value exists and throw a 404 error if it doesn't
+   * @param condition
+   * @param res
+   * @param options
+   */
+  protected isExist<T>(
+    condition: T | null | undefined,
+    res: Response,
+    options?: { statusCode?: number; message?: string }
+  ): asserts condition is T {
+    if (!condition) {
+      res.status(options?.statusCode || 404)
+
+      throw new Error(options?.message || global.dictionary.messages.somethingWentWrong)
+    }
+  }
+
+  /**
+   * Checks if the user is the owner of the resource or has admin privileges if allowed
+   * @param user
+   * @param compareId
+   * @param res
+   * @param options
+   */
+  protected isOwner(
+    user: IUser | null | undefined,
+    compareId: mongoose.Types.ObjectId,
+    res: Response,
+    options?: { statusCode?: number; message?: string; admin?: boolean }
+  ): asserts user is IUser {
+    const isOwner = user?._id.toString() === compareId.toString()
+    const isAdmin = options?.admin && user?.role === Role.ADMIN
+
+    if (!isOwner && !isAdmin) {
+      res.status(options?.statusCode || 401)
+
+      throw new Error(options?.message || global.dictionary.messages.unauthorized)
+    }
+  }
+
   /**
    * Generate a pagination URL
    * @param baseUrl
