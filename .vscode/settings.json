@@ -6,6 +6,12 @@
   "editor.minimap.enabled": false,
   "editor.stickyScroll.enabled": false,
   "editor.wordWrap": "on",
+  "chat.commandCenter.enabled": false,
+  "git.enableSmartCommit": true,
+  "workbench.layoutControl.enabled": false,
+  "workbench.navigationControl.enabled": false,
+  "window.commandCenter": false,
+  "workbench.statusBar.visible": false,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.sortImports": "explicit"
